@@ -1,0 +1,27 @@
+# heritage_site/urls.py
+from django.contrib import admin
+from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
+from django.views.generic import RedirectView  # ← add this
+
+urlpatterns = [
+    # i18n (language switching)
+    path("i18n/", include("django.conf.urls.i18n")),
+
+    # Admin
+    path("admin/", admin.site.urls),
+
+    # ✅ Force /accounts/login/ to use Google OAuth (no local form)
+    path("accounts/login/", RedirectView.as_view(url="/accounts/google/login/", permanent=False)),
+
+    # allauth URLs (must come after the override above)
+    path("accounts/", include("allauth.urls")),
+
+    # Your app routes
+    path("", include("archive.urls")),
+]
+
+# media in dev
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,0 +1,2380 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-08-23 17:18+0300\n"
+"PO-Revision-Date: 2025-08-22 12:51+0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+
+#: .\archive\models.py:9 .\archive\templates\archive\heritage_list.html:34
+msgid "Riyadh"
+msgstr "الرياض"
+
+#: .\archive\models.py:10 .\archive\templates\archive\heritage_list.html:35
+msgid "Makkah"
+msgstr "مكة"
+
+#: .\archive\models.py:11 .\archive\templates\archive\heritage_list.html:36
+msgid "Madinah"
+msgstr "المدينة"
+
+#: .\archive\models.py:12 .\archive\templates\archive\heritage_list.html:46
+msgid "Qassim"
+msgstr "القصيم"
+
+#: .\archive\models.py:13 .\archive\templates\archive\heritage_list.html:37
+msgid "Eastern Province"
+msgstr "المنطقة الشرقية"
+
+#: .\archive\models.py:14 .\archive\templates\archive\heritage_list.html:38
+msgid "Asir"
+msgstr "عسير"
+
+#: .\archive\models.py:15 .\archive\templates\archive\heritage_list.html:39
+msgid "Tabuk"
+msgstr "تبوك"
+
+#: .\archive\models.py:16 .\archive\templates\archive\heritage_list.html:40
+msgid "Hail"
+msgstr "حائل"
+
+#: .\archive\models.py:17 .\archive\templates\archive\heritage_list.html:41
+msgid "Northern Borders"
+msgstr "الحدود الشمالية"
+
+#: .\archive\models.py:18 .\archive\templates\archive\heritage_list.html:42
+msgid "Jazan"
+msgstr "جازان"
+
+#: .\archive\models.py:19 .\archive\templates\archive\heritage_list.html:43
+msgid "Najran"
+msgstr "نجران"
+
+#: .\archive\models.py:20 .\archive\templates\archive\heritage_list.html:44
+msgid "Al Bahah"
+msgstr "الباحة"
+
+#: .\archive\models.py:21 .\archive\templates\archive\heritage_list.html:45
+msgid "Al Jouf"
+msgstr "الجوف"
+
+#: .\archive\models.py:26 .\archive\templates\archive\heritage_list.html:58
+msgid "Tool"
+msgstr "أداة"
+
+#: .\archive\models.py:27
+msgid "Vessel"
+msgstr "إناء"
+
+#: .\archive\models.py:28 .\archive\templates\archive\heritage_list.html:56
+msgid "Textile"
+msgstr "نسيج"
+
+#: .\archive\models.py:29 .\archive\templates\archive\heritage_list.html:57
+msgid "Jewellery"
+msgstr "المجوهرات"
+
+#: .\archive\models.py:30 .\archive\templates\archive\heritage_list.html:59
+msgid "Furniture"
+msgstr "أثاث"
+
+#: .\archive\models.py:31 .\archive\templates\archive\heritage_list.html:60
+msgid "Ceramic"
+msgstr "خزف"
+
+#: .\archive\models.py:32 .\archive\templates\archive\heritage_list.html:61
+msgid "Musical Instrument"
+msgstr "آلة موسيقية"
+
+#: .\archive\models.py:33 .\archive\templates\archive\heritage_list.html:62
+msgid "Architecture"
+msgstr "عمارة"
+
+#: .\archive\models.py:34 .\archive\templates\archive\heritage_list.html:63
+msgid "Manuscript"
+msgstr "مخطوط"
+
+#: .\archive\models.py:35 .\archive\templates\archive\heritage_list.html:64
+msgid "Other"
+msgstr "أخرى"
+
+#: .\archive\models.py:36
+msgid "Architecture Element"
+msgstr "عنصر معماري"
+
+#: .\archive\models.py:40
+msgid "Oral Traditions"
+msgstr "التقاليد الشفوية"
+
+#: .\archive\models.py:41
+msgid "Performing Arts"
+msgstr "الفنون الأدائية"
+
+#: .\archive\models.py:42
+msgid "Social Practices & Rituals"
+msgstr "الممارسات الاجتماعية والطقوس"
+
+#: .\archive\models.py:43
+msgid "Knowledge about Nature"
+msgstr "المعارف المرتبطة بالطبيعة"
+
+#: .\archive\models.py:44
+msgid "Traditional Craftsmanship"
+msgstr "الحِرَف التقليدية"
+
+#: .\archive\models.py:48
+msgid "Title (English)"
+msgstr "العنوان (بالإنجليزية)"
+
+#: .\archive\models.py:49
+msgid "Title (Arabic)"
+msgstr "العنوان (بالعربية)"
+
+#: .\archive\models.py:54 .\archive\templates\archive\heritage_detail.html:252
+msgid "ICH Domain"
+msgstr "المجال التراثي"
+
+#: .\archive\models.py:58
+msgid "Model 3D"
+msgstr "نموذج ثلاثي الأبعاد"
+
+#: .\archive\models.py:62
+msgid "Maker / Artist"
+msgstr "الصانع / الفنان"
+
+#: .\archive\models.py:79
+msgid "Taxonomy"
+msgstr "التصنيف"
+
+#: .\archive\models.py:81
+msgid "See more items in"
+msgstr "اطّلع على المزيد ضمن"
+
+#: .\archive\models.py:82
+msgid "On View / Location"
+msgstr "معروض في / الموقع"
+
+#: .\archive\models.py:87
+msgid "Restrictions & Rights"
+msgstr "الحقوق والقيود"
+
+#: .\archive\models.py:172 .\archive\models.py:194
+msgid "Pending"
+msgstr "قيد المراجعة"
+
+#: .\archive\models.py:173 .\archive\models.py:195
+msgid "Approved"
+msgstr "موافق عليه"
+
+#: .\archive\models.py:174 .\archive\models.py:196
+msgid "Rejected"
+msgstr "مرفوض"
+
+#: .\archive\models.py:244
+msgid "Advanced Digitizer"
+msgstr "رقمنة متقدم"
+
+#: .\archive\models.py:246
+msgid "Intermediate Digitizer"
+msgstr "رقمنة متوسط"
+
+#: .\archive\models.py:248
+msgid "Beginner Digitizer"
+msgstr "رقمنة مبتدئ"
+
+#: .\archive\models.py:259
+msgid "Site Creator"
+msgstr "منشئ الموقع"
+
+#: .\archive\models.py:264
+msgid "Admin"
+msgstr "مدير"
+
+#: .\archive\models.py:271
+msgid "Expert"
+msgstr "خبير"
+
+#: .\archive\models.py:276
+msgid "Consultant"
+msgstr "استشاري"
+
+#: .\archive\models.py:281
+msgid "Moderator"
+msgstr "مشرف"
+
+#: .\archive\templates\archive\about.html:4
+
+msgid "Search heritage objects..."
+msgstr "ابحث في القطع التراثية..."
+
+msgid "Press Enter to search or Esc to close"
+msgstr "اضغط Enter للبحث أو Esc للإغلاق"
+#, fuzzy
+#| msgid "About"
+msgid "About Us"
+msgstr "من نحن"
+
+#: .\archive\templates\archive\about.html:8
+msgid "About This Platform"
+msgstr "حول هذه المنصة"
+
+#: .\archive\templates\archive\about.html:12
+msgid ""
+"This website aims to preserve and present Saudi Arabia's cultural heritage "
+"through digitized 3D models and accessible research tools."
+msgstr ""
+"يهدف هذا الموقع إلى حفظ وعرض التراث الثقافي للمملكة العربية السعودية من خلال "
+"نماذج رقمية ثلاثية الأبعاد وأدوات بحث يسيرة المنال."
+
+#: .\archive\templates\archive\about.html:17
+msgid "Our Mission"
+msgstr "مهمتنا"
+
+#: .\archive\templates\archive\about.html:19
+msgid ""
+"To digitally preserve and share Saudi Arabia's rich cultural heritage "
+"through innovative 3D modeling technology, making these treasures accessible "
+"to researchers, educators, and the global community."
+msgstr ""
+"حفظ ومشاركة التراث الثقافي العريق للمملكة العربية السعودية رقمياً من خلال "
+"تقنية النمذجة ثلاثية الأبعاد المبتكرة، مما يجعل هذه الكنوز في متناول "
+"الباحثين والمعلمين والمجتمع العالمي."
+
+#: .\archive\templates\archive\about.html:24
+msgid "Our Vision"
+msgstr "رؤيتنا"
+
+#: .\archive\templates\archive\about.html:26
+msgid ""
+"To become the leading digital repository of Saudi cultural artifacts, "
+"fostering education, research, and cultural appreciation for future "
+"generations."
+msgstr ""
+"أن نصبح المستودع الرقمي الرائد للقطع الثقافية السعودية، مع تعزيز التعليم "
+"والبحث والتقدير الثقافي للأجيال القادمة."
+
+#: .\archive\templates\archive\about.html:32
+msgid "Technology & Innovation"
+msgstr "التقنية والابتكار"
+
+#: .\archive\templates\archive\about.html:34
+msgid ""
+"Our platform utilizes cutting-edge 3D scanning and modeling technology to "
+"create high-fidelity digital representations of cultural artifacts. Each "
+"object is carefully documented with detailed metadata, providing context and "
+"historical significance."
+msgstr ""
+"تستخدم منصتنا تقنية المسح والنمذجة ثلاثية الأبعاد المتطورة لإنشاء تمثيلات "
+"رقمية عالية الدقة للقطع الأثرية. يتم توثيق كل قطعة بعناية مع بيانات وصفية "
+"تفصيلية، مما يوفر سياقاً ودلالة تاريخية."
+
+#: .\archive\templates\archive\base.html:8
+#: .\archive\templates\archive\base.html:70
+#: .\archive\templates\archive\base.html:272
+#: .\archive\templates\archive\heritage_detail.html:139
+#: .\archive\templates\archive\home.html:4
+msgid "Turath3D"
+msgstr "Turath3D"
+
+#: .\archive\templates\archive\base.html:69
+msgid "Turath3D logo"
+msgstr "شعار Turath3D"
+
+#: .\archive\templates\archive\base.html:81
+msgid "Home"
+msgstr "الرئيسية"
+
+#: .\archive\templates\archive\base.html:87
+msgid "Collections"
+msgstr "المجموعات"
+
+#: .\archive\templates\archive\base.html:93
+msgid "About"
+msgstr "من نحن"
+
+#: .\archive\templates\archive\base.html:99
+msgid "Sponsors"
+msgstr "الرعاة"
+
+#: .\archive\templates\archive\base.html:105
+msgid "Donate"
+msgstr "تبرّع"
+
+#: .\archive\templates\archive\base.html:127
+msgid "Saudi Arabia"
+msgstr "المملكة العربية السعودية"
+
+#: .\archive\templates\archive\base.html:140
+msgid "United Kingdom"
+msgstr "المملكة المتحدة"
+
+#: .\archive\templates\archive\base.html:210
+msgid "My dashboard"
+msgstr "لوحة التحكم"
+
+#: .\archive\templates\archive\base.html:211
+msgid "Public profile"
+msgstr "الملف العام"
+
+#: .\archive\templates\archive\base.html:212
+msgid "My submissions"
+msgstr "مساهماتي"
+
+#: .\archive\templates\archive\base.html:213
+msgid "My proposals"
+msgstr "اقتراحاتي"
+
+#: .\archive\templates\archive\base.html:214
+msgid "Submit new object"
+msgstr "إضافة قطعة جديدة"
+
+#: .\archive\templates\archive\base.html:222
+msgid "Sign out"
+msgstr "تسجيل الخروج"
+
+#: .\archive\templates\archive\base.html:238
+msgid "Sign in"
+msgstr "تسجيل الدخول"
+
+#: .\archive\templates\archive\base.html:255
+msgid "Search..."
+msgstr "ابحث..."
+
+#: .\archive\templates\archive\base.html:273
+msgid "Inspired by the cultural landscapes of Saudi Arabia"
+msgstr "مستوحى من المشاهد الثقافية في المملكة العربية السعودية"
+
+#: .\archive\templates\archive\comment_partial.html:38
+#: .\archive\templates\archive\public_profile.html:115
+#: .\archive\templates\archive\reply_partial.html:27
+msgid "ago"
+msgstr "منذ"
+
+#: .\archive\templates\archive\comment_partial.html:41
+msgid "posts"
+msgstr "منشورات"
+
+#: .\archive\templates\archive\comment_partial.html:44
+msgid "likes received"
+msgstr "إعجابات مستلمة"
+
+#: .\archive\templates\archive\comment_partial.html:54
+msgid "Delete this comment?"
+msgstr "حذف هذا التعليق؟"
+
+#: .\archive\templates\archive\comment_partial.html:55
+#: .\archive\templates\archive\reply_partial.html:34
+#: .\venv\Lib\site-packages\django\forms\formsets.py:499
+msgid "Delete"
+msgstr "حذف"
+
+#: .\archive\templates\archive\comment_partial.html:89
+#: .\archive\templates\archive\comment_partial.html:118
+#: .\archive\templates\archive\reply_partial.html:66
+#: .\archive\templates\archive\reply_partial.html:95
+msgid "Reply"
+msgstr "رد"
+
+#: .\archive\templates\archive\comment_partial.html:98
+#: .\archive\templates\archive\heritage_detail.html:621
+#: .\archive\templates\archive\reply_partial.html:75
+msgid "Hide"
+msgstr "إخفاء"
+
+#: .\archive\templates\archive\comment_partial.html:98
+#: .\archive\templates\archive\heritage_detail.html:621
+#: .\archive\templates\archive\reply_partial.html:75
+msgid "Show"
+msgstr "إظهار"
+
+#: .\archive\templates\archive\comment_partial.html:99
+#: .\archive\templates\archive\heritage_detail.html:622
+#: .\archive\templates\archive\reply_partial.html:76
+msgid "reply"
+msgstr "رد"
+
+#: .\archive\templates\archive\comment_partial.html:99
+#: .\archive\templates\archive\reply_partial.html:76
+msgid "replies"
+msgstr "ردود"
+
+#: .\archive\templates\archive\comment_partial.html:110
+#: .\archive\templates\archive\reply_partial.html:87
+msgid "Write a reply…"
+msgstr "اكتب رداً..."
+
+#: .\archive\templates\archive\comment_partial.html:114
+#: .\archive\templates\archive\propose_edit.html:32
+#: .\archive\templates\archive\reply_partial.html:91
+#: .\archive\templates\archive\submit_object.html:24
+msgid "Cancel"
+msgstr "إلغاء"
+
+#: .\archive\templates\archive\donate.html:4
+#: .\archive\templates\archive\donate.html:8
+#, fuzzy
+#| msgid "Submit new object"
+msgid "Support the Project"
+msgstr "دعم المشروع"
+
+#: .\archive\templates\archive\donate.html:12
+msgid ""
+"Your contributions help us document, preserve, and share Saudi Arabia's "
+"cultural heritage with the world."
+msgstr ""
+"مساهماتكم تساعدنا في توثيق وحفظ ومشاركة التراث الثقافي للمملكة العربية "
+"السعودية مع العالم."
+
+#: .\archive\templates\archive\donate.html:16
+msgid "Why Support Us?"
+msgstr "لماذا دعمنا؟"
+
+#: .\archive\templates\archive\donate.html:18
+msgid ""
+"Turath3D is dedicated to preserving Saudi Arabia's rich cultural heritage "
+"through cutting-edge 3D digitization technology. Your support enables us to "
+"continue this vital work of cultural preservation for future generations."
+msgstr ""
+"تكرس Turath3D جهودها لحفظ التراث الثقافي العريق للمملكة العربية السعودية من "
+"خلال تقنية الرقمنة ثلاثية الأبعاد المتطورة. دعمكم يمكننا من مواصلة هذا العمل "
+"الحيوي في حفظ التراث الثقافي للأجيال القادمة."
+
+#: .\archive\templates\archive\donate.html:24
+msgid "Equipment & Technology"
+msgstr "المعدات والتقنية"
+
+#: .\archive\templates\archive\donate.html:26
+msgid ""
+"High-end 3D scanning equipment, specialized software licenses, and cloud "
+"storage for our growing digital archive."
+msgstr ""
+"معدات المسح ثلاثي الأبعاد المتقدمة وتراخيص البرمجيات المتخصصة والتخزين "
+"السحابي لأرشيفنا الرقمي المتنامي."
+
+#: .\archive\templates\archive\donate.html:31
+msgid "Research & Documentation"
+msgstr "البحث والتوثيق"
+
+#: .\archive\templates\archive\donate.html:33
+msgid ""
+"Supporting researchers, historians, and cultural experts who provide context "
+"and historical significance to each artifact."
+msgstr ""
+"دعم الباحثين والمؤرخين والخبراء الثقافيين الذين يوفرون السياق والدلالة "
+"التاريخية لكل قطعة أثرية."
+
+#: .\archive\templates\archive\donate.html:38
+#, fuzzy
+#| msgid "Community"
+msgid "Community Access"
+msgstr "الوصول المجتمعي"
+
+#: .\archive\templates\archive\donate.html:40
+msgid ""
+"Ensuring free public access to our digital heritage collection and "
+"educational resources for schools and universities."
+msgstr ""
+"ضمان الوصول العام المجاني إلى مجموعتنا التراثية الرقمية والموارد التعليمية "
+"للمدارس والجامعات."
+
+#: .\archive\templates\archive\donate.html:45
+msgid "Platform Development"
+msgstr "تطوير المنصة"
+
+#: .\archive\templates\archive\donate.html:47
+msgid ""
+"Continuous improvement of our website, user experience, and accessibility "
+"features to serve our global community."
+msgstr ""
+"التحسين المستمر لموقعنا وتجربة المستخدم وميزات إمكانية الوصول لخدمة مجتمعنا "
+"العالمي."
+
+#: .\archive\templates\archive\donate.html:53
+msgid "How to Contribute"
+msgstr "كيفية المساهمة"
+
+#: .\archive\templates\archive\donate.html:55
+msgid ""
+"We welcome contributions of all sizes. Every donation directly supports the "
+"preservation and accessibility of Saudi cultural heritage."
+msgstr ""
+"نرحب بالمساهمات من جميع الأحجام. كل تبرع يدعم مباشرة حفظ وإتاحة التراث "
+"الثقافي السعودي."
+
+#: .\archive\templates\archive\donate.html:58
+msgid "Contact Us for Donation Information"
+msgstr "تواصل معنا لمعلومات التبرع"
+
+#: .\archive\templates\archive\donate.html:60
+msgid ""
+"For donation inquiries and partnership opportunities, please reach out to "
+"our team."
+msgstr "للاستفسارات حول التبرع وفرص الشراكة، يرجى التواصل مع فريقنا."
+
+#: .\archive\templates\archive\heritage_detail.html:3
+msgid "Heritage Object"
+msgstr "قطعة تراثية"
+
+#: .\archive\templates\archive\heritage_detail.html:74
+msgid "Back to Collections"
+msgstr "الرجوع إلى المجموعات"
+
+#: .\archive\templates\archive\heritage_detail.html:90
+msgid "Liked"
+msgstr "أعجب بها"
+
+#: .\archive\templates\archive\heritage_detail.html:92
+#: .\archive\templates\archive\heritage_detail.html:290
+msgid "Like"
+msgstr "إعجاب"
+
+#: .\archive\templates\archive\heritage_detail.html:101
+#: .\archive\templates\archive\heritage_detail.html:296
+#: .\archive\templates\archive\propose_edit.html:3
+#: .\archive\templates\archive\propose_edit.html:7
+msgid "Propose Edit"
+msgstr "اقتراح تعديل"
+
+#: .\archive\templates\archive\heritage_detail.html:107
+msgid "Sign in to participate"
+msgstr "سجل دخولك للمشاركة"
+
+#: .\archive\templates\archive\heritage_detail.html:124
+#: .\archive\templates\archive\heritage_list.html:97
+#, fuzzy, python-format
+#| msgid "3D model of %(object.title)s"
+msgid "3D model of %(object.get_title_display)s"
+msgstr "نموذج ثلاثي الأبعاد لـ %(object.title)s"
+
+#: .\archive\templates\archive\heritage_detail.html:147
+msgid "Fullscreen"
+msgstr "ملء الشاشة"
+
+#: .\archive\templates\archive\heritage_detail.html:156
+#: .\archive\templates\archive\heritage_detail.html:334
+msgid "Share"
+msgstr "مشاركة"
+
+#: .\archive\templates\archive\heritage_detail.html:164
+msgid "Share this object"
+msgstr "شارك هذه القطعة"
+
+#: .\archive\templates\archive\heritage_detail.html:172
+msgid "Copy Link"
+msgstr "نسخ الرابط"
+
+#: .\archive\templates\archive\heritage_detail.html:181
+#: .\archive\templates\archive\heritage_detail.html:316
+msgid "Email"
+msgstr "بريد إلكتروني"
+
+#: .\archive\templates\archive\heritage_detail.html:190
+msgid "Twitter"
+msgstr "تويتر"
+
+#: .\archive\templates\archive\heritage_detail.html:199
+msgid "Facebook"
+msgstr "فيسبوك"
+
+#: .\archive\templates\archive\heritage_detail.html:208
+msgid "WhatsApp"
+msgstr "واتساب"
+
+#: .\archive\templates\archive\heritage_detail.html:215
+msgid "Tip: drag to rotate • scroll to zoom • right-click/2-finger drag to pan"
+msgstr ""
+"تلميح: اسحب للدوران • استخدم العجلة للتكبير • انقر يمين/اسحب بإصبعين للتحريك"
+
+#: .\archive\templates\archive\heritage_detail.html:216
+msgid "3D Model Viewer"
+msgstr "عارض النموذج ثلاثي الأبعاد"
+
+#: .\archive\templates\archive\heritage_detail.html:227
+msgid "Summary"
+msgstr "الملخص"
+
+#: .\archive\templates\archive\heritage_detail.html:233
+msgid "No summary provided."
+msgstr "لا يوجد ملخص."
+
+#: .\archive\templates\archive\heritage_detail.html:239
+msgid "Object Details"
+msgstr "تفاصيل القطعة"
+
+#: .\archive\templates\archive\heritage_detail.html:244
+msgid "Region"
+msgstr "المنطقة"
+
+#: .\archive\templates\archive\heritage_detail.html:248
+msgid "Type"
+msgstr "النوع"
+
+#: .\archive\templates\archive\heritage_detail.html:256
+msgid "Date"
+msgstr "التاريخ"
+
+#: .\archive\templates\archive\heritage_detail.html:260
+msgid "3D File"
+msgstr "ملف ثلاثي الأبعاد"
+
+#: .\archive\templates\archive\heritage_detail.html:263
+#: .\archive\templates\archive\heritage_detail.html:271
+msgid "Download"
+msgstr "تنزيل"
+
+#: .\archive\templates\archive\heritage_detail.html:268
+#: .\venv\Lib\site-packages\django\db\models\fields\files.py:393
+msgid "Image"
+msgstr "الصورة"
+
+#: .\archive\templates\archive\heritage_detail.html:280
+msgid "Community"
+msgstr "المجتمع"
+
+#: .\archive\templates\archive\heritage_detail.html:290
+msgid "Unlike"
+msgstr "إلغاء الإعجاب"
+
+#: .\archive\templates\archive\heritage_detail.html:302
+msgid "Sign in with Google to like & comment"
+msgstr "سجل دخولك بجوجل للإعجاب والتعليق"
+
+#: .\archive\templates\archive\heritage_detail.html:325
+msgid "Get Link"
+msgstr "نسخ الرابط"
+
+#: .\archive\templates\archive\heritage_detail.html:346
+msgid "Discussion"
+msgstr "النقاش"
+
+#: .\archive\templates\archive\heritage_detail.html:357
+msgid "Add a public comment…"
+msgstr "أضف تعليقاً عاماً..."
+
+#: .\archive\templates\archive\heritage_detail.html:363
+#: .\archive\templates\archive\heritage_detail.html:497
+msgid "Post comment"
+msgstr "نشر التعليق"
+
+#: .\archive\templates\archive\heritage_detail.html:369
+msgid "Sign in to comment"
+msgstr "سجل دخولك للتعليق"
+
+#: .\archive\templates\archive\heritage_detail.html:384
+msgid "No comments yet. Be the first to share your thoughts!"
+msgstr "لا توجد تعليقات بعد. كن أول من يشارك أفكاره!"
+
+#: .\archive\templates\archive\heritage_detail.html:449
+#: .\archive\templates\archive\heritage_detail.html:560
+msgid "Posting..."
+msgstr "جاري النشر..."
+
+#: .\archive\templates\archive\heritage_detail.html:492
+msgid "Error posting comment. Please try again."
+msgstr "خطأ في نشر التعليق. يرجى المحاولة مرة أخرى."
+
+#: .\archive\templates\archive\heritage_detail.html:545
+msgid "Error updating like. Please try again."
+msgstr "خطأ في تحديث الإعجاب. يرجى المحاولة مرة أخرى."
+
+#: .\archive\templates\archive\heritage_detail.html:635
+msgid "Error posting reply. Please try again."
+msgstr "خطأ في نشر الرد. يرجى المحاولة مرة أخرى."
+
+#: .\archive\templates\archive\heritage_list.html:4
+#: .\archive\templates\archive\heritage_list.html:10
+msgid "Heritage Objects"
+msgstr "القطع التراثية"
+
+#: .\archive\templates\archive\heritage_list.html:20
+msgid "Filter Collections"
+msgstr "تصفية المجموعات"
+
+#: .\archive\templates\archive\heritage_list.html:29
+msgid "Browse by Region"
+msgstr "استعراض حسب المنطقة"
+
+#: .\archive\templates\archive\heritage_list.html:33
+msgid "All Regions"
+msgstr "كل المناطق"
+
+#: .\archive\templates\archive\heritage_list.html:51
+msgid "Browse by Object Type"
+msgstr "استعراض حسب نوع القطعة"
+
+#: .\archive\templates\archive\heritage_list.html:55
+msgid "All Types"
+msgstr "كل الأنواع"
+
+#: .\archive\templates\archive\heritage_list.html:73
+msgid "Filter"
+msgstr "تصفية"
+
+#: .\archive\templates\archive\heritage_list.html:82
+msgid "Filtered by:"
+msgstr "مصفّى حسب:"
+
+#: .\archive\templates\archive\heritage_list.html:83
+#: .\archive\templates\archive\heritage_list.html:116
+msgid "Region:"
+msgstr "المنطقة:"
+
+#: .\archive\templates\archive\heritage_list.html:84
+#: .\archive\templates\archive\heritage_list.html:120
+msgid "Type:"
+msgstr "النوع:"
+
+#: .\archive\templates\archive\heritage_list.html:124
+msgid "ICH Domain:"
+msgstr "المجال التراثي:"
+
+#: .\archive\templates\archive\heritage_list.html:134
+#, fuzzy
+#| msgid "View details"
+msgid "View Details"
+msgstr "عرض التفاصيل"
+
+#: .\archive\templates\archive\heritage_list.html:154
+msgid "No Results Found"
+msgstr "لا توجد نتائج"
+
+#: .\archive\templates\archive\heritage_list.html:155
+msgid "Try adjusting your search or filter criteria"
+msgstr "جرّب تعديل معايير البحث أو التصفية"
+
+#: .\archive\templates\archive\home.html:19
+msgid "Welcome to Turath3D"
+msgstr "مرحبًا بكم في Turath3D"
+
+#: .\archive\templates\archive\home.html:22
+msgid ""
+"Digitising cultural memory in 3D — explore Saudi material culture through "
+"interactive objects."
+msgstr ""
+"رقمنة الذاكرة الثقافية بتقنية ثلاثية الأبعاد — استكشف الثقافة المادية في "
+"السعودية عبر نماذج تفاعلية."
+
+#: .\archive\templates\archive\home.html:33
+#: .\archive\templates\archive\me_dashboard.html:179
+msgid "Browse Collections"
+msgstr "استكشاف المجموعات"
+
+#: .\archive\templates\archive\home.html:43
+msgid "Interact in 3D"
+msgstr "تفاعل ثلاثي الأبعاد"
+
+#: .\archive\templates\archive\home.html:44
+msgid "Rotate, zoom, and inspect each object to discover craft and detail."
+msgstr "قم بالدوران والتكبير وفحص كل قطعة لاكتشاف الحِرفة والتفاصيل."
+
+#: .\archive\templates\archive\home.html:47
+msgid "Filter by region & type"
+msgstr "فلترة حسب المنطقة والنوع"
+
+#: .\archive\templates\archive\home.html:48
+msgid "Find objects from specific regions, periods, and categories."
+msgstr "اعثر على القطع حسب المناطق والفترات والفئات."
+
+#: .\archive\templates\archive\home.html:51
+msgid "Bilingual interface"
+msgstr "واجهة ثنائية اللغة"
+
+#: .\archive\templates\archive\home.html:52
+msgid "Switch between Arabic and English across the entire site."
+msgstr "بدّل بين العربية والإنجليزية عبر الموقع بأكمله."
+
+#: .\archive\templates\archive\me_dashboard.html:3
+msgid "My Dashboard"
+msgstr "لوحة التحكم الخاصة بي"
+
+#: .\archive\templates\archive\me_dashboard.html:26
+msgid "Welcome"
+msgstr "مرحبا"
+
+#: .\archive\templates\archive\me_dashboard.html:32
+msgid "No bio yet. Add one in your profile settings."
+msgstr "لا توجد نبذة بعد. أضف واحدة في إعدادات ملفك الشخصي."
+
+#: .\archive\templates\archive\me_dashboard.html:41
+#: .\archive\templates\archive\public_profile.html:50
+msgid "Member since"
+msgstr "عضو منذ"
+
+#: .\archive\templates\archive\me_dashboard.html:50
+msgid "Your Activity"
+msgstr "نشاطك"
+
+#: .\archive\templates\archive\me_dashboard.html:57
+#: .\archive\templates\archive\public_profile.html:69
+msgid "Objects Liked"
+msgstr "قطع معجب بها"
+
+#: .\archive\templates\archive\me_dashboard.html:65
+msgid "Comments Posted"
+msgstr "تعليقات منشورة"
+
+#: .\archive\templates\archive\me_dashboard.html:73
+msgid "Edit Proposals"
+msgstr "اقتراحات التعديل"
+
+#: .\archive\templates\archive\me_dashboard.html:81
+msgid "Objects Submitted"
+msgstr "قطع مقدمة"
+
+#: .\archive\templates\archive\me_dashboard.html:91
+msgid "Recent Submissions"
+msgstr "المساهمات الأخيرة"
+
+#: .\archive\templates\archive\me_dashboard.html:94
+#: .\archive\templates\archive\me_dashboard.html:131
+#, fuzzy
+#| msgid "View details"
+msgid "View all"
+msgstr "عرض التفاصيل"
+
+#: .\archive\templates\archive\me_dashboard.html:117
+msgid "No submissions yet"
+msgstr "لا توجد مساهمات بعد"
+
+#: .\archive\templates\archive\me_dashboard.html:128
+msgid "Recent Edit Proposals"
+msgstr "اقتراحات التعديل الأخيرة"
+
+#: .\archive\templates\archive\me_dashboard.html:157
+msgid "No proposals yet"
+msgstr "لا توجد اقتراحات بعد"
+
+#: .\archive\templates\archive\me_dashboard.html:165
+msgid "Quick Actions"
+msgstr "إجراءات سريعة"
+
+#: .\archive\templates\archive\me_dashboard.html:172
+#: .\archive\templates\archive\submit_object.html:3
+#: .\archive\templates\archive\submit_object.html:7
+#, fuzzy
+#| msgid "Heritage Object"
+msgid "Submit New Object"
+msgstr "قطعة تراثية"
+
+#: .\archive\templates\archive\me_dashboard.html:186
+msgid "View Public Profile"
+msgstr "عرض الملف العام"
+
+#: .\archive\templates\archive\my_proposals.html:3
+#: .\archive\templates\archive\my_proposals.html:7
+msgid "My Edit Proposals"
+msgstr "اقتراحات التعديل الخاصة بي"
+
+#: .\archive\templates\archive\my_proposals.html:28
+msgid "View proposed JSON"
+msgstr ""
+
+#: .\archive\templates\archive\my_proposals.html:36
+msgid "No proposals yet."
+msgstr ""
+
+#: .\archive\templates\archive\my_submissions.html:3
+#: .\archive\templates\archive\my_submissions.html:7
+msgid "My Submissions"
+msgstr ""
+
+#: .\archive\templates\archive\my_submissions.html:14
+msgid "Title"
+msgstr ""
+
+#: .\archive\templates\archive\my_submissions.html:15
+msgid "Status"
+msgstr ""
+
+#: .\archive\templates\archive\my_submissions.html:16
+msgid "Submitted"
+msgstr ""
+
+#: .\archive\templates\archive\my_submissions.html:38
+msgid "No submissions yet."
+msgstr ""
+
+#: .\archive\templates\archive\propose_edit.html:9
+#, python-format
+msgid ""
+"Suggest changes to <strong>%(object.get_title_display)s</strong>. Your "
+"proposal will be reviewed by moderators."
+msgstr ""
+
+#: .\archive\templates\archive\propose_edit.html:25
+msgid "Provide JSON with the fields to update, e.g."
+msgstr ""
+
+#: .\archive\templates\archive\propose_edit.html:33
+msgid "Submit proposal"
+msgstr ""
+
+#: .\archive\templates\archive\public_profile.html:3
+msgid "Profile"
+msgstr ""
+
+#: .\archive\templates\archive\public_profile.html:54
+#, fuzzy
+#| msgid "Heritage Objects"
+msgid "Heritage Enthusiast"
+msgstr "القطع التراثية"
+
+#: .\archive\templates\archive\public_profile.html:59
+msgid "Active Contributor"
+msgstr ""
+
+#: .\archive\templates\archive\public_profile.html:79
+msgid "Comments"
+msgstr ""
+
+#: .\archive\templates\archive\public_profile.html:90
+msgid "Recent Activity"
+msgstr ""
+
+#: .\archive\templates\archive\public_profile.html:94
+msgid "Recently Liked"
+msgstr ""
+
+#: .\archive\templates\archive\public_profile.html:108
+msgid "Recent Comments"
+msgstr ""
+
+#: .\archive\templates\archive\public_profile.html:115
+msgid "on"
+msgstr ""
+
+#: .\archive\templates\archive\reply_partial.html:33
+msgid "Delete this reply?"
+msgstr ""
+
+#: .\archive\templates\archive\sponsors.html:4
+#: .\archive\templates\archive\sponsors.html:8
+#, fuzzy
+#| msgid "Sponsors"
+msgid "Our Sponsors"
+msgstr "الرعاة"
+
+#: .\archive\templates\archive\sponsors.html:12
+msgid ""
+"We thank our generous partners and sponsors who support cultural "
+"preservation and digitization efforts."
+msgstr ""
+"نشكر شركاءنا ورعاةنا الكرماء الذين يدعمون جهود حفظ ورقمنة التراث الثقافي."
+
+#: .\archive\templates\archive\sponsors.html:16
+msgid "Partnership Opportunities"
+msgstr "فرص الشراكة"
+
+#: .\archive\templates\archive\sponsors.html:18
+msgid ""
+"We welcome partnerships with cultural institutions, technology companies, "
+"educational organizations, and philanthropic foundations who share our "
+"mission of preserving Saudi Arabia's cultural heritage."
+msgstr ""
+"نرحب بالشراكات مع المؤسسات الثقافية وشركات التقنية والمنظمات التعليمية "
+"والمؤسسات الخيرية التي تشاركنا مهمة حفظ التراث الثقافي للمملكة العربية "
+"السعودية."
+
+#: .\archive\templates\archive\sponsors.html:24
+msgid "Institutional Partners"
+msgstr "الشركاء المؤسسيون"
+
+#: .\archive\templates\archive\sponsors.html:26
+msgid ""
+"Museums, universities, and cultural institutions that collaborate with us in "
+"digitization projects and research initiatives."
+msgstr ""
+"المتاحف والجامعات والمؤسسات الثقافية التي تتعاون معنا في مشاريع الرقمنة "
+"ومبادرات البحث."
+
+#: .\archive\templates\archive\sponsors.html:31
+msgid "Technology Sponsors"
+msgstr "رعاة التقنية"
+
+#: .\archive\templates\archive\sponsors.html:33
+msgid ""
+"Companies providing 3D scanning equipment, software solutions, and technical "
+"expertise to advance our digitization capabilities."
+msgstr ""
+"الشركات التي توفر معدات المسح ثلاثي الأبعاد وحلول البرمجيات والخبرة التقنية "
+"لتطوير قدراتنا في الرقمنة."
+
+#: .\archive\templates\archive\sponsors.html:38
+msgid "Educational Support"
+msgstr "الدعم التعليمي"
+
+#: .\archive\templates\archive\sponsors.html:40
+msgid ""
+"Organizations supporting educational programs and public access initiatives "
+"to make cultural heritage accessible to all."
+msgstr ""
+"المنظمات التي تدعم البرامج التعليمية ومبادرات الوصول العام لجعل التراث "
+"الثقافي في متناول الجميع."
+
+#: .\archive\templates\archive\sponsors.html:45
+msgid "Become a Sponsor"
+msgstr "اصبح راعياً"
+
+#: .\archive\templates\archive\sponsors.html:47
+msgid ""
+"Interested in supporting our mission? Contact us to learn about sponsorship "
+"opportunities and partnership benefits."
+msgstr "مهتم بدعم مهمتنا؟ تواصل معنا للتعرف على فرص الرعاية وفوائد الشراكة."
+
+#: .\archive\templates\archive\submit_object.html:8
+msgid ""
+"Share a new object with the community. Submissions are reviewed before "
+"publishing."
+msgstr ""
+
+#: .\archive\templates\archive\submit_object.html:25
+msgid "Submit"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\contrib\messages\apps.py:15
+msgid "Messages"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\contrib\sitemaps\apps.py:8
+msgid "Site Maps"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\contrib\staticfiles\apps.py:9
+msgid "Static Files"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\contrib\syndication\apps.py:7
+msgid "Syndication"
+msgstr ""
+
+#. Translators: String used to replace omitted page numbers in elided page
+#. range generated by paginators, e.g. [1, 2, '…', 5, 6, 7, '…', 9, 10].
+#: .\venv\Lib\site-packages\django\core\paginator.py:30
+msgid "…"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\core\paginator.py:50
+msgid "That page number is not an integer"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\core\paginator.py:52
+msgid "That page number is less than 1"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\core\paginator.py:54
+msgid "That page contains no results"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\core\validators.py:22
+msgid "Enter a valid value."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\core\validators.py:104
+#: .\venv\Lib\site-packages\django\forms\fields.py:752
+msgid "Enter a valid URL."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\core\validators.py:165
+msgid "Enter a valid integer."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\core\validators.py:176
+msgid "Enter a valid email address."
+msgstr ""
+
+#. Translators: "letters" means latin letters: a-z and A-Z.
+#: .\venv\Lib\site-packages\django\core\validators.py:259
+msgid ""
+"Enter a valid “slug” consisting of letters, numbers, underscores or hyphens."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\core\validators.py:267
+msgid ""
+"Enter a valid “slug” consisting of Unicode letters, numbers, underscores, or "
+"hyphens."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\core\validators.py:281
+#: .\venv\Lib\site-packages\django\core\validators.py:289
+#: .\venv\Lib\site-packages\django\core\validators.py:318
+msgid "Enter a valid IPv4 address."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\core\validators.py:298
+#: .\venv\Lib\site-packages\django\core\validators.py:319
+msgid "Enter a valid IPv6 address."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\core\validators.py:310
+#: .\venv\Lib\site-packages\django\core\validators.py:317
+msgid "Enter a valid IPv4 or IPv6 address."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\core\validators.py:353
+msgid "Enter only digits separated by commas."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\core\validators.py:359
+#, python-format
+msgid "Ensure this value is %(limit_value)s (it is %(show_value)s)."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\core\validators.py:394
+#, python-format
+msgid "Ensure this value is less than or equal to %(limit_value)s."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\core\validators.py:403
+#, python-format
+msgid "Ensure this value is greater than or equal to %(limit_value)s."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\core\validators.py:412
+#, python-format
+msgid "Ensure this value is a multiple of step size %(limit_value)s."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\core\validators.py:422
+#, python-format
+msgid ""
+"Ensure this value has at least %(limit_value)d character (it has "
+"%(show_value)d)."
+msgid_plural ""
+"Ensure this value has at least %(limit_value)d characters (it has "
+"%(show_value)d)."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
+
+#: .\venv\Lib\site-packages\django\core\validators.py:440
+#, python-format
+msgid ""
+"Ensure this value has at most %(limit_value)d character (it has "
+"%(show_value)d)."
+msgid_plural ""
+"Ensure this value has at most %(limit_value)d characters (it has "
+"%(show_value)d)."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
+
+#: .\venv\Lib\site-packages\django\core\validators.py:463
+#: .\venv\Lib\site-packages\django\forms\fields.py:347
+#: .\venv\Lib\site-packages\django\forms\fields.py:386
+msgid "Enter a number."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\core\validators.py:465
+#, python-format
+msgid "Ensure that there are no more than %(max)s digit in total."
+msgid_plural "Ensure that there are no more than %(max)s digits in total."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
+
+#: .\venv\Lib\site-packages\django\core\validators.py:470
+#, python-format
+msgid "Ensure that there are no more than %(max)s decimal place."
+msgid_plural "Ensure that there are no more than %(max)s decimal places."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
+
+#: .\venv\Lib\site-packages\django\core\validators.py:475
+#, python-format
+msgid ""
+"Ensure that there are no more than %(max)s digit before the decimal point."
+msgid_plural ""
+"Ensure that there are no more than %(max)s digits before the decimal point."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
+
+#: .\venv\Lib\site-packages\django\core\validators.py:546
+#, python-format
+msgid ""
+"File extension “%(extension)s” is not allowed. Allowed extensions are: "
+"%(allowed_extensions)s."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\core\validators.py:607
+msgid "Null characters are not allowed."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\base.py:1423
+#: .\venv\Lib\site-packages\django\forms\models.py:893
+msgid "and"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\base.py:1425
+#, python-format
+msgid "%(model_name)s with this %(field_labels)s already exists."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\constraints.py:17
+#, python-format
+msgid "Constraint “%(name)s” is violated."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:128
+#, python-format
+msgid "Value %(value)r is not a valid choice."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:129
+msgid "This field cannot be null."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:130
+msgid "This field cannot be blank."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:131
+#, python-format
+msgid "%(model_name)s with this %(field_label)s already exists."
+msgstr ""
+
+#. Translators: The 'lookup_type' is one of 'date', 'year' or
+#. 'month'. Eg: "Title must be unique for pub_date year"
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:135
+#, python-format
+msgid ""
+"%(field_label)s must be unique for %(date_field_label)s %(lookup_type)s."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:173
+#, python-format
+msgid "Field of type: %(field_type)s"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1094
+#, python-format
+msgid "“%(value)s” value must be either True or False."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1095
+#, python-format
+msgid "“%(value)s” value must be either True, False, or None."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1097
+msgid "Boolean (Either True or False)"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1147
+#, python-format
+msgid "String (up to %(max_length)s)"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1149
+msgid "String (unlimited)"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1253
+msgid "Comma-separated integers"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1354
+#, python-format
+msgid ""
+"“%(value)s” value has an invalid date format. It must be in YYYY-MM-DD "
+"format."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1358
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1493
+#, python-format
+msgid ""
+"“%(value)s” value has the correct format (YYYY-MM-DD) but it is an invalid "
+"date."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1362
+msgid "Date (without time)"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1489
+#, python-format
+msgid ""
+"“%(value)s” value has an invalid format. It must be in YYYY-MM-DD "
+"HH:MM[:ss[.uuuuuu]][TZ] format."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1497
+#, python-format
+msgid ""
+"“%(value)s” value has the correct format (YYYY-MM-DD HH:MM[:ss[.uuuuuu]]"
+"[TZ]) but it is an invalid date/time."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1502
+msgid "Date (with time)"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1626
+#, python-format
+msgid "“%(value)s” value must be a decimal number."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1628
+msgid "Decimal number"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1789
+#, python-format
+msgid ""
+"“%(value)s” value has an invalid format. It must be in [DD] "
+"[[HH:]MM:]ss[.uuuuuu] format."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1793
+msgid "Duration"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1845
+msgid "Email address"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1870
+msgid "File path"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1948
+#, python-format
+msgid "“%(value)s” value must be a float."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1950
+msgid "Floating point number"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1990
+#, python-format
+msgid "“%(value)s” value must be an integer."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1992
+msgid "Integer"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2088
+msgid "Big (8 byte) integer"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2105
+msgid "Small integer"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2113
+msgid "IPv4 address"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2144
+msgid "IP address"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2237
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2238
+#, python-format
+msgid "“%(value)s” value must be either None, True or False."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2240
+msgid "Boolean (Either True, False or None)"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2291
+msgid "Positive big integer"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2306
+msgid "Positive integer"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2321
+msgid "Positive small integer"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2337
+#, python-format
+msgid "Slug (up to %(max_length)s)"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2373
+#, fuzzy
+#| msgid "Textile"
+msgid "Text"
+msgstr "نسيج"
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2448
+#, python-format
+msgid ""
+"“%(value)s” value has an invalid format. It must be in HH:MM[:ss[.uuuuuu]] "
+"format."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2452
+#, python-format
+msgid ""
+"“%(value)s” value has the correct format (HH:MM[:ss[.uuuuuu]]) but it is an "
+"invalid time."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2456
+msgid "Time"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2564
+msgid "URL"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2588
+msgid "Raw binary data"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2653
+#, python-format
+msgid "“%(value)s” is not a valid UUID."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2655
+msgid "Universally unique identifier"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\files.py:232
+#, fuzzy
+#| msgid "3D File"
+msgid "File"
+msgstr "ملف ثلاثي الأبعاد"
+
+#: .\venv\Lib\site-packages\django\db\models\fields\json.py:26
+msgid "A JSON object"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\json.py:28
+msgid "Value must be valid JSON."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\related.py:919
+#, python-format
+msgid "%(model)s instance with %(field)s %(value)r does not exist."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\related.py:921
+msgid "Foreign Key (type determined by related field)"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\related.py:1212
+msgid "One-to-one relationship"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\related.py:1269
+#, python-format
+msgid "%(from)s-%(to)s relationship"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\related.py:1271
+#, python-format
+msgid "%(from)s-%(to)s relationships"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\related.py:1319
+msgid "Many-to-many relationship"
+msgstr ""
+
+#. Translators: If found as last label character, these punctuation
+#. characters will prevent the default label_suffix to be appended to the label
+#: .\venv\Lib\site-packages\django\forms\boundfield.py:184
+msgid ":?.!"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\fields.py:91
+msgid "This field is required."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\fields.py:298
+msgid "Enter a whole number."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\fields.py:467
+#: .\venv\Lib\site-packages\django\forms\fields.py:1241
+msgid "Enter a valid date."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\fields.py:490
+#: .\venv\Lib\site-packages\django\forms\fields.py:1242
+msgid "Enter a valid time."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\fields.py:517
+msgid "Enter a valid date/time."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\fields.py:551
+msgid "Enter a valid duration."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\fields.py:552
+#, python-brace-format
+msgid "The number of days must be between {min_days} and {max_days}."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\fields.py:621
+msgid "No file was submitted. Check the encoding type on the form."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\fields.py:622
+msgid "No file was submitted."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\fields.py:623
+msgid "The submitted file is empty."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\fields.py:625
+#, python-format
+msgid "Ensure this filename has at most %(max)d character (it has %(length)d)."
+msgid_plural ""
+"Ensure this filename has at most %(max)d characters (it has %(length)d)."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
+
+#: .\venv\Lib\site-packages\django\forms\fields.py:630
+msgid "Please either submit a file or check the clear checkbox, not both."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\fields.py:694
+msgid ""
+"Upload a valid image. The file you uploaded was either not an image or a "
+"corrupted image."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\fields.py:857
+#: .\venv\Lib\site-packages\django\forms\fields.py:949
+#: .\venv\Lib\site-packages\django\forms\models.py:1566
+#, python-format
+msgid "Select a valid choice. %(value)s is not one of the available choices."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\fields.py:951
+#: .\venv\Lib\site-packages\django\forms\fields.py:1070
+#: .\venv\Lib\site-packages\django\forms\models.py:1564
+msgid "Enter a list of values."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\fields.py:1071
+msgid "Enter a complete value."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\fields.py:1313
+msgid "Enter a valid UUID."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\fields.py:1343
+msgid "Enter a valid JSON."
+msgstr ""
+
+#. Translators: This is the default suffix added to form field labels
+#: .\venv\Lib\site-packages\django\forms\forms.py:98
+msgid ":"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\forms.py:244
+#: .\venv\Lib\site-packages\django\forms\forms.py:328
+#, python-format
+msgid "(Hidden field %(name)s) %(error)s"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\formsets.py:63
+#, python-format
+msgid ""
+"ManagementForm data is missing or has been tampered with. Missing fields: "
+"%(field_names)s. You may need to file a bug report if the issue persists."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\formsets.py:67
+#, python-format
+msgid "Please submit at most %(num)d form."
+msgid_plural "Please submit at most %(num)d forms."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
+
+#: .\venv\Lib\site-packages\django\forms\formsets.py:72
+#, python-format
+msgid "Please submit at least %(num)d form."
+msgid_plural "Please submit at least %(num)d forms."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
+
+#: .\venv\Lib\site-packages\django\forms\formsets.py:484
+#: .\venv\Lib\site-packages\django\forms\formsets.py:491
+msgid "Order"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\models.py:886
+#, python-format
+msgid "Please correct the duplicate data for %(field)s."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\models.py:891
+#, python-format
+msgid "Please correct the duplicate data for %(field)s, which must be unique."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\models.py:898
+#, python-format
+msgid ""
+"Please correct the duplicate data for %(field_name)s which must be unique "
+"for the %(lookup)s in %(date_field)s."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\models.py:907
+msgid "Please correct the duplicate values below."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\models.py:1338
+msgid "The inline value did not match the parent instance."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\models.py:1429
+msgid "Select a valid choice. That choice is not one of the available choices."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\models.py:1568
+#, python-format
+msgid "“%(pk)s” is not a valid value."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\utils.py:226
+#, python-format
+msgid ""
+"%(datetime)s couldn’t be interpreted in time zone %(current_timezone)s; it "
+"may be ambiguous or it may not exist."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\widgets.py:463
+msgid "Clear"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\widgets.py:464
+msgid "Currently"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\widgets.py:465
+msgid "Change"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\widgets.py:794
+msgid "Unknown"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\widgets.py:795
+msgid "Yes"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\widgets.py:796
+msgid "No"
+msgstr ""
+
+#. Translators: Please do not add spaces around commas.
+#: .\venv\Lib\site-packages\django\template\defaultfilters.py:874
+msgid "yes,no,maybe"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\template\defaultfilters.py:904
+#: .\venv\Lib\site-packages\django\template\defaultfilters.py:921
+#, python-format
+msgid "%(size)d byte"
+msgid_plural "%(size)d bytes"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
+
+#: .\venv\Lib\site-packages\django\template\defaultfilters.py:923
+#, python-format
+msgid "%s KB"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\template\defaultfilters.py:925
+#, python-format
+msgid "%s MB"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\template\defaultfilters.py:927
+#, python-format
+msgid "%s GB"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\template\defaultfilters.py:929
+#, python-format
+msgid "%s TB"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\template\defaultfilters.py:931
+#, python-format
+msgid "%s PB"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dateformat.py:73
+msgid "p.m."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dateformat.py:74
+msgid "a.m."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dateformat.py:79
+msgid "PM"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dateformat.py:80
+msgid "AM"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dateformat.py:152
+msgid "midnight"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dateformat.py:154
+msgid "noon"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:7
+msgid "Monday"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:8
+msgid "Tuesday"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:9
+msgid "Wednesday"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:10
+msgid "Thursday"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:11
+msgid "Friday"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:12
+msgid "Saturday"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:13
+msgid "Sunday"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:16
+msgid "Mon"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:17
+msgid "Tue"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:18
+msgid "Wed"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:19
+msgid "Thu"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:20
+msgid "Fri"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:21
+msgid "Sat"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:22
+msgid "Sun"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:25
+msgid "January"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:26
+msgid "February"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:27
+msgid "March"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:28
+msgid "April"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:29
+msgid "May"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:30
+msgid "June"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:31
+msgid "July"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:32
+msgid "August"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:33
+msgid "September"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:34
+msgid "October"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:35
+msgid "November"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:36
+msgid "December"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:39
+#, fuzzy
+#| msgid "Najran"
+msgid "jan"
+msgstr "نجران"
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:40
+msgid "feb"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:41
+#, fuzzy
+#| msgid "Summary"
+msgid "mar"
+msgstr "الملخص"
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:42
+msgid "apr"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:43
+#, fuzzy
+#| msgid "Summary"
+msgid "may"
+msgstr "الملخص"
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:44
+msgid "jun"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:45
+msgid "jul"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:46
+#, fuzzy
+#| msgid "ago"
+msgid "aug"
+msgstr "منذ"
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:47
+msgid "sep"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:48
+msgid "oct"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:49
+msgid "nov"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:50
+msgid "dec"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:53
+msgctxt "abbrev. month"
+msgid "Jan."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:54
+msgctxt "abbrev. month"
+msgid "Feb."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:55
+msgctxt "abbrev. month"
+msgid "March"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:56
+msgctxt "abbrev. month"
+msgid "April"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:57
+msgctxt "abbrev. month"
+msgid "May"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:58
+msgctxt "abbrev. month"
+msgid "June"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:59
+msgctxt "abbrev. month"
+msgid "July"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:60
+msgctxt "abbrev. month"
+msgid "Aug."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:61
+msgctxt "abbrev. month"
+msgid "Sept."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:62
+msgctxt "abbrev. month"
+msgid "Oct."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:63
+msgctxt "abbrev. month"
+msgid "Nov."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:64
+msgctxt "abbrev. month"
+msgid "Dec."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:67
+msgctxt "alt. month"
+msgid "January"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:68
+msgctxt "alt. month"
+msgid "February"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:69
+msgctxt "alt. month"
+msgid "March"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:70
+msgctxt "alt. month"
+msgid "April"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:71
+msgctxt "alt. month"
+msgid "May"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:72
+msgctxt "alt. month"
+msgid "June"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:73
+msgctxt "alt. month"
+msgid "July"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:74
+msgctxt "alt. month"
+msgid "August"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:75
+msgctxt "alt. month"
+msgid "September"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:76
+msgctxt "alt. month"
+msgid "October"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:77
+msgctxt "alt. month"
+msgid "November"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:78
+msgctxt "alt. month"
+msgid "December"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\ipv6.py:20
+msgid "This is not a valid IPv6 address."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\text.py:138
+#, python-format
+msgctxt "String to return when truncating text"
+msgid "%(truncated_text)s…"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\text.py:323
+msgid "or"
+msgstr ""
+
+#. Translators: This string is used as a separator between list elements
+#: .\venv\Lib\site-packages\django\utils\text.py:342
+#: .\venv\Lib\site-packages\django\utils\timesince.py:135
+msgid ", "
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\timesince.py:8
+#, python-format
+msgid "%(num)d year"
+msgid_plural "%(num)d years"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
+
+#: .\venv\Lib\site-packages\django\utils\timesince.py:9
+#, python-format
+msgid "%(num)d month"
+msgid_plural "%(num)d months"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
+
+#: .\venv\Lib\site-packages\django\utils\timesince.py:10
+#, python-format
+msgid "%(num)d week"
+msgid_plural "%(num)d weeks"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
+
+#: .\venv\Lib\site-packages\django\utils\timesince.py:11
+#, python-format
+msgid "%(num)d day"
+msgid_plural "%(num)d days"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
+
+#: .\venv\Lib\site-packages\django\utils\timesince.py:12
+#, python-format
+msgid "%(num)d hour"
+msgid_plural "%(num)d hours"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
+
+#: .\venv\Lib\site-packages\django\utils\timesince.py:13
+#, python-format
+msgid "%(num)d minute"
+msgid_plural "%(num)d minutes"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
+
+#: .\venv\Lib\site-packages\django\views\csrf.py:111
+msgid "Forbidden"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\csrf.py:112
+msgid "CSRF verification failed. Request aborted."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\csrf.py:116
+msgid ""
+"You are seeing this message because this HTTPS site requires a “Referer "
+"header” to be sent by your web browser, but none was sent. This header is "
+"required for security reasons, to ensure that your browser is not being "
+"hijacked by third parties."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\csrf.py:122
+msgid ""
+"If you have configured your browser to disable “Referer” headers, please re-"
+"enable them, at least for this site, or for HTTPS connections, or for “same-"
+"origin” requests."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\csrf.py:127
+msgid ""
+"If you are using the <meta name=\"referrer\" content=\"no-referrer\"> tag or "
+"including the “Referrer-Policy: no-referrer” header, please remove them. The "
+"CSRF protection requires the “Referer” header to do strict referer checking. "
+"If you’re concerned about privacy, use alternatives like <a "
+"rel=\"noreferrer\" …> for links to third-party sites."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\csrf.py:136
+msgid ""
+"You are seeing this message because this site requires a CSRF cookie when "
+"submitting forms. This cookie is required for security reasons, to ensure "
+"that your browser is not being hijacked by third parties."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\csrf.py:142
+msgid ""
+"If you have configured your browser to disable cookies, please re-enable "
+"them, at least for this site, or for “same-origin” requests."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\csrf.py:148
+msgid "More information is available with DEBUG=True."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\generic\dates.py:44
+msgid "No year specified"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\generic\dates.py:64
+#: .\venv\Lib\site-packages\django\views\generic\dates.py:115
+#: .\venv\Lib\site-packages\django\views\generic\dates.py:214
+msgid "Date out of range"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\generic\dates.py:94
+msgid "No month specified"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\generic\dates.py:147
+msgid "No day specified"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\generic\dates.py:194
+msgid "No week specified"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\generic\dates.py:349
+#: .\venv\Lib\site-packages\django\views\generic\dates.py:380
+#, python-format
+msgid "No %(verbose_name_plural)s available"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\generic\dates.py:652
+#, python-format
+msgid ""
+"Future %(verbose_name_plural)s not available because "
+"%(class_name)s.allow_future is False."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\generic\dates.py:692
+#, python-format
+msgid "Invalid date string “%(datestr)s” given format “%(format)s”"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\generic\detail.py:56
+#, python-format
+msgid "No %(verbose_name)s found matching the query"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\generic\list.py:70
+msgid "Page is not “last”, nor can it be converted to an int."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\generic\list.py:77
+#, python-format
+msgid "Invalid page (%(page_number)s): %(message)s"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\generic\list.py:169
+#, python-format
+msgid "Empty list and “%(class_name)s.allow_empty” is False."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\static.py:38
+msgid "Directory indexes are not allowed here."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\static.py:40
+#, python-format
+msgid "“%(path)s” does not exist"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\static.py:79
+#, python-format
+msgid "Index of %(directory)s"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:7
+#: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:220
+msgid "The install worked successfully! Congratulations!"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:206
+#, python-format
+msgid ""
+"View <a href=\"https://docs.djangoproject.com/en/%(version)s/releases/\" "
+"target=\"_blank\" rel=\"noopener\">release notes</a> for Django %(version)s"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:221
+#, python-format
+msgid ""
+"You are seeing this page because <a href=\"https://docs.djangoproject.com/en/"
+"%(version)s/ref/settings/#debug\" target=\"_blank\" "
+"rel=\"noopener\">DEBUG=True</a> is in your settings file and you have not "
+"configured any URLs."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:229
+#, fuzzy
+#| msgid "Research & Documentation"
+msgid "Django Documentation"
+msgstr "البحث والتوثيق"
+
+#: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:230
+msgid "Topics, references, &amp; how-to’s"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:238
+msgid "Tutorial: A Polling App"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:239
+msgid "Get started with Django"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:247
+#, fuzzy
+#| msgid "Community"
+msgid "Django Community"
+msgstr "المجتمع"
+
+#: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:248
+msgid "Connect, get help, or contribute"
+msgstr ""
+
+# Additional translations for edit form
+msgid "Title (French)"
+msgstr "العنوان (بالفرنسية)"
+
+msgid "Description (English)"
+msgstr "الوصف (بالإنجليزية)"
+
+msgid "Description (Arabic)"
+msgstr "الوصف (بالعربية)"
+
+msgid "Description (French)"
+msgstr "الوصف (بالفرنسية)"
+
+msgid "Origin Date"
+msgstr "تاريخ الأصل"
+
+msgid "Additional Metadata (Optional)"
+msgstr "بيانات وصفية إضافية (اختياري)"
+
+msgid "Submit Changes"
+msgstr "إرسال التغييرات"
+
+msgid "Cancel Edit"
+msgstr "إلغاء التعديل"
+
+msgid "Alternate Name"
+msgstr "اسم بديل"
+
+msgid "Maker/Artist"
+msgstr "الصانع/الفنان"
+
+msgid "Attribution"
+msgstr "الإسناد"
+
+msgid "Period"
+msgstr "الفترة"
+
+msgid "Origin Place"
+msgstr "مكان الأصل"
+
+msgid "Dimensions"
+msgstr "الأبعاد"
+
+msgid "Weight"
+msgstr "الوزن"
+
+msgid "Materials"
+msgstr "المواد"
+
+#~ msgid "Settings"
+#~ msgstr "الإعدادات"
+
+#~ msgid "Change password"
+#~ msgstr "تغيير كلمة المرور"
+
+#~ msgid "Rank"
+#~ msgstr "المرتبة"
+
+#~ msgid "Date:"
+#~ msgstr "التاريخ:"

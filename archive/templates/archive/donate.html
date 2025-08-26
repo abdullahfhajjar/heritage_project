@@ -1,0 +1,66 @@
+{% extends 'archive/base.html' %}
+{% load static i18n %}
+
+{% block title %}{% trans "Support the Project" %}{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto px-4 py-8">
+  <h1 class="text-3xl font-bold text-brand-navy mb-6">{% trans "Support the Project" %}</h1>
+  
+  <div class="prose prose-lg max-w-none text-brand-navy/80">
+    <p class="text-xl leading-relaxed mb-8">
+      {% trans "Your contributions help us document, preserve, and share Saudi Arabia's cultural heritage with the world." %}
+    </p>
+    
+    <div class="bg-brand-sand/20 rounded-lg p-6 mb-8">
+      <h2 class="text-xl font-semibold text-brand-navy mb-4">{% trans "Why Support Us?" %}</h2>
+      <p>
+        {% trans "Turath3D is dedicated to preserving Saudi Arabia's rich cultural heritage through cutting-edge 3D digitization technology. Your support enables us to continue this vital work of cultural preservation for future generations." %}
+      </p>
+    </div>
+    
+    <div class="grid md:grid-cols-2 gap-8">
+      <div class="bg-white rounded-lg shadow-sm border border-brand-sand/30 p-6 hover:shadow-lg hover:-translate-y-0.5 transition">
+        <h2 class="text-xl font-semibold text-brand-navy mb-4">{% trans "Equipment & Technology" %}</h2>
+        <p>
+          {% trans "High-end 3D scanning equipment, specialized software licenses, and cloud storage for our growing digital archive." %}
+        </p>
+      </div>
+      
+      <div class="bg-white rounded-lg shadow-sm border border-brand-sand/30 p-6 hover:shadow-lg hover:-translate-y-0.5 transition">
+        <h2 class="text-xl font-semibold text-brand-navy mb-4">{% trans "Research & Documentation" %}</h2>
+        <p>
+          {% trans "Supporting researchers, historians, and cultural experts who provide context and historical significance to each artifact." %}
+        </p>
+      </div>
+      
+      <div class="bg-white rounded-lg shadow-sm border border-brand-sand/30 p-6 hover:shadow-lg hover:-translate-y-0.5 transition">
+        <h2 class="text-xl font-semibold text-brand-navy mb-4">{% trans "Community Access" %}</h2>
+        <p>
+          {% trans "Ensuring free public access to our digital heritage collection and educational resources for schools and universities." %}
+        </p>
+      </div>
+      
+      <div class="bg-white rounded-lg shadow-sm border border-brand-sand/30 p-6 hover:shadow-lg hover:-translate-y-0.5 transition">
+        <h2 class="text-xl font-semibold text-brand-navy mb-4">{% trans "Platform Development" %}</h2>
+        <p>
+          {% trans "Continuous improvement of our website, user experience, and accessibility features to serve our global community." %}
+        </p>
+      </div>
+    </div>
+    
+    <div class="mt-8 text-center">
+      <h2 class="text-xl font-semibold text-brand-navy mb-4">{% trans "How to Contribute" %}</h2>
+      <p class="mb-6">
+        {% trans "We welcome contributions of all sizes. Every donation directly supports the preservation and accessibility of Saudi cultural heritage." %}
+      </p>
+      <div class="bg-brand-navy text-white rounded-lg p-6">
+        <p class="text-lg font-medium mb-2">{% trans "Contact Us for Donation Information" %}</p>
+        <p class="text-brand-sand/90">
+          {% trans "For donation inquiries and partnership opportunities, please reach out to our team." %}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,1048 @@
+{% extends 'archive/base.html' %}
+{% load static i18n dict_extras %}
+{% block title %}{{ object.get_title_display }} — {% trans "Heritage Object" %}{% endblock %}
+
+{% block content %}
+<style>
+/* 3D Viewer Control Styles */
+.viewer-control-btn {
+  width: 2.5rem;
+  height: 2.5rem;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  transition: all 0.2s ease-in-out;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+}
+
+.viewer-control-btn:hover {
+  background: rgba(0, 0, 0, 0.8);
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Share menu animation */
+#shareMenu {
+  transition: all 0.2s ease-in-out;
+  transform-origin: left center;
+}
+
+#shareMenu.show {
+  display: block;
+  animation: slideIn 0.2s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-10px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+/* Fullscreen styles */
+.fullscreen-viewer {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  z-index: 9999 !important;
+  background: #000 !important;
+}
+
+.fullscreen-viewer model-viewer {
+  width: 100% !important;
+  height: 100% !important;
+}
+</style>
+<div class="max-w-7xl mx-auto px-4 py-8">
+
+  <!-- Back -->
+  <a href="{% url 'heritage-list' %}"
+     class="inline-flex items-center justify-center rounded-lg bg-brand-navy text-white
+            px-4 py-2.5 text-sm font-semibold hover:bg-brand-gold hover:text-brand-navy transition
+            focus:outline-none focus:ring-2 focus:ring-brand-gold/60">
+    ← {% trans "Back to Collections" %}
+  </a>
+
+  <!-- Title + small actions -->
+  <header class="mt-4 mb-4 flex items-start justify-between gap-4">
+    <h1 class="text-3xl font-semibold text-brand-navy">{{ object.get_title_display }}</h1>
+
+    <div class="flex items-center gap-2">
+      {% if request.user.is_authenticated %}
+        <!-- Like -->
+        <form method="post" action="{% url 'toggle-like' object.pk %}">
+          {% csrf_token %}
+          <button type="submit"
+                  class="inline-flex items-center gap-1 rounded-md border border-brand-navy/20 bg-white
+                         px-3 py-1.5 text-sm font-medium text-brand-navy hover:bg-brand-sand/60">
+            {% if user_liked %}
+              ❤️ {% trans "Liked" %}
+            {% else %}
+              ♡ {% trans "Like" %}
+            {% endif %}
+          </button>
+        </form>
+
+        <!-- Propose Edit -->
+        <button onclick="toggleEditMode()"
+                id="edit-mode-btn"
+                class="inline-flex items-center gap-2 rounded-md border border-brand-navy/20 bg-white
+                       px-3 py-1.5 text-sm font-medium text-brand-navy hover:bg-brand-sand/60">
+          <span id="edit-btn-text">✏️ {% trans "Propose Edit" %}</span>
+        </button>
+      {% else %}
+        <a href="{% url 'account_login' %}"
+           class="inline-flex items-center gap-2 rounded-md border border-brand-navy/20 bg-white
+                  px-3 py-1.5 text-sm font-medium text-brand-navy hover:bg-brand-sand/60">
+          {% trans "Sign in to participate" %}
+        </a>
+      {% endif %}
+    </div>
+  </header>
+
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+
+    <!-- LEFT: 3D Viewer -->
+    <div class="lg:col-span-7">
+      <article class="bg-white rounded-xl2 shadow-soft border border-brand-navy/10 overflow-hidden">
+        <div class="relative p-3 bg-brand-sand">
+          <!-- 3D Model Viewer -->
+          <div class="relative rounded-lg overflow-hidden">
+            <model-viewer
+              id="heritageViewer"
+              src="{{ object.model_3d.url }}"
+              alt="{% blocktrans %}3D model of {{ object.get_title_display }}{% endblocktrans %}"
+              class="w-full h-[64vh] min-h-[520px]"
+              camera-controls
+              interaction-prompt="none"
+              environment-image="neutral"
+              exposure="1.0"
+              shadow-intensity="0.6"
+              shadow-softness="0.8"
+              camera-target="auto"
+              style="background-color:transparent; --poster-color:transparent;">
+            </model-viewer>
+            
+            <!-- Branded Overlay - Top Right -->
+            <div class="absolute top-4 right-4 flex items-center gap-2 bg-black/60 backdrop-blur-sm rounded-lg px-3 py-2">
+              <img src="{% static 'images/logo.png' %}" alt="Turath3D" class="w-6 h-6">
+              <span class="text-white text-sm font-semibold tracking-wide">{% trans "Turath3D" %}</span>
+            </div>
+            
+            <!-- Viewer Controls - Top Left -->
+            <div class="absolute top-4 left-4 flex flex-col gap-2">
+              <!-- Fullscreen Button -->
+              <button onclick="toggleFullscreen()" 
+                      class="viewer-control-btn group" 
+                      title="{% trans 'Fullscreen' %}">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M4 7V4a1 1 0 011-1h3M4 17v3a1 1 0 001 1h3m10-18h3a1 1 0 011 1v3m0 10v3a1 1 0 01-1 1h-3M9 12l2 2 4-4"/>
+                </svg>
+              </button>
+              
+              <!-- Share Button -->
+              <button onclick="toggleShareMenu()" 
+                      class="viewer-control-btn group" 
+                      title="{% trans 'Share' %}">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"/>
+                </svg>
+              </button>
+              
+              <!-- Share Menu Dropdown -->
+              <div id="shareMenu" class="hidden absolute top-0 left-12 bg-white rounded-lg shadow-lg border border-brand-navy/10 p-2 min-w-[180px] z-10">
+                <div class="text-xs font-medium text-brand-navy/70 mb-2 px-2">{% trans "Share this object" %}</div>
+                
+                <!-- Copy Link -->
+                <button onclick="copyLink()" 
+                        class="w-full flex items-center gap-2 px-3 py-2 text-sm text-brand-navy hover:bg-brand-sand/50 rounded-md">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/>
+                  </svg>
+                  {% trans "Copy Link" %}
+                </button>
+                
+                <!-- Email -->
+                <button onclick="shareViaEmail()" 
+                        class="w-full flex items-center gap-2 px-3 py-2 text-sm text-brand-navy hover:bg-brand-sand/50 rounded-md">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                  </svg>
+                  {% trans "Email" %}
+                </button>
+                
+                <!-- Twitter -->
+                <button onclick="shareOnTwitter()" 
+                        class="w-full flex items-center gap-2 px-3 py-2 text-sm text-brand-navy hover:bg-brand-sand/50 rounded-md">
+                  <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                  </svg>
+                  {% trans "Twitter" %}
+                </button>
+                
+                <!-- Facebook -->
+                <button onclick="shareOnFacebook()" 
+                        class="w-full flex items-center gap-2 px-3 py-2 text-sm text-brand-navy hover:bg-brand-sand/50 rounded-md">
+                  <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                  </svg>
+                  {% trans "Facebook" %}
+                </button>
+                
+                <!-- WhatsApp -->
+                <button onclick="shareOnWhatsApp()" 
+                        class="w-full flex items-center gap-2 px-3 py-2 text-sm text-brand-navy hover:bg-brand-sand/50 rounded-md">
+                  <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
+                  </svg>
+                  {% trans "WhatsApp" %}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="px-4 py-3 border-t border-brand-navy/10 text-xs text-brand-navy/70 flex items-center justify-between">
+          <span>{% trans "Tip: drag to rotate • scroll to zoom • right-click/2-finger drag to pan" %}</span>
+          <span class="text-brand-navy/50">{% trans "3D Model Viewer" %}</span>
+        </div>
+      </article>
+    </div>
+
+    <!-- RIGHT: Details -->
+    <aside class="lg:col-span-5">
+      <!-- Edit Mode Form (Hidden by default) -->
+      <form id="edit-form" method="post" action="{% url 'propose-edit-inline' object.pk %}" 
+            class="hidden" enctype="multipart/form-data">
+        {% csrf_token %}
+      </form>
+      
+      <section class="w-full bg-white rounded-xl2 shadow-soft border border-brand-navy/10 overflow-hidden">
+
+        <!-- Summary -->
+        <div class="px-4 py-3 bg-brand-sand/40 border-b border-brand-navy/10">
+          <h2 class="font-medium text-brand-navy">{% trans "Summary" %}</h2>
+        </div>
+        <div class="p-6">
+          <!-- View Mode -->
+          <div class="view-mode">
+            {% if object.get_description_display %}
+              <p class="text-brand-navy/80 leading-relaxed">{{ object.get_description_display }}</p>
+            {% else %}
+              <p class="text-brand-navy/60 italic">{% trans "No summary provided." %}</p>
+            {% endif %}
+          </div>
+          
+          <!-- Edit Mode -->
+          <div class="edit-mode hidden space-y-4">
+            <div>
+              <label class="block text-sm font-medium text-brand-navy/70 mb-1">{% trans "Title (English)" %}</label>
+              <input type="text" name="title" form="edit-form" value="{{ object.title }}"
+                     class="w-full border border-brand-navy/20 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-gold/60">
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-brand-navy/70 mb-1">{% trans "Title (Arabic)" %}</label>
+              <input type="text" name="title_ar" form="edit-form" value="{{ object.title_ar|default:'' }}" dir="rtl"
+                     class="w-full border border-brand-navy/20 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-gold/60">
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-brand-navy/70 mb-1">{% trans "Title (French)" %}</label>
+              <input type="text" name="title_fr" form="edit-form" value="{{ object.title_fr|default:'' }}"
+                     class="w-full border border-brand-navy/20 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-gold/60">
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-brand-navy/70 mb-1">{% trans "Description (English)" %}</label>
+              <textarea name="description" form="edit-form" rows="4"
+                        class="w-full border border-brand-navy/20 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-gold/60">{{ object.description }}</textarea>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-brand-navy/70 mb-1">{% trans "Description (Arabic)" %}</label>
+              <textarea name="description_ar" form="edit-form" rows="4" dir="rtl"
+                        class="w-full border border-brand-navy/20 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-gold/60">{{ object.description_ar|default:'' }}</textarea>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-brand-navy/70 mb-1">{% trans "Description (French)" %}</label>
+              <textarea name="description_fr" form="edit-form" rows="4"
+                        class="w-full border border-brand-navy/20 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-gold/60">{{ object.description_fr|default:'' }}</textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- Object Details -->
+        <div class="px-4 py-3 bg-brand-sand/40 border-t border-b border-brand-navy/10">
+          <h3 class="font-medium text-brand-navy">{% trans "Object Details" %}</h3>
+        </div>
+        <div class="p-6">
+          <!-- View Mode -->
+          <dl class="grid grid-cols-3 gap-y-3 gap-x-4 view-mode">
+            {% if object.region %}
+              <dt class="text-sm text-brand-navy/60">{% trans "Region" %}</dt>
+              <dd class="col-span-2 text-sm text-brand-navy/80">{{ object.get_region_display }}</dd>
+            {% endif %}
+            {% if object.object_type %}
+              <dt class="text-sm text-brand-navy/60">{% trans "Type" %}</dt>
+              <dd class="col-span-2 text-sm text-brand-navy/80">{{ object.get_object_type_display }}</dd>
+            {% endif %}
+            {% if object.ich_domain %}
+              <dt class="text-sm text-brand-navy/60">{% trans "ICH Domain:" %}</dt>
+              <dd class="col-span-2 text-sm text-brand-navy/80">{{ object.get_ich_domain_display }}</dd>
+            {% endif %}
+            {% if object.origin_date %}
+              <dt class="text-sm text-brand-navy/60">{% trans "Date" %}</dt>
+              <dd class="col-span-2 text-sm text-brand-navy/80">{{ object.origin_date }}</dd>
+            {% endif %}
+            {% if object.model_3d %}
+              <dt class="text-sm text-brand-navy/60">{% trans "3D File" %}</dt>
+              <dd class="col-span-2 text-sm">
+                <a href="{{ object.model_3d.url }}" class="underline text-brand-navy hover:text-brand-gold" download>
+                  {% trans "Download" %}
+                </a>
+              </dd>
+            {% endif %}
+            {% if object.image %}
+              <dt class="text-sm text-brand-navy/60">{% trans "Image" %}</dt>
+              <dd class="col-span-2 text-sm">
+                <a href="{{ object.image.url }}" class="underline text-brand-navy hover:text-brand-gold" download>
+                  {% trans "Download" %}
+                </a>
+              </dd>
+            {% endif %}
+          </dl>
+          
+          <!-- Edit Mode - Core fields -->
+          <div class="edit-mode hidden space-y-4">
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label class="block text-sm font-medium text-brand-navy/70 mb-1">{% trans "Region" %}</label>
+                <select name="region" form="edit-form"
+                        class="w-full border border-brand-navy/20 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-gold/60">
+                  {% for value, label in region_choices %}
+                    <option value="{{ value }}" {% if value == object.region %}selected{% endif %}>{{ label }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-brand-navy/70 mb-1">{% trans "Type" %}</label>
+                <select name="object_type" form="edit-form"
+                        class="w-full border border-brand-navy/20 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-gold/60">
+                  {% for value, label in type_choices %}
+                    <option value="{{ value }}" {% if value == object.object_type %}selected{% endif %}>{{ label }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-brand-navy/70 mb-1">{% trans "ICH Domain" %}</label>
+                <select name="ich_domain" form="edit-form"
+                        class="w-full border border-brand-navy/20 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-gold/60">
+                  {% for value, label in ich_choices %}
+                    <option value="{{ value }}" {% if value == object.ich_domain %}selected{% endif %}>{{ label }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-brand-navy/70 mb-1">{% trans "Origin Date" %}</label>
+                <input type="date" name="origin_date" form="edit-form" value="{{ object.origin_date|date:'Y-m-d' }}"
+                       class="w-full border border-brand-navy/20 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-gold/60">
+              </div>
+            </div>
+            
+            <!-- Optional Metadata Fields -->
+            <details class="border-t border-brand-navy/10 pt-4">
+              <summary class="cursor-pointer text-sm font-medium text-brand-navy/70 hover:text-brand-gold">
+                {% trans "Additional Metadata (Optional)" %}
+              </summary>
+              <div class="mt-4 grid grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs font-medium text-brand-navy/60 mb-1">{% trans "Alternate Name" %}</label>
+                  <input type="text" name="alternate_name" form="edit-form" value="{{ object.alternate_name|default:'' }}"
+                         class="w-full border border-brand-navy/20 rounded-md px-2 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-gold/60">
+                </div>
+                <div>
+                  <label class="block text-xs font-medium text-brand-navy/60 mb-1">{% trans "Maker/Artist" %}</label>
+                  <input type="text" name="maker" form="edit-form" value="{{ object.maker|default:'' }}"
+                         class="w-full border border-brand-navy/20 rounded-md px-2 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-gold/60">
+                </div>
+                <div>
+                  <label class="block text-xs font-medium text-brand-navy/60 mb-1">{% trans "Attribution" %}</label>
+                  <input type="text" name="attribution" form="edit-form" value="{{ object.attribution|default:'' }}"
+                         class="w-full border border-brand-navy/20 rounded-md px-2 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-gold/60">
+                </div>
+                <div>
+                  <label class="block text-xs font-medium text-brand-navy/60 mb-1">{% trans "Period" %}</label>
+                  <input type="text" name="period" form="edit-form" value="{{ object.period|default:'' }}"
+                         class="w-full border border-brand-navy/20 rounded-md px-2 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-gold/60">
+                </div>
+                <div>
+                  <label class="block text-xs font-medium text-brand-navy/60 mb-1">{% trans "Origin Place" %}</label>
+                  <input type="text" name="origin_place" form="edit-form" value="{{ object.origin_place|default:'' }}"
+                         class="w-full border border-brand-navy/20 rounded-md px-2 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-gold/60">
+                </div>
+                <div>
+                  <label class="block text-xs font-medium text-brand-navy/60 mb-1">{% trans "Dimensions" %}</label>
+                  <input type="text" name="dimensions" form="edit-form" value="{{ object.dimensions|default:'' }}"
+                         class="w-full border border-brand-navy/20 rounded-md px-2 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-gold/60">
+                </div>
+                <div>
+                  <label class="block text-xs font-medium text-brand-navy/60 mb-1">{% trans "Weight" %}</label>
+                  <input type="text" name="weight" form="edit-form" value="{{ object.weight|default:'' }}"
+                         class="w-full border border-brand-navy/20 rounded-md px-2 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-gold/60">
+                </div>
+                <div class="col-span-2">
+                  <label class="block text-xs font-medium text-brand-navy/60 mb-1">{% trans "Materials" %}</label>
+                  <textarea name="materials" form="edit-form" rows="2"
+                            class="w-full border border-brand-navy/20 rounded-md px-2 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-gold/60">{{ object.materials|default:'' }}</textarea>
+                </div>
+              </div>
+            </details>
+            
+            <!-- Edit Actions -->
+            <div class="flex justify-end gap-3 pt-4 border-t border-brand-navy/10">
+              <button type="button" onclick="cancelEdit()"
+                      class="px-4 py-2 text-sm font-medium text-brand-navy hover:bg-brand-sand/60 rounded-md">
+                {% trans "Cancel" %}
+              </button>
+              <button type="submit" form="edit-form" 
+                      onclick="if(typeof handleEditSubmit !== 'undefined') { handleEditSubmit(event); return false; }"
+                      class="px-4 py-2 text-sm font-medium text-white bg-brand-navy hover:bg-brand-gold hover:text-brand-navy rounded-md transition">
+                {% trans "Submit Changes" %}
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Community actions (secondary spot) -->
+        <div class="px-4 py-3 bg-brand-sand/40 border-t border-brand-navy/10">
+          <h3 class="font-medium text-brand-navy">{% trans "Community" %}</h3>
+        </div>
+        <div class="p-6">
+          <div class="flex flex-wrap gap-3">
+            {% if request.user.is_authenticated %}
+              <form method="post" action="{% url 'toggle-like' object.pk %}">
+                {% csrf_token %}
+                <button type="submit"
+                        class="inline-flex items-center gap-2 rounded-md border border-brand-navy/20 bg-white
+                               px-3 py-2 text-sm font-medium text-brand-navy hover:bg-brand-sand/60">
+                  {% if user_liked %}❤️ {% trans "Unlike" %}{% else %}♡ {% trans "Like" %}{% endif %}
+                </button>
+              </form>
+              <button onclick="toggleEditMode()"
+                      class="inline-flex items-center gap-2 rounded-md border border-brand-navy/20 bg-white
+                             px-3 py-2 text-sm font-medium text-brand-navy hover:bg-brand-sand/60">
+                <span id="edit-btn-text-2">✏️ {% trans "Propose Edit" %}</span>
+              </button>
+            {% else %}
+              <a href="{% url 'account_login' %}"
+                 class="inline-flex items-center gap-2 rounded-md border border-brand-navy/20 bg-white
+                        px-3 py-2 text-sm font-medium text-brand-navy hover:bg-brand-sand/60">
+                {% trans "Sign in with Google to like & comment" %}
+              </a>
+            {% endif %}
+          </div>
+          
+          <!-- Additional Sharing Options -->
+          <div class="mt-4 pt-4 border-t border-brand-navy/10">
+            <div class="flex flex-wrap gap-3">
+              <button onclick="shareViaEmail()"
+                      class="inline-flex items-center gap-2 rounded-md border border-brand-navy/20 bg-white
+                             px-3 py-2 text-sm font-medium text-brand-navy hover:bg-brand-sand/60">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                </svg>
+                {% trans "Email" %}
+              </button>
+              
+              <button onclick="copyLink()"
+                      class="inline-flex items-center gap-2 rounded-md border border-brand-navy/20 bg-white
+                             px-3 py-2 text-sm font-medium text-brand-navy hover:bg-brand-sand/60">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/>
+                </svg>
+                {% trans "Get Link" %}
+              </button>
+              
+              <button onclick="shareOnSocial()"
+                      class="inline-flex items-center gap-2 rounded-md border border-brand-navy/20 bg-white
+                             px-3 py-2 text-sm font-medium text-brand-navy hover:bg-brand-sand/60">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"/>
+                </svg>
+                {% trans "Share" %}
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </aside>
+  </div>
+
+  <!-- Discussion Section -->
+  <section class="mt-8 bg-white rounded-xl2 shadow-soft border border-brand-navy/10 overflow-hidden">
+    <div class="px-6 py-4 bg-brand-sand/40 border-b border-brand-navy/10">
+      <h3 class="font-medium text-brand-navy">{% trans "Discussion" %}</h3>
+    </div>
+
+    <!-- Add comment -->
+    <div class="p-6 border-b border-brand-navy/10">
+      {% if request.user.is_authenticated %}
+        <form id="comment-form" onsubmit="postComment(event)" class="space-y-3">
+          {% csrf_token %}
+          <div id="comment-errors" class="hidden text-red-600 text-sm"></div>
+          <textarea name="body" rows="3" required
+                    class="w-full border border-brand-navy/15 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-gold/60"
+                    placeholder="{% trans 'Add a public comment…' %}"></textarea>
+          <div class="flex justify-end">
+            <button type="submit" id="comment-submit-btn"
+                    class="inline-flex items-center justify-center rounded-lg bg-brand-navy text-white
+                           px-4 py-2 text-sm font-semibold hover:bg-brand-gold hover:text-brand-navy transition
+                           focus:outline-none focus:ring-2 focus:ring-brand-gold/60">
+              {% trans "Post comment" %}
+            </button>
+          </div>
+        </form>
+      {% else %}
+        <a href="{% url 'account_login' %}" class="underline text-brand-navy hover:text-brand-gold text-sm">
+          {% trans "Sign in to comment" %}
+        </a>
+      {% endif %}
+    </div>
+
+    <!-- List comments (sorted by upvotes) -->
+    <div id="comments-container">
+      {% if comments %}
+        <div class="comments-list">
+          {% for c in comments %}
+            {% include 'archive/comment_partial.html' with c=c %}
+          {% endfor %}
+        </div>
+      {% else %}
+        <div class="px-6 pb-6 text-sm text-brand-navy/70" id="no-comments-message">
+          {% trans "No comments yet. Be the first to share your thoughts!" %}
+        </div>
+      {% endif %}
+    </div>
+  </section>
+</div>
+
+<!-- Auto-frame + gentle zoom-out -->
+<script>
+  const mv = document.getElementById('heritageViewer');
+  if (mv) {
+    mv.addEventListener('load', () => {
+      try {
+        mv.reset();
+        const o = mv.getCameraOrbit();
+        mv.cameraOrbit = `${o.theta}rad ${o.phi}rad ${o.radius * 1.08}m`;
+      } catch (e) {}
+    });
+  }
+
+  // CSRF Token for AJAX requests
+  function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+      const cookies = document.cookie.split(';');
+      for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i].trim();
+        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+          break;
+        }
+      }
+    }
+    return cookieValue;
+  }
+  
+  const csrftoken = getCookie('csrftoken');
+
+  // Show notification messages
+  function showMessage(message, isSuccess = true) {
+    // Create a simple toast notification
+    const toast = document.createElement('div');
+    toast.className = `fixed top-4 right-4 z-50 px-4 py-2 rounded-lg text-white font-medium transition-all ${
+      isSuccess ? 'bg-green-600' : 'bg-red-600'
+    }`;
+    toast.textContent = message;
+    document.body.appendChild(toast);
+    
+    setTimeout(() => {
+      toast.style.opacity = '0';
+      setTimeout(() => document.body.removeChild(toast), 300);
+    }, 3000);
+  }
+
+  // Post new comment
+  async function postComment(event) {
+    event.preventDefault();
+    
+    const form = event.target;
+    const formData = new FormData(form);
+    const submitBtn = document.getElementById('comment-submit-btn');
+    const errorDiv = document.getElementById('comment-errors');
+    
+    // Disable submit button
+    submitBtn.disabled = true;
+    submitBtn.textContent = '{% trans "Posting..." %}';
+    
+    try {
+      const response = await fetch(`{% url 'post-comment' object.pk %}`, {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'X-Requested-With': 'XMLHttpRequest',
+          'X-CSRFToken': csrftoken
+        }
+      });
+      
+      const data = await response.json();
+      
+      if (data.success) {
+        // Clear form
+        form.querySelector('textarea[name="body"]').value = '';
+        
+        // Hide no-comments message if it exists
+        const noCommentsMsg = document.getElementById('no-comments-message');
+        if (noCommentsMsg) {
+          noCommentsMsg.remove();
+        }
+        
+        // Add new comment to the top of the list
+        const commentsList = document.querySelector('.comments-list');
+        if (commentsList) {
+          commentsList.insertAdjacentHTML('afterbegin', data.comment_html);
+        } else {
+          // Create comments list if it doesn't exist
+          const commentsContainer = document.getElementById('comments-container');
+          commentsContainer.innerHTML = `<div class="comments-list">${data.comment_html}</div>`;
+        }
+        
+        showMessage(data.message);
+        errorDiv.classList.add('hidden');
+      } else {
+        errorDiv.textContent = data.message;
+        errorDiv.classList.remove('hidden');
+        showMessage(data.message, false);
+      }
+    } catch (error) {
+      console.error('Error posting comment:', error);
+      showMessage('{% trans "Error posting comment. Please try again." %}', false);
+    }
+    
+    // Re-enable submit button
+    submitBtn.disabled = false;
+    submitBtn.textContent = '{% trans "Post comment" %}';
+  }
+
+  // Toggle comment like
+  async function toggleCommentLike(commentId) {
+    const likeBtn = document.querySelector(`[data-comment-id="${commentId}"].like-btn`);
+    const likeCountSpan = likeBtn.querySelector('.like-count');
+    const likeIcon = likeBtn.querySelector('.like-icon');
+    
+    try {
+      const response = await fetch(`/comment/${commentId}/like/`, {
+        method: 'POST',
+        headers: {
+          'X-Requested-With': 'XMLHttpRequest',
+          'X-CSRFToken': csrftoken
+        }
+      });
+      
+      const data = await response.json();
+      
+      if (data.success) {
+        // Update like count
+        likeCountSpan.textContent = data.like_count;
+        
+        // Determine icon size based on current icon
+        const isSmallIcon = likeIcon.classList.contains('w-3');
+        const iconSize = isSmallIcon ? 'w-3 h-3' : 'w-4 h-4';
+        
+        // Update button appearance
+        if (data.liked) {
+          likeBtn.classList.remove('text-brand-navy/70');
+          likeBtn.classList.add('text-brand-gold', 'font-medium');
+          likeIcon.outerHTML = `<svg class="${iconSize} fill-current like-icon" viewBox="0 0 20 20">
+            <path d="M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01-3 0v-6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962-1.608l1.2-6A2 2 0 0015.56 8H12V4a2 2 0 00-2-2 1 1 0 00-1 1v.667a4 4 0 01-.8 2.4L6.8 7.933a4 4 0 00-.8 2.4z"/>
+          </svg>`;
+        } else {
+          likeBtn.classList.remove('text-brand-gold', 'font-medium');
+          likeBtn.classList.add('text-brand-navy/70');
+          likeIcon.outerHTML = `<svg class="${iconSize} like-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"/>
+          </svg>`;
+        }
+        
+        likeBtn.setAttribute('data-liked', data.liked);
+        showMessage(data.message);
+      }
+    } catch (error) {
+      console.error('Error toggling like:', error);
+      showMessage('{% trans "Error updating like. Please try again." %}', false);
+    }
+  }
+
+  // Post comment reply
+  async function postCommentReply(event, parentCommentId) {
+    event.preventDefault();
+    
+    const form = event.target;
+    const formData = new FormData(form);
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const originalText = submitBtn.textContent;
+    
+    // Disable submit button
+    submitBtn.disabled = true;
+    submitBtn.textContent = '{% trans "Posting..." %}';
+    
+    try {
+      const response = await fetch(`/comment/${parentCommentId}/reply/`, {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'X-Requested-With': 'XMLHttpRequest',
+          'X-CSRFToken': csrftoken
+        }
+      });
+      
+      const data = await response.json();
+      
+      if (data.success) {
+        // Clear form
+        form.querySelector('textarea[name="body"]').value = '';
+        
+        // Hide reply form using Alpine.js
+        const commentDiv = form.closest('[data-comment-id]');
+        const alpineElement = commentDiv.querySelector('[x-data]');
+        if (alpineElement && alpineElement._x_dataStack) {
+          // Access Alpine component data
+          const alpineData = alpineElement._x_dataStack[0];
+          if (alpineData && alpineData.showReplyForm !== undefined) {
+            alpineData.showReplyForm = false;
+          }
+        }
+        
+        // Add reply to replies container
+        const repliesContainer = commentDiv.querySelector('.replies-container');
+        let repliesList = repliesContainer.querySelector('.replies-list');
+        
+        if (repliesList) {
+          // Add to existing replies list
+          repliesList.insertAdjacentHTML('beforeend', data.reply_html);
+        } else {
+          // Create new replies list
+          const newRepliesList = `
+            <div x-show="showReplies" x-transition class="mt-3 space-y-3 pl-3 border-l border-brand-sand/70 replies-list">
+              ${data.reply_html}
+            </div>
+          `;
+          repliesContainer.innerHTML = newRepliesList;
+        }
+        
+        // Update reply count button if it exists
+        const replyCountBtn = commentDiv.querySelector('.reply-count-btn');
+        if (replyCountBtn) {
+          const replyCountSpan = replyCountBtn.querySelector('.reply-count');
+          if (replyCountSpan) {
+            replyCountSpan.textContent = data.reply_count;
+          }
+        } else if (data.reply_count === 1) {
+          // Add reply count button if this is the first reply
+          const actionsDiv = commentDiv.querySelector('.mt-3.flex.items-center.gap-4, .mt-2.flex.items-center.gap-4');
+          if (actionsDiv) {
+            const replyBtn = `
+              <button @click="showReplies = !showReplies" 
+                      class="inline-flex items-center gap-1 text-xs text-brand-navy/70 hover:text-brand-gold reply-count-btn"
+                      data-comment-id="${parentCommentId}">
+                <span x-text="showReplies ? '{% trans "Hide" %}' : '{% trans "Show" %}'">{% trans "Hide" %}</span>
+                <span class="reply-count">${data.reply_count}</span> {% trans "reply" %}
+              </button>
+            `;
+            actionsDiv.insertAdjacentHTML('beforeend', replyBtn);
+          }
+        }
+        
+        showMessage(data.message);
+      } else {
+        showMessage(data.message, false);
+      }
+    } catch (error) {
+      console.error('Error posting reply:', error);
+      showMessage('{% trans "Error posting reply. Please try again." %}', false);
+    }
+    
+    // Re-enable submit button
+    submitBtn.disabled = false;
+    submitBtn.textContent = originalText;
+  }
+
+  // 3D Viewer Control Functions
+  function toggleFullscreen() {
+    const viewer = document.getElementById('heritageViewer');
+    if (!document.fullscreenElement) {
+      viewer.requestFullscreen().catch(err => {
+        console.error('Error attempting to enable fullscreen:', err);
+        showMessage('Fullscreen not supported on this device', false);
+      });
+    } else {
+      document.exitFullscreen();
+    }
+  }
+
+  function toggleShareMenu() {
+    const shareMenu = document.getElementById('shareMenu');
+    const shareBtn = document.querySelector('.share-btn');
+    
+    if (shareMenu.classList.contains('hidden')) {
+      shareMenu.classList.remove('hidden');
+      shareBtn.classList.add('bg-brand-gold', 'text-brand-navy');
+    } else {
+      shareMenu.classList.add('hidden');
+      shareBtn.classList.remove('bg-brand-gold', 'text-brand-navy');
+    }
+  }
+
+  function copyLink() {
+    const url = window.location.href;
+    navigator.clipboard.writeText(url).then(() => {
+      showMessage('Link copied to clipboard!');
+      toggleShareMenu(); // Close the share menu
+    }).catch(err => {
+      console.error('Failed to copy link:', err);
+      showMessage('Failed to copy link', false);
+    });
+  }
+
+  function shareViaEmail() {
+    const subject = encodeURIComponent(`Check out this heritage object: ${document.title}`);
+    const body = encodeURIComponent(`I wanted to share this interesting heritage object with you: ${window.location.href}`);
+    const mailtoUrl = `mailto:?subject=${subject}&body=${body}`;
+    window.open(mailtoUrl);
+    toggleShareMenu(); // Close the share menu
+  }
+
+  function shareOnTwitter() {
+    const text = encodeURIComponent(`Check out this heritage object: ${document.title}`);
+    const url = encodeURIComponent(window.location.href);
+    const twitterUrl = `https://twitter.com/intent/tweet?text=${text}&url=${url}`;
+    window.open(twitterUrl, '_blank');
+    toggleShareMenu();
+  }
+
+  function shareOnFacebook() {
+    const url = encodeURIComponent(window.location.href);
+    const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+    window.open(facebookUrl, '_blank');
+    toggleShareMenu();
+  }
+
+  function shareOnWhatsApp() {
+    const text = encodeURIComponent(`Check out this heritage object: ${document.title} ${window.location.href}`);
+    const whatsappUrl = `https://wa.me/?text=${text}`;
+    window.open(whatsappUrl, '_blank');
+    toggleShareMenu();
+  }
+
+  function shareOnLinkedIn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    const linkedinUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${url}&title=${title}`;
+    window.open(linkedinUrl, '_blank');
+    toggleShareMenu();
+  }
+
+  // Generic share function for other platforms
+  function shareOnSocial(platform) {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    
+    let shareUrl = '';
+    
+    switch(platform) {
+      case 'pinterest':
+        shareUrl = `https://pinterest.com/pin/create/button/?url=${url}&description=${title}`;
+        break;
+      case 'telegram':
+        shareUrl = `https://t.me/share/url?url=${url}&text=${title}`;
+        break;
+      case 'reddit':
+        shareUrl = `https://reddit.com/submit?url=${url}&title=${title}`;
+        break;
+    }
+    
+    if (shareUrl) {
+      window.open(shareUrl, '_blank');
+      toggleShareMenu();
+    }
+  }
+
+  // Close share menu when clicking outside
+  document.addEventListener('click', function(event) {
+    const shareMenu = document.getElementById('shareMenu');
+    const shareBtn = document.querySelector('.share-btn');
+    
+    if (shareMenu && !shareMenu.contains(event.target) && !shareBtn.contains(event.target)) {
+      shareMenu.classList.add('hidden');
+      shareBtn.classList.remove('bg-brand-gold', 'text-brand-navy');
+    }
+  });
+  
+  // Edit Mode Functions
+  let editMode = false;
+  
+  // Define handleEditSubmit globally so it's available for onclick
+  async function handleEditSubmit(event) {
+    if (event && event.preventDefault) {
+      event.preventDefault();
+    }
+    console.log('Form submission triggered');
+    
+    const form = document.getElementById('edit-form');
+    if (!form) {
+      console.error('Form not found');
+      showMessage('Error: Form not found', false);
+      return false;
+    }
+    
+    const formData = new FormData(form);
+    
+    // Find the submit button
+    const submitBtn = document.querySelector('button[form="edit-form"]');
+    if (!submitBtn) {
+      console.error('Submit button not found');
+      showMessage('Error: Submit button not found', false);
+      return false;
+    }
+    
+    const originalText = submitBtn.textContent;
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Submitting...';
+    
+    try {
+      const response = await fetch(form.action, {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'X-Requested-With': 'XMLHttpRequest',
+          'X-CSRFToken': csrftoken
+        }
+      });
+      
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      
+      const data = await response.json();
+      
+      if (data.success) {
+        showMessage(data.message);
+        
+        // Always reload the page after successful submission
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
+      } else {
+        showMessage(data.message || 'Error submitting changes', false);
+      }
+    } catch (error) {
+      console.error('Error submitting edit:', error);
+      showMessage('Error submitting changes. Please try again.', false);
+    }
+    
+    // Re-enable submit button
+    submitBtn.disabled = false;
+    submitBtn.textContent = originalText;
+    return false;
+  }
+  
+  function toggleEditMode() {
+    {% if not request.user.is_authenticated %}
+      // Redirect to login if not authenticated
+      window.location.href = "{% url 'account_login' %}?next={{ request.path }}";
+      return;
+    {% endif %}
+    
+    editMode = !editMode;
+    
+    // Get all view and edit mode elements
+    const viewModes = document.querySelectorAll('.view-mode');
+    const editModes = document.querySelectorAll('.edit-mode');
+    const editBtn = document.getElementById('edit-mode-btn');
+    const editBtnText = document.getElementById('edit-btn-text');
+    const editBtnText2 = document.getElementById('edit-btn-text-2');
+    
+    if (editMode) {
+      // Show edit mode
+      viewModes.forEach(el => el.classList.add('hidden'));
+      editModes.forEach(el => el.classList.remove('hidden'));
+      
+      // Update button
+      if (editBtn) {
+        editBtn.classList.add('bg-brand-gold', 'text-brand-navy', 'border-brand-gold');
+        editBtn.classList.remove('bg-white', 'text-brand-navy', 'border-brand-navy/20');
+      }
+      if (editBtnText) editBtnText.textContent = '❌ ' + '{% trans "Cancel Edit"|escapejs %}';
+      if (editBtnText2) editBtnText2.textContent = '❌ ' + '{% trans "Cancel Edit"|escapejs %}';
+      
+      // Scroll to the edit form
+      const firstEditMode = document.querySelector('.edit-mode');
+      if (firstEditMode) {
+        firstEditMode.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    } else {
+      // Show view mode
+      viewModes.forEach(el => el.classList.remove('hidden'));
+      editModes.forEach(el => el.classList.add('hidden'));
+      
+      // Reset button
+      if (editBtn) {
+        editBtn.classList.remove('bg-brand-gold', 'text-brand-navy', 'border-brand-gold');
+        editBtn.classList.add('bg-white', 'text-brand-navy', 'border-brand-navy/20');
+      }
+      if (editBtnText) editBtnText.textContent = '✏️ ' + '{% trans "Propose Edit"|escapejs %}';
+      if (editBtnText2) editBtnText2.textContent = '✏️ ' + '{% trans "Propose Edit"|escapejs %}';
+    }
+  }
+  
+  function cancelEdit() {
+    editMode = false;
+    toggleEditMode();
+  }
+  
+  // Attach form submission handlers when DOM is ready
+  document.addEventListener('DOMContentLoaded', function() {
+    // Attach to form submit event
+    const editForm = document.getElementById('edit-form');
+    if (editForm) {
+      editForm.addEventListener('submit', handleEditSubmit);
+    }
+  });
+
+  // Handle fullscreen change events
+  document.addEventListener('fullscreenchange', function() {
+    const fullscreenBtn = document.querySelector('[onclick="toggleFullscreen()"]');
+    if (document.fullscreenElement) {
+      fullscreenBtn.innerHTML = `
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 9V4.5M9 9H4.5M9 9L3.75 3.75M15 9h4.5M15 9V4.5M15 9l5.25-5.25M9 15H4.5M9 15v4.5M9 15l-5.25 5.25M15 15h4.5M15 15v4.5m0-4.5l5.25 5.25"/>
+        </svg>
+      `;
+    } else {
+      fullscreenBtn.innerHTML = `
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15"/>
+        </svg>
+      `;
+    }
+  });
+</script>
+{% endblock %}

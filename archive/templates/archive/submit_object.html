@@ -1,0 +1,284 @@
+{% extends 'archive/base.html' %}
+{% load i18n %}
+{% block title %}{% trans "Submit New Object" %}{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto px-4 py-8">
+  <div class="mb-8">
+    <h1 class="text-3xl font-semibold text-brand-navy mb-3">{% trans "Submit New Object" %}</h1>
+    {% if has_auto_approval %}
+      <div class="bg-green-50 border border-green-200 rounded-lg p-4 mb-4">
+        <div class="flex">
+          <div class="flex-shrink-0">
+            <span class="text-green-500 text-xl">⚡</span>
+          </div>
+          <div class="ml-3">
+            <h3 class="text-sm font-medium text-green-800">{% trans "Instant Publication" %}</h3>
+            <p class="mt-1 text-sm text-green-700">{% trans "Your privileged status allows your submissions to be published immediately without review." %}</p>
+          </div>
+        </div>
+      </div>
+    {% else %}
+      <p class="text-brand-navy/70 mb-2">{% trans "Share a new object with the community. Submissions are reviewed before publishing." %}</p>
+    {% endif %}
+  </div>
+
+  <form method="post" enctype="multipart/form-data" x-data="submissionForm()" class="bg-white rounded-xl shadow-soft border border-brand-navy/10 overflow-visible">
+    {% csrf_token %}
+    {% if form.non_field_errors %}
+      <div class="bg-red-50 border border-red-200 rounded-lg p-4 m-6 mb-0">
+        <div class="text-red-600 text-sm">{{ form.non_field_errors }}</div>
+      </div>
+    {% endif %}
+
+    <!-- Core Information Section -->
+    <div class="border-b border-brand-navy/10">
+      <button type="button" @click="coreOpen = !coreOpen" 
+              class="w-full px-6 py-4 flex justify-between items-center bg-brand-sand/20 hover:bg-brand-sand/30 transition">
+        <span class="font-medium text-brand-navy text-lg">{% trans "Core Information" %} <span class="text-red-500">*</span></span>
+        <svg :class="{'rotate-180': coreOpen}" class="w-5 h-5 transform transition-transform text-brand-navy/70"
+             fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+        </svg>
+      </button>
+      
+      <div x-show="coreOpen" class="p-6 space-y-6">
+        <!-- Trilingual Titles -->
+        <div>
+          <h3 class="text-md font-medium text-brand-navy mb-4">{% trans "Titles" %}</h3>
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+            <div>
+              {{ form.title.label_tag }}
+              {{ form.title }}
+              {% if form.title.errors %}<p class="text-red-600 text-xs mt-1">{{ form.title.errors|striptags }}</p>{% endif %}
+            </div>
+            <div>
+              {{ form.title_ar.label_tag }}
+              {{ form.title_ar }}
+              {% if form.title_ar.errors %}<p class="text-red-600 text-xs mt-1">{{ form.title_ar.errors|striptags }}</p>{% endif %}
+            </div>
+            <div>
+              {{ form.title_fr.label_tag }}  
+              {{ form.title_fr }}
+              {% if form.title_fr.errors %}<p class="text-red-600 text-xs mt-1">{{ form.title_fr.errors|striptags }}</p>{% endif %}
+            </div>
+          </div>
+        </div>
+
+        <!-- Trilingual Descriptions -->
+        <div>
+          <h3 class="text-md font-medium text-brand-navy mb-4">{% trans "Descriptions" %}</h3>
+          <div class="space-y-4">
+            <div>
+              {{ form.description.label_tag }}
+              {{ form.description }}
+              {% if form.description.errors %}<p class="text-red-600 text-xs mt-1">{{ form.description.errors|striptags }}</p>{% endif %}
+            </div>
+            <div>
+              {{ form.description_ar.label_tag }}
+              {{ form.description_ar }}
+              {% if form.description_ar.errors %}<p class="text-red-600 text-xs mt-1">{{ form.description_ar.errors|striptags }}</p>{% endif %}
+            </div>
+            <div>
+              {{ form.description_fr.label_tag }}
+              {{ form.description_fr }}
+              {% if form.description_fr.errors %}<p class="text-red-600 text-xs mt-1">{{ form.description_fr.errors|striptags }}</p>{% endif %}
+            </div>
+          </div>
+        </div>
+
+        <!-- Classification -->
+        <div>
+          <h3 class="text-md font-medium text-brand-navy mb-4">{% trans "Classification" %}</h3>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <!-- Region Dropdown -->
+            <div x-data="{ open: false, selected: '{{ form.region.value|default:"" }}', selectedText: '{% if form.region.value %}{{ form.region.value }}{% else %}{% trans "Select Region" %}{% endif %}' }" class="relative">
+              <label class="block text-sm font-medium text-brand-navy mb-1">{{ form.region.label }} <span class="text-red-500">*</span></label>
+              <input type="hidden" name="region" :value="selected">
+              <button type="button" @click="open = !open"
+                      class="w-full flex items-center justify-between bg-white border border-brand-navy/20 rounded-md px-3 py-2 text-sm
+                             focus:outline-none focus:ring-2 focus:ring-brand-gold/60 hover:bg-white/95">
+                <span x-text="selectedText" class="text-brand-navy"></span>
+                <svg :class="{'rotate-180': open}" class="w-4 h-4 transform transition-transform text-brand-navy/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                </svg>
+              </button>
+              <div x-show="open" @click.outside="open=false" x-transition
+                   class="absolute mt-2 w-full bg-white border border-brand-navy/15 rounded-md shadow-soft overflow-hidden z-50">
+                {% for value, label in form.region.field.choices %}
+                  <button type="button" @click="selected='{{ value }}'; selectedText='{{ label }}'; open=false" 
+                          class="w-full flex items-center px-3 py-2 text-sm hover:bg-brand-sand text-brand-navy text-left">{{ label }}</button>
+                {% endfor %}
+              </div>
+              {% if form.region.errors %}<p class="text-red-600 text-xs mt-1">{{ form.region.errors|striptags }}</p>{% endif %}
+            </div>
+
+            <!-- Object Type Dropdown -->
+            <div x-data="{ open: false, selected: '{{ form.object_type.value|default:"" }}', selectedText: '{% if form.object_type.value %}{{ form.object_type.value }}{% else %}{% trans "Select Type" %}{% endif %}' }" class="relative">
+              <label class="block text-sm font-medium text-brand-navy mb-1">{{ form.object_type.label }} <span class="text-red-500">*</span></label>
+              <input type="hidden" name="object_type" :value="selected">
+              <button type="button" @click="open = !open"
+                      class="w-full flex items-center justify-between bg-white border border-brand-navy/20 rounded-md px-3 py-2 text-sm
+                             focus:outline-none focus:ring-2 focus:ring-brand-gold/60 hover:bg-white/95">
+                <span x-text="selectedText" class="text-brand-navy"></span>
+                <svg :class="{'rotate-180': open}" class="w-4 h-4 transform transition-transform text-brand-navy/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                </svg>
+              </button>
+              <div x-show="open" @click.outside="open=false" x-transition
+                   class="absolute mt-2 w-full bg-white border border-brand-navy/15 rounded-md shadow-soft overflow-hidden z-50">
+                {% for value, label in form.object_type.field.choices %}
+                  <button type="button" @click="selected='{{ value }}'; selectedText='{{ label }}'; open=false" 
+                          class="w-full flex items-center px-3 py-2 text-sm hover:bg-brand-sand text-brand-navy text-left">{{ label }}</button>
+                {% endfor %}
+              </div>
+              {% if form.object_type.errors %}<p class="text-red-600 text-xs mt-1">{{ form.object_type.errors|striptags }}</p>{% endif %}
+            </div>
+
+            <!-- ICH Domain Dropdown -->
+            <div x-data="{ open: false, selected: '{{ form.ich_domain.value|default:"" }}', selectedText: '{% if form.ich_domain.value %}{{ form.ich_domain.value }}{% else %}{% trans "Select ICH Domain" %}{% endif %}' }" class="relative">
+              <label class="block text-sm font-medium text-brand-navy mb-1">{{ form.ich_domain.label }} <span class="text-red-500">*</span></label>
+              <input type="hidden" name="ich_domain" :value="selected">
+              <button type="button" @click="open = !open"
+                      class="w-full flex items-center justify-between bg-white border border-brand-navy/20 rounded-md px-3 py-2 text-sm
+                             focus:outline-none focus:ring-2 focus:ring-brand-gold/60 hover:bg-white/95">
+                <span x-text="selectedText" class="text-brand-navy"></span>
+                <svg :class="{'rotate-180': open}" class="w-4 h-4 transform transition-transform text-brand-navy/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                </svg>
+              </button>
+              <div x-show="open" @click.outside="open=false" x-transition
+                   class="absolute mt-2 w-full bg-white border border-brand-navy/15 rounded-md shadow-soft overflow-hidden z-50">
+                {% for value, label in form.ich_domain.field.choices %}
+                  <button type="button" @click="selected='{{ value }}'; selectedText='{{ label }}'; open=false" 
+                          class="w-full flex items-center px-3 py-2 text-sm hover:bg-brand-sand text-brand-navy text-left">{{ label }}</button>
+                {% endfor %}
+              </div>
+              {% if form.ich_domain.errors %}<p class="text-red-600 text-xs mt-1">{{ form.ich_domain.errors|striptags }}</p>{% endif %}
+            </div>
+          </div>
+        </div>
+
+        <!-- Date and Files -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div>
+            {{ form.origin_date.label_tag }}
+            {{ form.origin_date }}
+            {% if form.origin_date.errors %}<p class="text-red-600 text-xs mt-1">{{ form.origin_date.errors|striptags }}</p>{% endif %}
+          </div>
+          <div>
+            {{ form.image.label_tag }}
+            {{ form.image }}
+            {% if form.image.errors %}<p class="text-red-600 text-xs mt-1">{{ form.image.errors|striptags }}</p>{% endif %}
+          </div>
+          <div>
+            {{ form.model_3d.label_tag }}
+            {{ form.model_3d }}
+            {% if form.model_3d.errors %}<p class="text-red-600 text-xs mt-1">{{ form.model_3d.errors|striptags }}</p>{% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Optional Metadata Section -->
+    <div class="border-b border-brand-navy/10">
+      <button type="button" @click="metadataOpen = !metadataOpen" 
+              class="w-full px-6 py-4 flex justify-between items-center hover:bg-brand-sand/10 transition">
+        <span class="font-medium text-brand-navy text-lg">{% trans "Optional Metadata" %}</span>
+        <svg :class="{'rotate-180': metadataOpen}" class="w-5 h-5 transform transition-transform text-brand-navy/70"
+             fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+        </svg>
+      </button>
+      
+      <div x-show="metadataOpen" class="p-6 space-y-6">
+        <p class="text-sm text-brand-navy/60 mb-4">{% trans "Add detailed information about the object (all fields are optional)" %}</p>
+        
+        <!-- Identification -->
+        <div>
+          <h3 class="text-md font-medium text-brand-navy mb-4">{% trans "Identification" %}</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              {{ form.alternate_name.label_tag }}
+              {{ form.alternate_name }}
+              {% if form.alternate_name.errors %}<p class="text-red-600 text-xs mt-1">{{ form.alternate_name.errors|striptags }}</p>{% endif %}
+            </div>
+            <div>
+              {{ form.maker.label_tag }}
+              {{ form.maker }}
+              {% if form.maker.errors %}<p class="text-red-600 text-xs mt-1">{{ form.maker.errors|striptags }}</p>{% endif %}
+            </div>
+            <div>
+              {{ form.attribution.label_tag }}
+              {{ form.attribution }}
+              {% if form.attribution.errors %}<p class="text-red-600 text-xs mt-1">{{ form.attribution.errors|striptags }}</p>{% endif %}
+            </div>
+            <div>
+              {{ form.period.label_tag }}
+              {{ form.period }}
+              {% if form.period.errors %}<p class="text-red-600 text-xs mt-1">{{ form.period.errors|striptags }}</p>{% endif %}
+            </div>
+            <div>
+              {{ form.origin_place.label_tag }}
+              {{ form.origin_place }}
+              {% if form.origin_place.errors %}<p class="text-red-600 text-xs mt-1">{{ form.origin_place.errors|striptags }}</p>{% endif %}
+            </div>
+          </div>
+        </div>
+
+        <!-- Physical Properties -->
+        <div>
+          <h3 class="text-md font-medium text-brand-navy mb-4">{% trans "Physical Properties" %}</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="md:col-span-2">
+              {{ form.materials.label_tag }}
+              {{ form.materials }}
+              {% if form.materials.errors %}<p class="text-red-600 text-xs mt-1">{{ form.materials.errors|striptags }}</p>{% endif %}
+            </div>
+            <div>
+              {{ form.dimensions.label_tag }}
+              {{ form.dimensions }}
+              {% if form.dimensions.errors %}<p class="text-red-600 text-xs mt-1">{{ form.dimensions.errors|striptags }}</p>{% endif %}
+            </div>
+            <div>
+              {{ form.weight.label_tag }}
+              {{ form.weight }}
+              {% if form.weight.errors %}<p class="text-red-600 text-xs mt-1">{{ form.weight.errors|striptags }}</p>{% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Submit Section -->
+    <div class="px-6 py-4 bg-brand-sand/5">
+      <div class="flex justify-between items-center">
+        <div class="text-sm text-brand-navy/60">
+          <span class="text-red-500">*</span> {% trans "Required fields" %}
+        </div>
+        <div class="flex gap-3">
+          <a href="{% url 'heritage-list' %}" class="px-4 py-2 rounded-lg border text-brand-navy border-brand-navy/20 hover:bg-brand-sand/50 transition">
+            {% trans "Cancel" %}
+          </a>
+          <button type="submit" class="px-6 py-2 rounded-lg bg-brand-navy text-white font-semibold hover:bg-brand-charcoal transition shadow-sm">
+            {% if has_auto_approval %}
+              ⚡ {% trans "Publish Now" %}
+            {% else %}
+              📋 {% trans "Submit for Review" %}
+            {% endif %}
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<script>
+function submissionForm() {
+  return {
+    coreOpen: true,
+    metadataOpen: false
+  }
+}
+</script>
+{% endblock %}

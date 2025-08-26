@@ -1,0 +1,41 @@
+{% extends 'archive/base.html' %}
+{% load i18n %}
+{% block title %}{% trans "My Submissions" %}{% endblock %}
+
+{% block content %}
+<div class="max-w-5xl mx-auto px-4 py-8">
+  <h1 class="text-2xl font-semibold text-brand-navy mb-4">{% trans "My Submissions" %}</h1>
+
+  {% if items %}
+    <div class="bg-white rounded-xl2 shadow-soft border border-brand-navy/10 overflow-hidden">
+      <table class="w-full text-sm">
+        <thead class="bg-brand-sand/40 text-brand-navy">
+          <tr>
+            <th class="text-left px-4 py-3">{% trans "Title" %}</th>
+            <th class="text-left px-4 py-3">{% trans "Status" %}</th>
+            <th class="text-left px-4 py-3">{% trans "Submitted" %}</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-brand-navy/10">
+          {% for s in items %}
+          <tr>
+            <td class="px-4 py-3 text-brand-navy">{{ s.title }}</td>
+            <td class="px-4 py-3">
+              <span class="px-2 py-1 rounded-md border text-xs
+                {% if s.status == 'approved' %}bg-green-50 text-green-700 border-green-200
+                {% elif s.status == 'rejected' %}bg-red-50 text-red-700 border-red-200
+                {% else %}bg-brand-sand/60 text-brand-navy border-brand-navy/10{% endif %}">
+                {{ s.get_status_display|default:s.status|title }}
+              </span>
+            </td>
+            <td class="px-4 py-3 text-brand-navy/70">{{ s.created_at|date:"M j, Y H:i" }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <p class="text-brand-navy/70">{% trans "No submissions yet." %}</p>
+  {% endif %}
+</div>
+{% endblock %}

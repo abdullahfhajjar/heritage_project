@@ -1,0 +1,115 @@
+{% load i18n dict_extras %}
+<div class="reply-item" data-comment-id="{{ reply.id }}" x-data="{ showReplyForm: false, showReplies: true }">
+  <div class="flex gap-3">
+    <!-- Reply Avatar -->
+    <div class="flex-shrink-0">
+      {% with user_stats=comment_user_stats|get_item:reply.user_id %}
+      {% if user_stats.profile and user_stats.profile.profile_photo_url %}
+        <img src="{{ user_stats.profile.profile_photo_url }}" 
+             alt="{{ reply.user.get_full_name|default:reply.user.username }}"
+             class="w-8 h-8 rounded-full object-cover border-2 border-brand-sand">
+      {% else %}
+        <div class="w-8 h-8 rounded-full bg-brand-sand flex items-center justify-center text-brand-navy font-semibold text-xs">
+          {{ reply.user.first_name|default:reply.user.username|first|upper }}
+        </div>
+      {% endif %}
+      {% endwith %}
+    </div>
+
+    <!-- Reply Content -->
+    <div class="flex-1">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <a href="{% url 'public-profile' reply.user.username %}" class="font-medium text-sm text-brand-navy hover:text-brand-gold transition-colors">
+            {{ reply.user.get_full_name|default:reply.user.username }}
+          </a>
+          <span class="text-xs text-brand-navy/60">
+            {{ reply.created_at|timesince }} {% trans "ago" %}
+          </span>
+        </div>
+        {% if request.user.is_staff or request.user.id == reply.user_id %}
+          <a href="{% url 'comment-delete' reply.id %}"
+             class="text-xs text-brand-navy/50 hover:text-red-600"
+             onclick="return confirm('{% trans 'Delete this reply?' %}')">
+            {% trans "Delete" %}
+          </a>
+        {% endif %}
+      </div>
+      <p class="mt-1 text-sm text-brand-navy/90">{{ reply.body|linebreaksbr }}</p>
+      
+      <!-- Reply Actions -->
+      <div class="mt-2 flex items-center gap-4">
+        {% if request.user.is_authenticated %}
+          <!-- Like Button -->
+          <button type="button" onclick="toggleCommentLike({{ reply.id }})" 
+                  class="like-btn inline-flex items-center gap-1 text-xs
+                         {% if reply.user_liked %}text-brand-gold font-medium{% else %}text-brand-navy/70 hover:text-brand-gold{% endif %}"
+                  data-comment-id="{{ reply.id }}" data-liked="{% if reply.user_liked %}true{% else %}false{% endif %}">
+            {% if reply.user_liked %}
+              <svg class="w-3 h-3 fill-current like-icon" viewBox="0 0 20 20">
+                <path d="M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01-3 0v-6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962-1.608l1.2-6A2 2 0 0015.56 8H12V4a2 2 0 00-2-2 1 1 0 00-1 1v.667a4 4 0 01-.8 2.4L6.8 7.933a4 4 0 00-.8 2.4z"/>
+              </svg>
+            {% else %}
+              <svg class="w-3 h-3 like-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"/>
+              </svg>
+            {% endif %}
+            <span class="like-count">{{ reply.like_count|default:0 }}</span>
+          </button>
+
+          <!-- Reply Button -->
+          <button @click="showReplyForm = !showReplyForm" 
+                  class="inline-flex items-center gap-1 text-xs text-brand-navy/70 hover:text-brand-gold">
+            <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6"/>
+            </svg>
+            {% trans "Reply" %}
+          </button>
+        {% endif %}
+
+        <!-- Show/Hide Replies -->
+        {% if reply.reply_count > 0 %}
+          <button @click="showReplies = !showReplies" 
+                  class="inline-flex items-center gap-1 text-xs text-brand-navy/70 hover:text-brand-gold reply-count-btn"
+                  data-comment-id="{{ reply.id }}">
+            <span x-text="showReplies ? '{% trans "Hide" %}' : '{% trans "Show" %}'"></span>
+            <span class="reply-count">{{ reply.reply_count }}</span> {% if reply.reply_count == 1 %}{% trans "reply" %}{% else %}{% trans "replies" %}{% endif %}
+          </button>
+        {% endif %}
+      </div>
+
+      <!-- Reply Form -->
+      <div x-show="showReplyForm" x-transition class="mt-3">
+        <form onsubmit="postCommentReply(event, {{ reply.id }})" class="space-y-2 reply-form">
+          {% csrf_token %}
+          <textarea name="body" rows="2" required
+                    class="w-full border border-brand-navy/15 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-gold/60"
+                    placeholder="{% trans 'Write a reply…' %}"></textarea>
+          <div class="flex justify-end gap-2">
+            <button type="button" @click="showReplyForm = false"
+                    class="px-3 py-1 text-xs text-brand-navy/70 hover:text-brand-navy">
+              {% trans "Cancel" %}
+            </button>
+            <button type="submit"
+                    class="px-3 py-1 rounded-md bg-brand-navy text-white text-xs font-medium hover:bg-brand-gold hover:text-brand-navy transition">
+              {% trans "Reply" %}
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Nested Replies Container -->
+      <div class="replies-container" data-comment-id="{{ reply.id }}">
+        {% if reply.replies.all %}
+          <div x-show="showReplies" x-transition class="mt-3 space-y-3 pl-3 border-l border-brand-sand/70 replies-list">
+            {% for nested_reply in reply.replies.all %}
+              {% if not nested_reply.is_deleted %}
+                {% include 'archive/reply_partial.html' with reply=nested_reply %}
+              {% endif %}
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>

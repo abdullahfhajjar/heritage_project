@@ -1,0 +1,13 @@
+/* Unify ALL admin form labels (Core + optional) */
+#content-main .form-row label,
+#content-main label,
+#content-main label.required {       /* Django adds .required to many core labels */
+  font-weight: 400 !important;       /* normal, not bold */
+  color: #333 !important;            /* unified neutral */
+}
+
+/* Optional: tidy helper text under file inputs */
+#content-main .form-row .file-upload p {
+  color: #555 !important;
+  font-size: 12px !important;
+}

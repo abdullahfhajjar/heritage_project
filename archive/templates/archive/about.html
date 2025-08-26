@@ -1,0 +1,39 @@
+{% extends 'archive/base.html' %}
+{% load static i18n %}
+
+{% block title %}{% trans "About Us" %}{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto px-4 py-8">
+  <h1 class="text-3xl font-bold text-brand-navy mb-6">{% trans "About This Platform" %}</h1>
+  
+  <div class="prose prose-lg max-w-none text-brand-navy/80">
+    <p class="text-xl leading-relaxed mb-6">
+      {% trans "This website aims to preserve and present Saudi Arabia's cultural heritage through digitized 3D models and accessible research tools." %}
+    </p>
+    
+    <div class="grid md:grid-cols-2 gap-8 mt-8">
+      <div class="bg-white rounded-lg shadow-sm border border-brand-sand/30 p-6 hover:shadow-lg hover:-translate-y-0.5 transition">
+        <h2 class="text-xl font-semibold text-brand-navy mb-4">{% trans "Our Mission" %}</h2>
+        <p>
+          {% trans "To digitally preserve and share Saudi Arabia's rich cultural heritage through innovative 3D modeling technology, making these treasures accessible to researchers, educators, and the global community." %}
+        </p>
+      </div>
+      
+      <div class="bg-white rounded-lg shadow-sm border border-brand-sand/30 p-6 hover:shadow-lg hover:-translate-y-0.5 transition">
+        <h2 class="text-xl font-semibold text-brand-navy mb-4">{% trans "Our Vision" %}</h2>
+        <p>
+          {% trans "To become the leading digital repository of Saudi cultural artifacts, fostering education, research, and cultural appreciation for future generations." %}
+        </p>
+      </div>
+    </div>
+    
+    <div class="mt-8 bg-brand-sand/20 rounded-lg p-6">
+      <h2 class="text-xl font-semibold text-brand-navy mb-4">{% trans "Technology & Innovation" %}</h2>
+      <p>
+        {% trans "Our platform utilizes cutting-edge 3D scanning and modeling technology to create high-fidelity digital representations of cultural artifacts. Each object is carefully documented with detailed metadata, providing context and historical significance." %}
+      </p>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'archive/base.html' %}
+{% load i18n %}
+{% block title %}{% trans "Propose Edit" %} — {{ object.get_title_display }}{% endblock %}
+
+{% block content %}
+<div class="max-w-3xl mx-auto px-4 py-8">
+  <h1 class="text-2xl font-semibold text-brand-navy mb-2">{% trans "Propose Edit" %}</h1>
+  <p class="text-brand-navy/70 mb-6">
+    {% blocktrans %}Suggest changes to <strong>{{ object.get_title_display }}</strong>. Your proposal will be reviewed by moderators.{% endblocktrans %}
+  </p>
+
+  <form method="post" class="bg-white rounded-xl2 shadow-soft border border-brand-navy/10 p-6 space-y-5">
+    {% csrf_token %}
+    {% if form.non_field_errors %}<div class="text-red-600 text-sm">{{ form.non_field_errors }}</div>{% endif %}
+
+    <div>
+      <label class="block text-sm font-medium text-brand-navy mb-1">{{ form.note.label }}</label>
+      {{ form.note }}
+      {% if form.note.errors %}<p class="text-red-600 text-xs mt-1">{{ form.note.errors|striptags }}</p>{% endif %}
+    </div>
+
+    <div>
+      <label class="block text-sm font-medium text-brand-navy mb-1">{{ form.data.label }}</label>
+      <p class="text-xs text-brand-navy/60 mb-2">
+        {% trans 'Provide JSON with the fields to update, e.g.' %} <code>{"title": "New title", "description": "..."}</code>
+      </p>
+      {{ form.data }}
+      {% if form.data.errors %}<p class="text-red-600 text-xs mt-1">{{ form.data.errors|striptags }}</p>{% endif %}
+    </div>
+
+    <div class="flex justify-end gap-3">
+      <a href="{% url 'heritage-detail' object.pk %}" class="px-4 py-2 rounded-md border text-brand-navy border-brand-navy/20 hover:bg-brand-sand/50">{% trans "Cancel" %}</a>
+      <button type="submit" class="px-4 py-2 rounded-md bg-brand-navy text-white font-semibold hover:bg-brand-charcoal">{% trans "Submit proposal" %}</button>
+    </div>
+  </form>
+</div>
+{% endblock %}

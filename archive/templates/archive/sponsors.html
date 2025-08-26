@@ -1,0 +1,53 @@
+{% extends 'archive/base.html' %}
+{% load static i18n %}
+
+{% block title %}{% trans "Our Sponsors" %}{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto px-4 py-8">
+  <h1 class="text-3xl font-bold text-brand-navy mb-6">{% trans "Our Sponsors" %}</h1>
+  
+  <div class="prose prose-lg max-w-none text-brand-navy/80">
+    <p class="text-xl leading-relaxed mb-8">
+      {% trans "We thank our generous partners and sponsors who support cultural preservation and digitization efforts." %}
+    </p>
+    
+    <div class="bg-brand-sand/20 rounded-lg p-6 mb-8">
+      <h2 class="text-xl font-semibold text-brand-navy mb-4">{% trans "Partnership Opportunities" %}</h2>
+      <p>
+        {% trans "We welcome partnerships with cultural institutions, technology companies, educational organizations, and philanthropic foundations who share our mission of preserving Saudi Arabia's cultural heritage." %}
+      </p>
+    </div>
+    
+    <div class="grid md:grid-cols-2 gap-8">
+      <div class="bg-white rounded-lg shadow-sm border border-brand-sand/30 p-6 hover:shadow-lg hover:-translate-y-0.5 transition">
+        <h2 class="text-xl font-semibold text-brand-navy mb-4">{% trans "Institutional Partners" %}</h2>
+        <p>
+          {% trans "Museums, universities, and cultural institutions that collaborate with us in digitization projects and research initiatives." %}
+        </p>
+      </div>
+      
+      <div class="bg-white rounded-lg shadow-sm border border-brand-sand/30 p-6 hover:shadow-lg hover:-translate-y-0.5 transition">
+        <h2 class="text-xl font-semibold text-brand-navy mb-4">{% trans "Technology Sponsors" %}</h2>
+        <p>
+          {% trans "Companies providing 3D scanning equipment, software solutions, and technical expertise to advance our digitization capabilities." %}
+        </p>
+      </div>
+      
+      <div class="bg-white rounded-lg shadow-sm border border-brand-sand/30 p-6 hover:shadow-lg hover:-translate-y-0.5 transition">
+        <h2 class="text-xl font-semibold text-brand-navy mb-4">{% trans "Educational Support" %}</h2>
+        <p>
+          {% trans "Organizations supporting educational programs and public access initiatives to make cultural heritage accessible to all." %}
+        </p>
+      </div>
+      
+      <div class="bg-white rounded-lg shadow-sm border border-brand-sand/30 p-6 hover:shadow-lg hover:-translate-y-0.5 transition">
+        <h2 class="text-xl font-semibold text-brand-navy mb-4">{% trans "Become a Sponsor" %}</h2>
+        <p>
+          {% trans "Interested in supporting our mission? Contact us to learn about sponsorship opportunities and partnership benefits." %}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

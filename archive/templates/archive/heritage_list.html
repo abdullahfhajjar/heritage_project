@@ -1,0 +1,201 @@
+{% extends 'archive/base.html' %}
+{% load static i18n %}
+
+{% block title %}{% trans "Heritage Objects" %}{% endblock %}
+
+{% block content %}
+
+  <div class="max-w-7xl mx-auto px-4">
+    <h2 class="text-3xl font-semibold text-brand-navy text-center mt-10 tracking-wide">
+      {% trans "Heritage Objects" %}
+    </h2>
+  </div>
+
+  <div x-data="{ filtersOpen: true }" class="flex justify-center mt-6 px-4 relative overflow-visible">
+    <form method="get" action="{% url 'heritage-filtered' %}"
+          class="w-full max-w-5xl bg-white rounded-xl2 shadow-soft border border-brand-navy/10 overflow-visible">
+
+      <button @click="filtersOpen = !filtersOpen" type="button"
+              class="w-full px-4 py-3 flex justify-between items-center bg-brand-sand/40">
+        <span class="font-medium text-brand-navy">{% trans "Filter Collections" %}</span>
+        <svg :class="{'rotate-180': filtersOpen}" class="w-5 h-5 transform transition-transform text-brand-navy/70"
+             fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
+
+      <div x-show="filtersOpen" class="grid grid-cols-1 md:grid-cols-3 gap-6 p-6 overflow-visible">
+        <div x-data="{ open: false, selected: '{{ region|default:"" }}', selectedText: '{% if region == "riyadh" %}{% trans "Riyadh" %}{% elif region == "makkah" %}{% trans "Makkah" %}{% elif region == "madinah" %}{% trans "Madinah" %}{% elif region == "eastern" %}{% trans "Eastern Province" %}{% elif region == "asir" %}{% trans "Asir" %}{% elif region == "tabuk" %}{% trans "Tabuk" %}{% elif region == "hail" %}{% trans "Hail" %}{% elif region == "northern" %}{% trans "Northern Borders" %}{% elif region == "jazan" %}{% trans "Jazan" %}{% elif region == "najran" %}{% trans "Najran" %}{% elif region == "bahah" %}{% trans "Al Bahah" %}{% elif region == "jouf" %}{% trans "Al Jouf" %}{% elif region == "qassim" %}{% trans "Qassim" %}{% else %}{% trans "All Regions" %}{% endif %}' }" class="relative">
+          <label class="block mb-1 text-xs font-medium text-brand-navy/70">{% trans "Browse by Region" %}</label>
+          <input type="hidden" name="region" :value="selected">
+          <button type="button"
+                  @click="open = !open"
+                  class="w-full flex items-center justify-between bg-white border border-brand-navy/15 rounded-md px-3 py-2 text-sm
+                         focus:outline-none focus:ring-2 focus:ring-brand-gold/60 hover:bg-white/95">
+            <span x-text="selectedText" class="text-brand-navy"></span>
+            <svg :class="{'rotate-180': open}" class="w-4 h-4 transform transition-transform text-brand-navy/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div x-show="open" @click.outside="open=false" x-transition
+               class="absolute mt-2 w-full bg-white border border-brand-navy/15 rounded-md shadow-soft overflow-hidden z-[100]">
+            <button type="button" @click="selected=''; selectedText='{% trans "All Regions" %}'; open=false" 
+                    class="w-full flex items-center px-3 py-2 text-sm hover:bg-brand-sand text-brand-navy text-left">{% trans "All Regions" %}</button>
+            <button type="button" @click="selected='riyadh'; selectedText='{% trans "Riyadh" %}'; open=false" 
+                    class="w-full flex items-center px-3 py-2 text-sm hover:bg-brand-sand text-brand-navy text-left">{% trans "Riyadh" %}</button>
+            <button type="button" @click="selected='makkah'; selectedText='{% trans "Makkah" %}'; open=false" 
+                    class="w-full flex items-center px-3 py-2 text-sm hover:bg-brand-sand text-brand-navy text-left">{% trans "Makkah" %}</button>
+            <button type="button" @click="selected='madinah'; selectedText='{% trans "Madinah" %}'; open=false" 
+                    class="w-full flex items-center px-3 py-2 text-sm hover:bg-brand-sand text-brand-navy text-left">{% trans "Madinah" %}</button>
+            <button type="button" @click="selected='eastern'; selectedText='{% trans "Eastern Province" %}'; open=false" 
+                    class="w-full flex items-center px-3 py-2 text-sm hover:bg-brand-sand text-brand-navy text-left">{% trans "Eastern Province" %}</button>
+            <button type="button" @click="selected='asir'; selectedText='{% trans "Asir" %}'; open=false" 
+                    class="w-full flex items-center px-3 py-2 text-sm hover:bg-brand-sand text-brand-navy text-left">{% trans "Asir" %}</button>
+            <button type="button" @click="selected='tabuk'; selectedText='{% trans "Tabuk" %}'; open=false" 
+                    class="w-full flex items-center px-3 py-2 text-sm hover:bg-brand-sand text-brand-navy text-left">{% trans "Tabuk" %}</button>
+            <button type="button" @click="selected='hail'; selectedText='{% trans "Hail" %}'; open=false" 
+                    class="w-full flex items-center px-3 py-2 text-sm hover:bg-brand-sand text-brand-navy text-left">{% trans "Hail" %}</button>
+            <button type="button" @click="selected='northern'; selectedText='{% trans "Northern Borders" %}'; open=false" 
+                    class="w-full flex items-center px-3 py-2 text-sm hover:bg-brand-sand text-brand-navy text-left">{% trans "Northern Borders" %}</button>
+            <button type="button" @click="selected='jazan'; selectedText='{% trans "Jazan" %}'; open=false" 
+                    class="w-full flex items-center px-3 py-2 text-sm hover:bg-brand-sand text-brand-navy text-left">{% trans "Jazan" %}</button>
+            <button type="button" @click="selected='najran'; selectedText='{% trans "Najran" %}'; open=false" 
+                    class="w-full flex items-center px-3 py-2 text-sm hover:bg-brand-sand text-brand-navy text-left">{% trans "Najran" %}</button>
+            <button type="button" @click="selected='bahah'; selectedText='{% trans "Al Bahah" %}'; open=false" 
+                    class="w-full flex items-center px-3 py-2 text-sm hover:bg-brand-sand text-brand-navy text-left">{% trans "Al Bahah" %}</button>
+            <button type="button" @click="selected='jouf'; selectedText='{% trans "Al Jouf" %}'; open=false" 
+                    class="w-full flex items-center px-3 py-2 text-sm hover:bg-brand-sand text-brand-navy text-left">{% trans "Al Jouf" %}</button>
+            <button type="button" @click="selected='qassim'; selectedText='{% trans "Qassim" %}'; open=false" 
+                    class="w-full flex items-center px-3 py-2 text-sm hover:bg-brand-sand text-brand-navy text-left">{% trans "Qassim" %}</button>
+          </div>
+        </div>
+
+        <div x-data="{ open: false, selected: '{{ obj_type|default:"" }}', selectedText: '{% if obj_type == "textile" %}{% trans "Textile" %}{% elif obj_type == "jewellery" %}{% trans "Jewellery" %}{% elif obj_type == "tool" %}{% trans "Tool" %}{% elif obj_type == "furniture" %}{% trans "Furniture" %}{% elif obj_type == "ceramic" %}{% trans "Ceramic" %}{% elif obj_type == "musical instrument" %}{% trans "Musical Instrument" %}{% elif obj_type == "architecture" %}{% trans "Architecture" %}{% elif obj_type == "manuscript" %}{% trans "Manuscript" %}{% elif obj_type == "other" %}{% trans "Other" %}{% else %}{% trans "All Types" %}{% endif %}' }" class="relative">
+          <label class="block mb-1 text-xs font-medium text-brand-navy/70">{% trans "Browse by Object Type" %}</label>
+          <input type="hidden" name="type" :value="selected">
+          <button type="button"
+                  @click="open = !open"
+                  class="w-full flex items-center justify-between bg-white border border-brand-navy/15 rounded-md px-3 py-2 text-sm
+                         focus:outline-none focus:ring-2 focus:ring-brand-gold/60 hover:bg-white/95">
+            <span x-text="selectedText" class="text-brand-navy"></span>
+            <svg :class="{'rotate-180': open}" class="w-4 h-4 transform transition-transform text-brand-navy/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div x-show="open" @click.outside="open=false" x-transition
+               class="absolute mt-2 w-full bg-white border border-brand-navy/15 rounded-md shadow-soft overflow-hidden z-[100]">
+            <button type="button" @click="selected=''; selectedText='{% trans "All Types" %}'; open=false" 
+                    class="w-full flex items-center px-3 py-2 text-sm hover:bg-brand-sand text-brand-navy text-left">{% trans "All Types" %}</button>
+            <button type="button" @click="selected='textile'; selectedText='{% trans "Textile" %}'; open=false" 
+                    class="w-full flex items-center px-3 py-2 text-sm hover:bg-brand-sand text-brand-navy text-left">{% trans "Textile" %}</button>
+            <button type="button" @click="selected='jewellery'; selectedText='{% trans "Jewellery" %}'; open=false" 
+                    class="w-full flex items-center px-3 py-2 text-sm hover:bg-brand-sand text-brand-navy text-left">{% trans "Jewellery" %}</button>
+            <button type="button" @click="selected='tool'; selectedText='{% trans "Tool" %}'; open=false" 
+                    class="w-full flex items-center px-3 py-2 text-sm hover:bg-brand-sand text-brand-navy text-left">{% trans "Tool" %}</button>
+            <button type="button" @click="selected='furniture'; selectedText='{% trans "Furniture" %}'; open=false" 
+                    class="w-full flex items-center px-3 py-2 text-sm hover:bg-brand-sand text-brand-navy text-left">{% trans "Furniture" %}</button>
+            <button type="button" @click="selected='ceramic'; selectedText='{% trans "Ceramic" %}'; open=false" 
+                    class="w-full flex items-center px-3 py-2 text-sm hover:bg-brand-sand text-brand-navy text-left">{% trans "Ceramic" %}</button>
+            <button type="button" @click="selected='musical instrument'; selectedText='{% trans "Musical Instrument" %}'; open=false" 
+                    class="w-full flex items-center px-3 py-2 text-sm hover:bg-brand-sand text-brand-navy text-left">{% trans "Musical Instrument" %}</button>
+            <button type="button" @click="selected='architecture'; selectedText='{% trans "Architecture" %}'; open=false" 
+                    class="w-full flex items-center px-3 py-2 text-sm hover:bg-brand-sand text-brand-navy text-left">{% trans "Architecture" %}</button>
+            <button type="button" @click="selected='manuscript'; selectedText='{% trans "Manuscript" %}'; open=false" 
+                    class="w-full flex items-center px-3 py-2 text-sm hover:bg-brand-sand text-brand-navy text-left">{% trans "Manuscript" %}</button>
+            <button type="button" @click="selected='other'; selectedText='{% trans "Other" %}'; open=false" 
+                    class="w-full flex items-center px-3 py-2 text-sm hover:bg-brand-sand text-brand-navy text-left">{% trans "Other" %}</button>
+          </div>
+        </div>
+
+        <div class="flex items-end">
+          <button type="submit"
+                  class="w-full inline-flex items-center justify-center rounded-lg bg-brand-navy text-white
+                         px-4 py-2.5 text-sm font-semibold hover:bg-brand-gold hover:text-brand-navy transition
+                         focus:outline-none focus:ring-2 focus:ring-brand-gold/60">
+            {% trans "Filter" %}
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  {% if filter_type != 'all' %}
+    <p class="text-center text-brand-navy/70 mt-6">
+      {% trans "Filtered by:" %}
+      {% if region %}<strong>{% trans "Region:" %}</strong> {{ region|title }} {% endif %}
+      {% if obj_type %}{% if region %}&nbsp;•&nbsp;{% endif %}<strong>{% trans "Type:" %}</strong> {{ obj_type|title }}{% endif %}
+    </p>
+  {% endif %}
+
+  <div class="max-w-7xl mx-auto mt-10 px-4">
+    {% if objects %}
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {% for object in objects %}
+          <article class="bg-white rounded-xl2 shadow-soft border border-brand-navy/5 hover:shadow-lg hover:-translate-y-0.5 transition">
+            {% if object.model_3d %}
+              <div class="relative h-64 bg-brand-sand rounded-t-xl2 overflow-hidden">
+                <model-viewer
+                  src="{{ object.model_3d.url }}"
+                  alt="{% blocktrans %}3D model of {{ object.get_title_display }}{% endblocktrans %}"
+                  class="w-full h-full"
+                  camera-controls
+                  loading="lazy"
+                  reveal="auto"
+                  interaction-prompt="none">
+                </model-viewer>
+              </div>
+            {% endif %}
+
+            <div class="p-6">
+              <h2 class="text-lg font-semibold text-brand-navy mb-3">
+                <a href="{% url 'heritage-detail' object.pk %}" class="hover:text-brand-gold transition">
+                  {{ object.get_title_display }}
+                </a>
+              </h2>
+
+              <div class="space-y-2 text-sm">
+                <div class="flex items-center gap-2">
+                  <span class="text-brand-navy/60">{% trans "Region:" %}</span>
+                  <span class="font-medium text-brand-navy">{{ object.get_region_display }}</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="text-brand-navy/60">{% trans "Type:" %}</span>
+                  <span class="font-medium text-brand-navy">{{ object.get_object_type_display }}</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="text-brand-navy/60">{% trans "ICH Domain:" %}</span>
+                  <span class="font-medium text-brand-navy">{{ object.get_ich_domain_display }}</span>
+                </div>
+              </div>
+
+              <div class="mt-4 flex items-center justify-between">
+                <a href="{% url 'heritage-detail' object.pk %}"
+                   class="inline-flex items-center justify-center px-4 py-2 rounded-lg border border-brand-navy/20 
+                          text-sm font-medium text-brand-navy hover:bg-brand-gold/10 hover:border-brand-gold/30 
+                          hover:text-brand-gold transition focus:outline-none focus:ring-2 focus:ring-brand-gold/60">
+                  {% trans "View Details" %}
+                </a>
+
+                {# like badge: uses annotated like_count and liked_ids from the view #}
+                {% if object.id in liked_ids %}
+                  <span class="inline-flex items-center gap-1 px-2 py-1 text-xs font-medium rounded-md border bg-brand-gold/10 text-brand-gold border-brand-gold/30">
+                    ❤️ {{ object.like_count }}
+                  </span>
+                {% else %}
+                  <span class="inline-flex items-center gap-1 px-2 py-1 text-xs font-medium rounded-md border bg-brand-sand/60 text-brand-navy border-brand-navy/10">
+                    ♡ {{ object.like_count }}
+                  </span>
+                {% endif %}
+              </div>
+            </div>
+          </article>
+        {% endfor %}
+      </div>
+    {% else %}
+      <div class="text-center py-16 bg-white rounded-xl2 shadow-soft border border-brand-navy/10">
+        <h3 class="text-xl font-semibold text-brand-navy">{% trans "No Results Found" %}</h3>
+        <p class="mt-2 text-brand-navy/70">{% trans "Try adjusting your search or filter criteria" %}</p>
+      </div>
+    {% endif %}
+  </div>
+{% endblock %}
