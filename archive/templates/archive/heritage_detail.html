@@ -68,9 +68,9 @@
 
   <!-- Back -->
   <a href="{% url 'heritage-list' %}"
-     class="inline-flex items-center justify-center rounded-lg bg-brand-navy text-white
-            px-4 py-2.5 text-sm font-semibold hover:bg-brand-gold hover:text-brand-navy transition
-            focus:outline-none focus:ring-2 focus:ring-brand-gold/60">
+     class="inline-flex items-center justify-center rounded-lg bg-brand-navy dark:bg-white text-white dark:text-black
+            px-4 py-2.5 text-sm font-semibold hover:bg-brand-gold dark:hover:bg-gray-200 hover:text-brand-navy dark:hover:text-black transition
+            focus:outline-none focus:ring-2 focus:ring-brand-gold/60 dark:border dark:border-white">
     ← {% trans "Back to Collections" %}
   </a>
 
@@ -115,24 +115,37 @@
 
     <!-- LEFT: 3D Viewer -->
     <div class="lg:col-span-7">
-      <article class="bg-white rounded-xl2 shadow-soft border border-brand-navy/10 overflow-hidden">
-        <div class="relative p-3 bg-brand-sand">
+      <article class="bg-white dark:bg-gray-900 rounded-xl2 shadow-soft dark:shadow-none border border-brand-navy/10 dark:border-white overflow-hidden transition-colors duration-300">
+        <div class="relative p-3 bg-brand-sand dark:bg-black transition-colors duration-300">
           <!-- 3D Model Viewer -->
           <div class="relative rounded-lg overflow-hidden">
-            <model-viewer
-              id="heritageViewer"
-              src="{{ object.model_3d.url }}"
-              alt="{% blocktrans %}3D model of {{ object.get_title_display }}{% endblocktrans %}"
-              class="w-full h-[64vh] min-h-[520px]"
-              camera-controls
-              interaction-prompt="none"
-              environment-image="neutral"
-              exposure="1.0"
-              shadow-intensity="0.6"
-              shadow-softness="0.8"
-              camera-target="auto"
-              style="background-color:transparent; --poster-color:transparent;">
-            </model-viewer>
+            {% if object.model_3d %}
+              <model-viewer
+                id="heritageViewer"
+                src="{{ object.model_3d.url }}"
+                alt="{% blocktrans %}3D model of {{ object.get_title_display }}{% endblocktrans %}"
+                class="w-full h-[64vh] min-h-[520px]"
+                camera-controls
+                interaction-prompt="none"
+                environment-image="neutral"
+                exposure="1.0"
+                shadow-intensity="0.6"
+                shadow-softness="0.8"
+                camera-target="auto"
+                style="background-color:transparent; --poster-color:transparent;">
+              </model-viewer>
+            {% else %}
+              <!-- No 3D Model Available -->
+              <div class="w-full h-[64vh] min-h-[520px] bg-gray-100 dark:bg-gray-800 flex items-center justify-center transition-colors duration-300">
+                <div class="text-center">
+                  <svg class="w-20 h-20 mx-auto text-gray-400 dark:text-gray-600 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M9 9l3-3 3 3M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"/>
+                  </svg>
+                  <p class="text-gray-500 dark:text-gray-400 text-lg font-medium mb-2">{% trans "No 3D Model Available" %}</p>
+                  <p class="text-gray-400 dark:text-gray-500 text-sm">{% trans "This heritage object doesn't have a 3D model yet" %}</p>
+                </div>
+              </div>
+            {% endif %}
             
             <!-- Branded Overlay - Top Right -->
             <div class="absolute top-4 right-4 flex items-center gap-2 bg-black/60 backdrop-blur-sm rounded-lg px-3 py-2">
@@ -486,31 +499,31 @@
   </div>
 
   <!-- Discussion Section -->
-  <section class="mt-8 bg-white rounded-xl2 shadow-soft border border-brand-navy/10 overflow-hidden">
-    <div class="px-6 py-4 bg-brand-sand/40 border-b border-brand-navy/10">
-      <h3 class="font-medium text-brand-navy">{% trans "Discussion" %}</h3>
+  <section class="mt-8 bg-white dark:bg-gray-900 rounded-xl2 shadow-soft dark:shadow-none border border-brand-navy/10 dark:border-white overflow-hidden transition-colors duration-300">
+    <div class="px-6 py-4 bg-brand-sand/40 dark:bg-gray-800 border-b border-brand-navy/10 dark:border-white transition-colors duration-300">
+      <h3 class="font-medium text-brand-navy dark:text-white transition-colors duration-300">{% trans "Discussion" %}</h3>
     </div>
 
     <!-- Add comment -->
-    <div class="p-6 border-b border-brand-navy/10">
+    <div class="p-6 border-b border-brand-navy/10 dark:border-white transition-colors duration-300">
       {% if request.user.is_authenticated %}
         <form id="comment-form" onsubmit="postComment(event)" class="space-y-3">
           {% csrf_token %}
           <div id="comment-errors" class="hidden text-red-600 text-sm"></div>
           <textarea name="body" rows="3" required
-                    class="w-full border border-brand-navy/15 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-gold/60"
+                    class="w-full border border-brand-navy/15 dark:border-white rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-gold/60 bg-white dark:bg-gray-800 text-brand-navy dark:text-white placeholder-gray-500 dark:placeholder-gray-400 transition-colors duration-300"
                     placeholder="{% trans 'Add a public comment…' %}"></textarea>
           <div class="flex justify-end">
             <button type="submit" id="comment-submit-btn"
-                    class="inline-flex items-center justify-center rounded-lg bg-brand-navy text-white
-                           px-4 py-2 text-sm font-semibold hover:bg-brand-gold hover:text-brand-navy transition
-                           focus:outline-none focus:ring-2 focus:ring-brand-gold/60">
+                    class="inline-flex items-center justify-center rounded-lg bg-brand-navy dark:bg-white text-white dark:text-black
+                           px-4 py-2 text-sm font-semibold hover:bg-brand-gold dark:hover:bg-gray-200 hover:text-brand-navy dark:hover:text-black transition
+                           focus:outline-none focus:ring-2 focus:ring-brand-gold/60 dark:border dark:border-white">
               {% trans "Post comment" %}
             </button>
           </div>
         </form>
       {% else %}
-        <a href="{% url 'account_login' %}" class="underline text-brand-navy hover:text-brand-gold text-sm">
+        <a href="{% url 'account_login' %}" class="underline text-brand-navy dark:text-white hover:text-brand-gold transition-colors">
           {% trans "Sign in to comment" %}
         </a>
       {% endif %}
@@ -525,7 +538,7 @@
           {% endfor %}
         </div>
       {% else %}
-        <div class="px-6 pb-6 text-sm text-brand-navy/70" id="no-comments-message">
+        <div class="px-6 pb-6 text-sm text-brand-navy/70 dark:text-white/70 transition-colors duration-300" id="no-comments-message">
           {% trans "No comments yet. Be the first to share your thoughts!" %}
         </div>
       {% endif %}

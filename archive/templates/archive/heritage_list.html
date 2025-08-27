@@ -145,6 +145,16 @@
                   interaction-prompt="none">
                 </model-viewer>
               </div>
+            {% else %}
+              <!-- Fallback placeholder for objects without 3D models -->
+              <div class="relative h-64 bg-gray-100 dark:bg-gray-800 rounded-t-xl2 overflow-hidden flex items-center justify-center transition-colors duration-300">
+                <div class="text-center">
+                  <svg class="w-16 h-16 mx-auto text-gray-400 dark:text-gray-600 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M9 9l3-3 3 3M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"/>
+                  </svg>
+                  <p class="text-gray-500 dark:text-gray-400 text-sm font-medium">{% trans "No 3D Model" %}</p>
+                </div>
+              </div>
             {% endif %}
 
             <div class="p-6">
