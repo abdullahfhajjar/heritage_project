@@ -6,27 +6,28 @@
 {% block content %}
 
   <div class="max-w-7xl mx-auto px-4">
-    <h2 class="text-3xl font-semibold text-brand-navy text-center mt-10 tracking-wide">
+    <h2 class="text-3xl font-semibold text-brand-navy dark:text-brand-dark-text text-center mt-10 tracking-wide transition-colors duration-300">
       {% trans "Heritage Objects" %}
     </h2>
   </div>
 
   <div x-data="{ filtersOpen: true }" class="flex justify-center mt-6 px-4 relative overflow-visible">
     <form method="get" action="{% url 'heritage-filtered' %}"
-          class="w-full max-w-5xl bg-white rounded-xl2 shadow-soft border border-brand-navy/10 overflow-visible">
+          class="w-full max-w-5xl bg-white dark:bg-gray-900 rounded-xl2 shadow-soft dark:shadow-none border border-brand-navy/10 dark:border-white transition-all duration-300">
 
       <button @click="filtersOpen = !filtersOpen" type="button"
-              class="w-full px-4 py-3 flex justify-between items-center bg-brand-sand/40">
-        <span class="font-medium text-brand-navy">{% trans "Filter Collections" %}</span>
-        <svg :class="{'rotate-180': filtersOpen}" class="w-5 h-5 transform transition-transform text-brand-navy/70"
+              :class="{'rounded-b-xl2': !filtersOpen}"
+              class="w-full px-4 py-3 flex justify-between items-center bg-brand-sand/40 dark:bg-gray-800 rounded-t-xl2 transition-all duration-300">
+        <span class="font-medium text-brand-navy dark:text-brand-dark-text transition-colors duration-300">{% trans "Filter Collections" %}</span>
+        <svg :class="{'rotate-180': filtersOpen}" class="w-5 h-5 transform transition-transform text-brand-navy/70 dark:text-brand-dark-text-secondary"
              fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
         </svg>
       </button>
 
-      <div x-show="filtersOpen" class="grid grid-cols-1 md:grid-cols-3 gap-6 p-6 overflow-visible">
+      <div x-show="filtersOpen" class="grid grid-cols-1 md:grid-cols-3 gap-6 p-6 overflow-visible relative">
         <div x-data="{ open: false, selected: '{{ region|default:"" }}', selectedText: '{% if region == "riyadh" %}{% trans "Riyadh" %}{% elif region == "makkah" %}{% trans "Makkah" %}{% elif region == "madinah" %}{% trans "Madinah" %}{% elif region == "eastern" %}{% trans "Eastern Province" %}{% elif region == "asir" %}{% trans "Asir" %}{% elif region == "tabuk" %}{% trans "Tabuk" %}{% elif region == "hail" %}{% trans "Hail" %}{% elif region == "northern" %}{% trans "Northern Borders" %}{% elif region == "jazan" %}{% trans "Jazan" %}{% elif region == "najran" %}{% trans "Najran" %}{% elif region == "bahah" %}{% trans "Al Bahah" %}{% elif region == "jouf" %}{% trans "Al Jouf" %}{% elif region == "qassim" %}{% trans "Qassim" %}{% else %}{% trans "All Regions" %}{% endif %}' }" class="relative">
-          <label class="block mb-1 text-xs font-medium text-brand-navy/70">{% trans "Browse by Region" %}</label>
+          <label class="block mb-1 text-xs font-medium text-brand-navy/70 dark:text-brand-dark-text-secondary transition-colors duration-300">{% trans "Browse by Region" %}</label>
           <input type="hidden" name="region" :value="selected">
           <button type="button"
                   @click="open = !open"
@@ -109,9 +110,9 @@
 
         <div class="flex items-end">
           <button type="submit"
-                  class="w-full inline-flex items-center justify-center rounded-lg bg-brand-navy text-white
-                         px-4 py-2.5 text-sm font-semibold hover:bg-brand-gold hover:text-brand-navy transition
-                         focus:outline-none focus:ring-2 focus:ring-brand-gold/60">
+                  class="w-full inline-flex items-center justify-center rounded-lg bg-brand-navy dark:bg-white dark:text-black text-white
+                         px-4 py-2.5 text-sm font-semibold hover:bg-brand-gold dark:hover:bg-gray-200 hover:text-brand-navy dark:hover:text-black transition
+                         focus:outline-none focus:ring-2 focus:ring-brand-gold/60 dark:border dark:border-white">
             {% trans "Filter" %}
           </button>
         </div>
@@ -131,9 +132,9 @@
     {% if objects %}
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {% for object in objects %}
-          <article class="bg-white rounded-xl2 shadow-soft border border-brand-navy/5 hover:shadow-lg hover:-translate-y-0.5 transition">
+          <article class="bg-white dark:bg-gray-900 rounded-xl2 shadow-soft dark:shadow-none border border-brand-navy/5 dark:border-white hover:shadow-lg dark:hover:shadow-none hover:-translate-y-0.5 transition">
             {% if object.model_3d %}
-              <div class="relative h-64 bg-brand-sand rounded-t-xl2 overflow-hidden">
+              <div class="relative h-64 bg-brand-sand dark:bg-gray-800 rounded-t-xl2 overflow-hidden">
                 <model-viewer
                   src="{{ object.model_3d.url }}"
                   alt="{% blocktrans %}3D model of {{ object.get_title_display }}{% endblocktrans %}"
@@ -147,16 +148,16 @@
             {% endif %}
 
             <div class="p-6">
-              <h2 class="text-lg font-semibold text-brand-navy mb-3">
-                <a href="{% url 'heritage-detail' object.pk %}" class="hover:text-brand-gold transition">
+              <h2 class="text-lg font-semibold text-brand-navy dark:text-white mb-3">
+                <a href="{% url 'heritage-detail' object.pk %}" class="hover:text-brand-gold dark:hover:text-gray-300 transition">
                   {{ object.get_title_display }}
                 </a>
               </h2>
 
               <div class="space-y-2 text-sm">
                 <div class="flex items-center gap-2">
-                  <span class="text-brand-navy/60">{% trans "Region:" %}</span>
-                  <span class="font-medium text-brand-navy">{{ object.get_region_display }}</span>
+                  <span class="text-brand-navy/60 dark:text-gray-400">{% trans "Region:" %}</span>
+                  <span class="font-medium text-brand-navy dark:text-white">{{ object.get_region_display }}</span>
                 </div>
                 <div class="flex items-center gap-2">
                   <span class="text-brand-navy/60">{% trans "Type:" %}</span>

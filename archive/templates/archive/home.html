@@ -4,7 +4,7 @@
 {% block title %}{% trans "Turath3D" %}{% endblock %}
 
 {% block content %}
-<section class="bg-brand-sand/60">
+<section class="bg-brand-sand/60 dark:bg-black transition-colors duration-300">
   <div class="max-w-6xl mx-auto px-4 py-16 sm:py-20">
 
     <!-- Logo -->
@@ -15,10 +15,10 @@
 
     <!-- Title + sub -->
     <div class="text-center mt-6">
-      <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-brand-navy">
+      <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-brand-navy dark:text-brand-dark-text transition-colors duration-300">
         {% trans "Welcome to Turath3D" %}
       </h1>
-      <p class="mt-3 text-base sm:text-lg text-brand-navy/80">
+      <p class="mt-3 text-base sm:text-lg text-brand-navy/80 dark:text-brand-dark-text-secondary transition-colors duration-300">
         {% trans "Digitising cultural memory in 3D — explore Saudi material culture through interactive objects." %}
       </p>
     </div>
@@ -27,9 +27,9 @@
     <div class="mt-8 flex justify-center">
       <a href="{% url 'heritage-list' %}"
          class="inline-flex items-center gap-2 px-5 py-3 rounded-lg
-                bg-brand-navy text-white font-semibold
-                shadow-soft hover:bg-brand-navy/90 focus:outline-none
-                focus:ring-2 focus:ring-brand-gold/60 transition">
+                bg-brand-navy dark:bg-white text-white dark:text-black font-semibold
+                shadow-soft dark:shadow-none hover:bg-brand-navy/90 dark:hover:bg-gray-200 focus:outline-none
+                focus:ring-2 focus:ring-brand-gold/60 dark:border dark:border-white transition">
         {% trans "Browse Collections" %}
         <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2"
              viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round"
@@ -39,17 +39,17 @@
 
     <!-- Highlights -->
     <div class="mt-14 grid grid-cols-1 md:grid-cols-3 gap-6">
-      <div class="bg-white rounded-xl shadow-soft p-6 border border-brand-navy/10 hover:shadow-lg hover:-translate-y-0.5 transition">
-        <h3 class="font-semibold text-brand-navy mb-2">{% trans "Interact in 3D" %}</h3>
-        <p class="text-sm text-brand-navy/80">{% trans "Rotate, zoom, and inspect each object to discover craft and detail." %}</p>
+      <div class="bg-white dark:bg-brand-dark-surface rounded-xl shadow-soft dark:shadow-none p-6 border border-brand-navy/10 dark:border-brand-dark-border hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300">
+        <h3 class="font-semibold text-brand-navy dark:text-brand-dark-text mb-2 transition-colors duration-300">{% trans "Interact in 3D" %}</h3>
+        <p class="text-sm text-brand-navy/80 dark:text-brand-dark-text-secondary transition-colors duration-300">{% trans "Rotate, zoom, and inspect each object to discover craft and detail." %}</p>
       </div>
-      <div class="bg-white rounded-xl shadow-soft p-6 border border-brand-navy/10 hover:shadow-lg hover:-translate-y-0.5 transition">
-        <h3 class="font-semibold text-brand-navy mb-2">{% trans "Filter by region & type" %}</h3>
-        <p class="text-sm text-brand-navy/80">{% trans "Find objects from specific regions, periods, and categories." %}</p>
+      <div class="bg-white dark:bg-brand-dark-surface rounded-xl shadow-soft dark:shadow-none p-6 border border-brand-navy/10 dark:border-brand-dark-border hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300">
+        <h3 class="font-semibold text-brand-navy dark:text-brand-dark-text mb-2 transition-colors duration-300">{% trans "Filter by region & type" %}</h3>
+        <p class="text-sm text-brand-navy/80 dark:text-brand-dark-text-secondary transition-colors duration-300">{% trans "Find objects from specific regions, periods, and categories." %}</p>
       </div>
-      <div class="bg-white rounded-xl shadow-soft p-6 border border-brand-navy/10 hover:shadow-lg hover:-translate-y-0.5 transition">
-        <h3 class="font-semibold text-brand-navy mb-2">{% trans "Bilingual interface" %}</h3>
-        <p class="text-sm text-brand-navy/80">{% trans "Switch between Arabic and English across the entire site." %}</p>
+      <div class="bg-white dark:bg-brand-dark-surface rounded-xl shadow-soft dark:shadow-none p-6 border border-brand-navy/10 dark:border-brand-dark-border hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300">
+        <h3 class="font-semibold text-brand-navy dark:text-brand-dark-text mb-2 transition-colors duration-300">{% trans "Bilingual interface" %}</h3>
+        <p class="text-sm text-brand-navy/80 dark:text-brand-dark-text-secondary transition-colors duration-300">{% trans "Switch between Arabic and English across the entire site." %}</p>
       </div>
     </div>
 
