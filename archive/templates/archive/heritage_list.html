@@ -1,200 +1,354 @@
 {% extends 'archive/base.html' %}
 {% load static i18n %}
 
-{% block title %}{% trans "Heritage Objects" %}{% endblock %}
+{% block title %}{% trans "Explore Saudi Heritage" %}{% endblock %}
 
 {% block content %}
 
-  <div class="max-w-7xl mx-auto px-4">
-    <h2 class="text-3xl font-semibold text-brand-navy dark:text-brand-dark-text text-center mt-10 tracking-wide transition-colors duration-300">
-      {% trans "Heritage Objects" %}
-    </h2>
+  <!-- Hero Section with Wide Search Bar -->
+  <div class="bg-gradient-to-r from-brand-navy to-brand-charcoal dark:from-brand-dark-surface dark:to-brand-dark-elevated py-16">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="text-center mb-8">
+        <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">
+          {% trans "Discover Saudi Arabia's Cultural Heritage" %}
+        </h1>
+        <p class="text-xl text-white/80 max-w-3xl mx-auto leading-relaxed">
+          {% trans "Explore thousands of digitized cultural artifacts from across the Kingdom, preserved for future generations" %}
+        </p>
+      </div>
+      
+      <!-- Main Search Bar -->
+      <form method="get" action="{% url 'heritage-filtered' %}" class="relative max-w-4xl mx-auto">
+        <div class="relative">
+          <div class="absolute inset-y-0 left-0 pl-6 flex items-center pointer-events-none">
+            <svg class="h-6 w-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+            </svg>
+          </div>
+          <input type="text" name="search" value="{{ request.GET.search }}" 
+                 class="w-full pl-14 pr-32 py-5 text-lg rounded-2xl border-0 shadow-xl 
+                        focus:ring-4 focus:ring-brand-gold/30 focus:outline-none
+                        placeholder:text-gray-500"
+                 placeholder="{% trans 'Search heritage objects, regions, or types...' %}">
+          <div class="absolute inset-y-0 right-0 flex items-center">
+            <button type="submit" 
+                    class="mr-2 px-8 py-3 bg-brand-gold hover:bg-brand-palm text-white dark:bg-white dark:hover:bg-gray-100 dark:text-gray-900 font-semibold 
+                           rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl">
+              {% trans "Search" %}
+            </button>
+          </div>
+        </div>
+        
+        <!-- Quick Filter Tags -->
+        <div class="flex flex-wrap justify-center gap-3 mt-6">
+          <a href="?region=riyadh" class="px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-full text-sm transition">
+            {% trans "Riyadh" %}
+          </a>
+          <a href="?region=makkah" class="px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-full text-sm transition">
+            {% trans "Makkah" %}
+          </a>
+          <a href="?type=textile" class="px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-full text-sm transition">
+            {% trans "Textiles" %}
+          </a>
+          <a href="?type=jewellery" class="px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-full text-sm transition">
+            {% trans "Jewelry" %}
+          </a>
+          <a href="?type=architecture" class="px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-full text-sm transition">
+            {% trans "Architecture" %}
+          </a>
+        </div>
+      </form>
+    </div>
   </div>
 
-  <div x-data="{ filtersOpen: true }" class="flex justify-center mt-6 px-4 relative overflow-visible">
-    <form method="get" action="{% url 'heritage-filtered' %}"
-          class="w-full max-w-5xl bg-white dark:bg-gray-900 rounded-xl2 shadow-soft dark:shadow-none border border-brand-navy/10 dark:border-white transition-all duration-300">
-
+  <!-- Advanced Filters Section -->
+  <div x-data="{ filtersOpen: false }" class="bg-white border-b border-gray-200 sticky top-0 z-30 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4">
       <button @click="filtersOpen = !filtersOpen" type="button"
-              :class="{'rounded-b-xl2': !filtersOpen}"
-              class="w-full px-4 py-3 flex justify-between items-center bg-brand-sand/40 dark:bg-gray-800 rounded-t-xl2 transition-all duration-300">
-        <span class="font-medium text-brand-navy dark:text-brand-dark-text transition-colors duration-300">{% trans "Filter Collections" %}</span>
-        <svg :class="{'rotate-180': filtersOpen}" class="w-5 h-5 transform transition-transform text-brand-navy/70 dark:text-brand-dark-text-secondary"
-             fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              class="w-full py-4 flex justify-center items-center gap-2 text-brand-navy hover:text-brand-gold transition">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4"/>
+        </svg>
+        <span class="font-medium">{% trans "Advanced Filters" %}</span>
+        <svg :class="{'rotate-180': filtersOpen}" class="w-4 h-4 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
         </svg>
       </button>
 
-      <div x-show="filtersOpen" class="grid grid-cols-1 md:grid-cols-3 gap-6 p-6 overflow-visible relative">
-        <div x-data="{ open: false, selected: '{{ region|default:"" }}', selectedText: '{% if region == "riyadh" %}{% trans "Riyadh" %}{% elif region == "makkah" %}{% trans "Makkah" %}{% elif region == "madinah" %}{% trans "Madinah" %}{% elif region == "eastern" %}{% trans "Eastern Province" %}{% elif region == "asir" %}{% trans "Asir" %}{% elif region == "tabuk" %}{% trans "Tabuk" %}{% elif region == "hail" %}{% trans "Hail" %}{% elif region == "northern" %}{% trans "Northern Borders" %}{% elif region == "jazan" %}{% trans "Jazan" %}{% elif region == "najran" %}{% trans "Najran" %}{% elif region == "bahah" %}{% trans "Al Bahah" %}{% elif region == "jouf" %}{% trans "Al Jouf" %}{% elif region == "qassim" %}{% trans "Qassim" %}{% else %}{% trans "All Regions" %}{% endif %}' }" class="relative">
-          <label class="block mb-1 text-xs font-medium text-brand-navy/70 dark:text-brand-dark-text-secondary transition-colors duration-300">{% trans "Browse by Region" %}</label>
-          <input type="hidden" name="region" :value="selected">
-          <button type="button"
-                  @click="open = !open"
-                  class="w-full flex items-center justify-between bg-white border border-brand-navy/15 rounded-md px-3 py-2 text-sm
-                         focus:outline-none focus:ring-2 focus:ring-brand-gold/60 hover:bg-white/95">
-            <span x-text="selectedText" class="text-brand-navy"></span>
-            <svg :class="{'rotate-180': open}" class="w-4 h-4 transform transition-transform text-brand-navy/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-            </svg>
-          </button>
-          <div x-show="open" @click.outside="open=false" x-transition
-               class="absolute mt-2 w-full bg-white border border-brand-navy/15 rounded-md shadow-soft overflow-hidden z-[100]">
-            <button type="button" @click="selected=''; selectedText='{% trans "All Regions" %}'; open=false" 
-                    class="w-full flex items-center px-3 py-2 text-sm hover:bg-brand-sand text-brand-navy text-left">{% trans "All Regions" %}</button>
-            <button type="button" @click="selected='riyadh'; selectedText='{% trans "Riyadh" %}'; open=false" 
-                    class="w-full flex items-center px-3 py-2 text-sm hover:bg-brand-sand text-brand-navy text-left">{% trans "Riyadh" %}</button>
-            <button type="button" @click="selected='makkah'; selectedText='{% trans "Makkah" %}'; open=false" 
-                    class="w-full flex items-center px-3 py-2 text-sm hover:bg-brand-sand text-brand-navy text-left">{% trans "Makkah" %}</button>
-            <button type="button" @click="selected='madinah'; selectedText='{% trans "Madinah" %}'; open=false" 
-                    class="w-full flex items-center px-3 py-2 text-sm hover:bg-brand-sand text-brand-navy text-left">{% trans "Madinah" %}</button>
-            <button type="button" @click="selected='eastern'; selectedText='{% trans "Eastern Province" %}'; open=false" 
-                    class="w-full flex items-center px-3 py-2 text-sm hover:bg-brand-sand text-brand-navy text-left">{% trans "Eastern Province" %}</button>
-            <button type="button" @click="selected='asir'; selectedText='{% trans "Asir" %}'; open=false" 
-                    class="w-full flex items-center px-3 py-2 text-sm hover:bg-brand-sand text-brand-navy text-left">{% trans "Asir" %}</button>
-            <button type="button" @click="selected='tabuk'; selectedText='{% trans "Tabuk" %}'; open=false" 
-                    class="w-full flex items-center px-3 py-2 text-sm hover:bg-brand-sand text-brand-navy text-left">{% trans "Tabuk" %}</button>
-            <button type="button" @click="selected='hail'; selectedText='{% trans "Hail" %}'; open=false" 
-                    class="w-full flex items-center px-3 py-2 text-sm hover:bg-brand-sand text-brand-navy text-left">{% trans "Hail" %}</button>
-            <button type="button" @click="selected='northern'; selectedText='{% trans "Northern Borders" %}'; open=false" 
-                    class="w-full flex items-center px-3 py-2 text-sm hover:bg-brand-sand text-brand-navy text-left">{% trans "Northern Borders" %}</button>
-            <button type="button" @click="selected='jazan'; selectedText='{% trans "Jazan" %}'; open=false" 
-                    class="w-full flex items-center px-3 py-2 text-sm hover:bg-brand-sand text-brand-navy text-left">{% trans "Jazan" %}</button>
-            <button type="button" @click="selected='najran'; selectedText='{% trans "Najran" %}'; open=false" 
-                    class="w-full flex items-center px-3 py-2 text-sm hover:bg-brand-sand text-brand-navy text-left">{% trans "Najran" %}</button>
-            <button type="button" @click="selected='bahah'; selectedText='{% trans "Al Bahah" %}'; open=false" 
-                    class="w-full flex items-center px-3 py-2 text-sm hover:bg-brand-sand text-brand-navy text-left">{% trans "Al Bahah" %}</button>
-            <button type="button" @click="selected='jouf'; selectedText='{% trans "Al Jouf" %}'; open=false" 
-                    class="w-full flex items-center px-3 py-2 text-sm hover:bg-brand-sand text-brand-navy text-left">{% trans "Al Jouf" %}</button>
-            <button type="button" @click="selected='qassim'; selectedText='{% trans "Qassim" %}'; open=false" 
-                    class="w-full flex items-center px-3 py-2 text-sm hover:bg-brand-sand text-brand-navy text-left">{% trans "Qassim" %}</button>
+      <div x-show="filtersOpen" x-transition class="pb-6">
+        <form method="get" action="{% url 'heritage-filtered' %}" class="grid grid-cols-1 md:grid-cols-4 gap-4">
+          <input type="hidden" name="search" value="{{ request.GET.search }}">
+          
+          <!-- Region Filter -->
+          <div x-data="{ open: false, selected: '{{ region|default:"" }}', selectedText: '{% if region == "riyadh" %}{% trans "Riyadh" %}{% elif region == "makkah" %}{% trans "Makkah" %}{% elif region == "madinah" %}{% trans "Madinah" %}{% elif region == "eastern" %}{% trans "Eastern Province" %}{% elif region == "asir" %}{% trans "Asir" %}{% elif region == "tabuk" %}{% trans "Tabuk" %}{% elif region == "hail" %}{% trans "Hail" %}{% elif region == "northern" %}{% trans "Northern Borders" %}{% elif region == "jazan" %}{% trans "Jazan" %}{% elif region == "najran" %}{% trans "Najran" %}{% elif region == "bahah" %}{% trans "Al Bahah" %}{% elif region == "jouf" %}{% trans "Al Jouf" %}{% elif region == "qassim" %}{% trans "Qassim" %}{% else %}{% trans "All Regions" %}{% endif %}' }" class="relative">
+            <label class="block mb-2 text-sm font-medium text-brand-navy">{% trans "Region" %}</label>
+            <input type="hidden" name="region" :value="selected">
+            <button type="button" @click="open = !open"
+                    class="w-full flex items-center justify-between bg-white border border-gray-300 rounded-lg px-3 py-2.5 text-sm
+                           focus:outline-none focus:ring-2 focus:ring-brand-gold/60 hover:border-brand-gold/50">
+              <span x-text="selectedText" class="text-brand-navy"></span>
+              <svg :class="{'rotate-180': open}" class="w-4 h-4 transform transition-transform text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </button>
+            <div x-show="open" @click.outside="open=false" x-transition
+                 class="absolute mt-1 w-full bg-white border border-gray-300 rounded-lg shadow-lg overflow-hidden z-50 max-h-60 overflow-y-auto">
+              <button type="button" @click="selected=''; selectedText='{% trans "All Regions" %}'; open=false" 
+                      class="w-full flex items-center px-3 py-2 text-sm hover:bg-gray-50 text-brand-navy text-left">{% trans "All Regions" %}</button>
+              <button type="button" @click="selected='riyadh'; selectedText='{% trans "Riyadh" %}'; open=false" 
+                      class="w-full flex items-center px-3 py-2 text-sm hover:bg-gray-50 text-brand-navy text-left">{% trans "Riyadh" %}</button>
+              <button type="button" @click="selected='makkah'; selectedText='{% trans "Makkah" %}'; open=false" 
+                      class="w-full flex items-center px-3 py-2 text-sm hover:bg-gray-50 text-brand-navy text-left">{% trans "Makkah" %}</button>
+              <button type="button" @click="selected='madinah'; selectedText='{% trans "Madinah" %}'; open=false" 
+                      class="w-full flex items-center px-3 py-2 text-sm hover:bg-gray-50 text-brand-navy text-left">{% trans "Madinah" %}</button>
+              <button type="button" @click="selected='eastern'; selectedText='{% trans "Eastern Province" %}'; open=false" 
+                      class="w-full flex items-center px-3 py-2 text-sm hover:bg-gray-50 text-brand-navy text-left">{% trans "Eastern Province" %}</button>
+              <button type="button" @click="selected='asir'; selectedText='{% trans "Asir" %}'; open=false" 
+                      class="w-full flex items-center px-3 py-2 text-sm hover:bg-gray-50 text-brand-navy text-left">{% trans "Asir" %}</button>
+              <button type="button" @click="selected='tabuk'; selectedText='{% trans "Tabuk" %}'; open=false" 
+                      class="w-full flex items-center px-3 py-2 text-sm hover:bg-gray-50 text-brand-navy text-left">{% trans "Tabuk" %}</button>
+              <button type="button" @click="selected='hail'; selectedText='{% trans "Hail" %}'; open=false" 
+                      class="w-full flex items-center px-3 py-2 text-sm hover:bg-gray-50 text-brand-navy text-left">{% trans "Hail" %}</button>
+              <button type="button" @click="selected='northern'; selectedText='{% trans "Northern Borders" %}'; open=false" 
+                      class="w-full flex items-center px-3 py-2 text-sm hover:bg-gray-50 text-brand-navy text-left">{% trans "Northern Borders" %}</button>
+              <button type="button" @click="selected='jazan'; selectedText='{% trans "Jazan" %}'; open=false" 
+                      class="w-full flex items-center px-3 py-2 text-sm hover:bg-gray-50 text-brand-navy text-left">{% trans "Jazan" %}</button>
+              <button type="button" @click="selected='najran'; selectedText='{% trans "Najran" %}'; open=false" 
+                      class="w-full flex items-center px-3 py-2 text-sm hover:bg-gray-50 text-brand-navy text-left">{% trans "Najran" %}</button>
+              <button type="button" @click="selected='bahah'; selectedText='{% trans "Al Bahah" %}'; open=false" 
+                      class="w-full flex items-center px-3 py-2 text-sm hover:bg-gray-50 text-brand-navy text-left">{% trans "Al Bahah" %}</button>
+              <button type="button" @click="selected='jouf'; selectedText='{% trans "Al Jouf" %}'; open=false" 
+                      class="w-full flex items-center px-3 py-2 text-sm hover:bg-gray-50 text-brand-navy text-left">{% trans "Al Jouf" %}</button>
+              <button type="button" @click="selected='qassim'; selectedText='{% trans "Qassim" %}'; open=false" 
+                      class="w-full flex items-center px-3 py-2 text-sm hover:bg-gray-50 text-brand-navy text-left">{% trans "Qassim" %}</button>
+            </div>
           </div>
-        </div>
 
-        <div x-data="{ open: false, selected: '{{ obj_type|default:"" }}', selectedText: '{% if obj_type == "textile" %}{% trans "Textile" %}{% elif obj_type == "jewellery" %}{% trans "Jewellery" %}{% elif obj_type == "tool" %}{% trans "Tool" %}{% elif obj_type == "furniture" %}{% trans "Furniture" %}{% elif obj_type == "ceramic" %}{% trans "Ceramic" %}{% elif obj_type == "musical instrument" %}{% trans "Musical Instrument" %}{% elif obj_type == "architecture" %}{% trans "Architecture" %}{% elif obj_type == "manuscript" %}{% trans "Manuscript" %}{% elif obj_type == "other" %}{% trans "Other" %}{% else %}{% trans "All Types" %}{% endif %}' }" class="relative">
-          <label class="block mb-1 text-xs font-medium text-brand-navy/70">{% trans "Browse by Object Type" %}</label>
-          <input type="hidden" name="type" :value="selected">
-          <button type="button"
-                  @click="open = !open"
-                  class="w-full flex items-center justify-between bg-white border border-brand-navy/15 rounded-md px-3 py-2 text-sm
-                         focus:outline-none focus:ring-2 focus:ring-brand-gold/60 hover:bg-white/95">
-            <span x-text="selectedText" class="text-brand-navy"></span>
-            <svg :class="{'rotate-180': open}" class="w-4 h-4 transform transition-transform text-brand-navy/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-            </svg>
-          </button>
-          <div x-show="open" @click.outside="open=false" x-transition
-               class="absolute mt-2 w-full bg-white border border-brand-navy/15 rounded-md shadow-soft overflow-hidden z-[100]">
-            <button type="button" @click="selected=''; selectedText='{% trans "All Types" %}'; open=false" 
-                    class="w-full flex items-center px-3 py-2 text-sm hover:bg-brand-sand text-brand-navy text-left">{% trans "All Types" %}</button>
-            <button type="button" @click="selected='textile'; selectedText='{% trans "Textile" %}'; open=false" 
-                    class="w-full flex items-center px-3 py-2 text-sm hover:bg-brand-sand text-brand-navy text-left">{% trans "Textile" %}</button>
-            <button type="button" @click="selected='jewellery'; selectedText='{% trans "Jewellery" %}'; open=false" 
-                    class="w-full flex items-center px-3 py-2 text-sm hover:bg-brand-sand text-brand-navy text-left">{% trans "Jewellery" %}</button>
-            <button type="button" @click="selected='tool'; selectedText='{% trans "Tool" %}'; open=false" 
-                    class="w-full flex items-center px-3 py-2 text-sm hover:bg-brand-sand text-brand-navy text-left">{% trans "Tool" %}</button>
-            <button type="button" @click="selected='furniture'; selectedText='{% trans "Furniture" %}'; open=false" 
-                    class="w-full flex items-center px-3 py-2 text-sm hover:bg-brand-sand text-brand-navy text-left">{% trans "Furniture" %}</button>
-            <button type="button" @click="selected='ceramic'; selectedText='{% trans "Ceramic" %}'; open=false" 
-                    class="w-full flex items-center px-3 py-2 text-sm hover:bg-brand-sand text-brand-navy text-left">{% trans "Ceramic" %}</button>
-            <button type="button" @click="selected='musical instrument'; selectedText='{% trans "Musical Instrument" %}'; open=false" 
-                    class="w-full flex items-center px-3 py-2 text-sm hover:bg-brand-sand text-brand-navy text-left">{% trans "Musical Instrument" %}</button>
-            <button type="button" @click="selected='architecture'; selectedText='{% trans "Architecture" %}'; open=false" 
-                    class="w-full flex items-center px-3 py-2 text-sm hover:bg-brand-sand text-brand-navy text-left">{% trans "Architecture" %}</button>
-            <button type="button" @click="selected='manuscript'; selectedText='{% trans "Manuscript" %}'; open=false" 
-                    class="w-full flex items-center px-3 py-2 text-sm hover:bg-brand-sand text-brand-navy text-left">{% trans "Manuscript" %}</button>
-            <button type="button" @click="selected='other'; selectedText='{% trans "Other" %}'; open=false" 
-                    class="w-full flex items-center px-3 py-2 text-sm hover:bg-brand-sand text-brand-navy text-left">{% trans "Other" %}</button>
+          <!-- Object Type Filter -->
+          <div x-data="{ open: false, selected: '{{ obj_type|default:"" }}', selectedText: '{% if obj_type == "textile" %}{% trans "Textile" %}{% elif obj_type == "jewellery" %}{% trans "Jewellery" %}{% elif obj_type == "tool" %}{% trans "Tool" %}{% elif obj_type == "furniture" %}{% trans "Furniture" %}{% elif obj_type == "ceramic" %}{% trans "Ceramic" %}{% elif obj_type == "musical instrument" %}{% trans "Musical Instrument" %}{% elif obj_type == "architecture" %}{% trans "Architecture" %}{% elif obj_type == "manuscript" %}{% trans "Manuscript" %}{% elif obj_type == "other" %}{% trans "Other" %}{% else %}{% trans "All Types" %}{% endif %}' }" class="relative">
+            <label class="block mb-2 text-sm font-medium text-brand-navy">{% trans "Object Type" %}</label>
+            <input type="hidden" name="type" :value="selected">
+            <button type="button" @click="open = !open"
+                    class="w-full flex items-center justify-between bg-white border border-gray-300 rounded-lg px-3 py-2.5 text-sm
+                           focus:outline-none focus:ring-2 focus:ring-brand-gold/60 hover:border-brand-gold/50">
+              <span x-text="selectedText" class="text-brand-navy"></span>
+              <svg :class="{'rotate-180': open}" class="w-4 h-4 transform transition-transform text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </button>
+            <div x-show="open" @click.outside="open=false" x-transition
+                 class="absolute mt-1 w-full bg-white border border-gray-300 rounded-lg shadow-lg overflow-hidden z-50 max-h-60 overflow-y-auto">
+              <button type="button" @click="selected=''; selectedText='{% trans "All Types" %}'; open=false" 
+                      class="w-full flex items-center px-3 py-2 text-sm hover:bg-gray-50 text-brand-navy text-left">{% trans "All Types" %}</button>
+              <button type="button" @click="selected='textile'; selectedText='{% trans "Textile" %}'; open=false" 
+                      class="w-full flex items-center px-3 py-2 text-sm hover:bg-gray-50 text-brand-navy text-left">{% trans "Textile" %}</button>
+              <button type="button" @click="selected='jewellery'; selectedText='{% trans "Jewellery" %}'; open=false" 
+                      class="w-full flex items-center px-3 py-2 text-sm hover:bg-gray-50 text-brand-navy text-left">{% trans "Jewellery" %}</button>
+              <button type="button" @click="selected='tool'; selectedText='{% trans "Tool" %}'; open=false" 
+                      class="w-full flex items-center px-3 py-2 text-sm hover:bg-gray-50 text-brand-navy text-left">{% trans "Tool" %}</button>
+              <button type="button" @click="selected='furniture'; selectedText='{% trans "Furniture" %}'; open=false" 
+                      class="w-full flex items-center px-3 py-2 text-sm hover:bg-gray-50 text-brand-navy text-left">{% trans "Furniture" %}</button>
+              <button type="button" @click="selected='ceramic'; selectedText='{% trans "Ceramic" %}'; open=false" 
+                      class="w-full flex items-center px-3 py-2 text-sm hover:bg-gray-50 text-brand-navy text-left">{% trans "Ceramic" %}</button>
+              <button type="button" @click="selected='musical instrument'; selectedText='{% trans "Musical Instrument" %}'; open=false" 
+                      class="w-full flex items-center px-3 py-2 text-sm hover:bg-gray-50 text-brand-navy text-left">{% trans "Musical Instrument" %}</button>
+              <button type="button" @click="selected='architecture'; selectedText='{% trans "Architecture" %}'; open=false" 
+                      class="w-full flex items-center px-3 py-2 text-sm hover:bg-gray-50 text-brand-navy text-left">{% trans "Architecture" %}</button>
+              <button type="button" @click="selected='manuscript'; selectedText='{% trans "Manuscript" %}'; open=false" 
+                      class="w-full flex items-center px-3 py-2 text-sm hover:bg-gray-50 text-brand-navy text-left">{% trans "Manuscript" %}</button>
+              <button type="button" @click="selected='other'; selectedText='{% trans "Other" %}'; open=false" 
+                      class="w-full flex items-center px-3 py-2 text-sm hover:bg-gray-50 text-brand-navy text-left">{% trans "Other" %}</button>
+            </div>
           </div>
-        </div>
 
-        <div class="flex items-end">
-          <button type="submit"
-                  class="w-full inline-flex items-center justify-center rounded-lg bg-brand-navy dark:bg-white dark:text-black text-white
-                         px-4 py-2.5 text-sm font-semibold hover:bg-brand-gold dark:hover:bg-gray-200 hover:text-brand-navy dark:hover:text-black transition
-                         focus:outline-none focus:ring-2 focus:ring-brand-gold/60 dark:border dark:border-white">
-            {% trans "Filter" %}
-          </button>
-        </div>
+          <!-- Sort Filter -->
+          <div x-data="{ open: false, selected: '{{ request.GET.sort|default:'newest' }}', selectedText: '{% if request.GET.sort == "oldest" %}{% trans "Oldest First" %}{% elif request.GET.sort == "name" %}{% trans "By Name" %}{% elif request.GET.sort == "popular" %}{% trans "Most Popular" %}{% else %}{% trans "Newest First" %}{% endif %}' }" class="relative">
+            <label class="block mb-2 text-sm font-medium text-brand-navy">{% trans "Sort By" %}</label>
+            <input type="hidden" name="sort" :value="selected">
+            <button type="button" @click="open = !open"
+                    class="w-full flex items-center justify-between bg-white border border-gray-300 rounded-lg px-3 py-2.5 text-sm
+                           focus:outline-none focus:ring-2 focus:ring-brand-gold/60 hover:border-brand-gold/50">
+              <span x-text="selectedText" class="text-brand-navy"></span>
+              <svg :class="{'rotate-180': open}" class="w-4 h-4 transform transition-transform text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </button>
+            <div x-show="open" @click.outside="open=false" x-transition
+                 class="absolute mt-1 w-full bg-white border border-gray-300 rounded-lg shadow-lg overflow-hidden z-50">
+              <button type="button" @click="selected='newest'; selectedText='{% trans "Newest First" %}'; open=false" 
+                      class="w-full flex items-center px-3 py-2 text-sm hover:bg-gray-50 text-brand-navy text-left">{% trans "Newest First" %}</button>
+              <button type="button" @click="selected='oldest'; selectedText='{% trans "Oldest First" %}'; open=false" 
+                      class="w-full flex items-center px-3 py-2 text-sm hover:bg-gray-50 text-brand-navy text-left">{% trans "Oldest First" %}</button>
+              <button type="button" @click="selected='name'; selectedText='{% trans "By Name" %}'; open=false" 
+                      class="w-full flex items-center px-3 py-2 text-sm hover:bg-gray-50 text-brand-navy text-left">{% trans "By Name" %}</button>
+              <button type="button" @click="selected='popular'; selectedText='{% trans "Most Popular" %}'; open=false" 
+                      class="w-full flex items-center px-3 py-2 text-sm hover:bg-gray-50 text-brand-navy text-left">{% trans "Most Popular" %}</button>
+            </div>
+          </div>
+
+          <!-- Apply Filter Button -->
+          <div class="flex items-end">
+            <button type="submit"
+                    class="w-full px-4 py-2.5 bg-brand-navy hover:bg-brand-gold text-white dark:bg-white dark:hover:bg-gray-100 dark:text-gray-900 font-medium rounded-lg transition
+                           focus:outline-none focus:ring-2 focus:ring-brand-gold/60 dark:focus:ring-gray-300 shadow-sm">
+              {% trans "Apply Filters" %}
+            </button>
+          </div>
+        </form>
       </div>
-    </form>
+    </div>
   </div>
 
-  {% if filter_type != 'all' %}
-    <p class="text-center text-brand-navy/70 mt-6">
-      {% trans "Filtered by:" %}
-      {% if region %}<strong>{% trans "Region:" %}</strong> {{ region|title }} {% endif %}
-      {% if obj_type %}{% if region %}&nbsp;•&nbsp;{% endif %}<strong>{% trans "Type:" %}</strong> {{ obj_type|title }}{% endif %}
-    </p>
-  {% endif %}
+  <!-- Results Section -->
+  <div class="max-w-7xl mx-auto px-4 py-8">
+    <!-- Results Info -->
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
+      <div>
+        {% if objects %}
+          <h2 class="text-2xl font-semibold text-brand-navy mb-1">
+            {% trans "Heritage Collection" %}
+          </h2>
+          <p class="text-brand-navy/70">
+            {% blocktrans count counter=objects|length %}Found {{ counter }} heritage object{% plural %}Found {{ counter }} heritage objects{% endblocktrans %}
+            {% if request.GET.search %}{% trans "for" %} "<strong>{{ request.GET.search }}</strong>"{% endif %}
+          </p>
+        {% endif %}
+      </div>
+      
+      {% if filter_type != 'all' %}
+        <div class="flex flex-wrap gap-2 mt-3 md:mt-0">
+          {% if region %}
+            <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-brand-navy text-white dark:bg-white dark:text-gray-900 dark:border dark:border-gray-300">
+              {% trans "Region:" %} {{ region|title }}
+            </span>
+          {% endif %}
+          {% if obj_type %}
+            <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-brand-gold text-white dark:bg-white dark:text-gray-900 dark:border dark:border-gray-300">
+              {% trans "Type:" %} {{ obj_type|title }}
+            </span>
+          {% endif %}
+        </div>
+      {% endif %}
+    </div>
 
-  <div class="max-w-7xl mx-auto mt-10 px-4">
+    <!-- Heritage Objects Grid -->
     {% if objects %}
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         {% for object in objects %}
-          <article class="bg-white dark:bg-gray-900 rounded-xl2 shadow-soft dark:shadow-none border border-brand-navy/5 dark:border-white hover:shadow-lg dark:hover:shadow-none hover:-translate-y-0.5 transition">
-            {% if object.model_3d %}
-              <div class="relative h-64 bg-brand-sand dark:bg-gray-800 rounded-t-xl2 overflow-hidden">
-                <model-viewer
-                  src="{{ object.model_3d.url }}"
-                  alt="{% blocktrans %}3D model of {{ object.get_title_display }}{% endblocktrans %}"
-                  class="w-full h-full"
-                  camera-controls
-                  loading="lazy"
-                  reveal="auto"
-                  interaction-prompt="none">
-                </model-viewer>
+          <article class="bg-white dark:bg-brand-dark-surface rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 overflow-hidden border border-gray-100 dark:border-gray-700">
+            <!-- Image/Thumbnail Section (Replaced 3D Model) -->
+            {% if object.thumbnail %}
+              <div class="aspect-square bg-gray-50 overflow-hidden">
+                <img src="{{ object.thumbnail.url }}" 
+                     alt="{% blocktrans %}Thumbnail of {{ object.get_title_display }}{% endblocktrans %}"
+                     class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                     loading="lazy">
+              </div>
+            {% elif object.image %}
+              <div class="aspect-square bg-gray-50 overflow-hidden">
+                <img src="{{ object.image.url }}" 
+                     alt="{% blocktrans %}Image of {{ object.get_title_display }}{% endblocktrans %}"
+                     class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                     loading="lazy">
               </div>
             {% else %}
-              <!-- Fallback placeholder for objects without 3D models -->
-              <div class="relative h-64 bg-gray-100 dark:bg-gray-800 rounded-t-xl2 overflow-hidden flex items-center justify-center transition-colors duration-300">
+              <!-- Fallback placeholder for objects without images -->
+              <div class="aspect-square bg-gray-100 dark:bg-gray-800 flex items-center justify-center">
                 <div class="text-center">
-                  <svg class="w-16 h-16 mx-auto text-gray-400 dark:text-gray-600 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M9 9l3-3 3 3M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"/>
+                  <svg class="w-16 h-16 mx-auto text-gray-400 dark:text-gray-500 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                   </svg>
-                  <p class="text-gray-500 dark:text-gray-400 text-sm font-medium">{% trans "No 3D Model" %}</p>
+                  <p class="text-gray-500 dark:text-gray-400 text-sm font-medium">{% trans "No Image Available" %}</p>
                 </div>
               </div>
             {% endif %}
 
-            <div class="p-6">
-              <h2 class="text-lg font-semibold text-brand-navy dark:text-white mb-3">
-                <a href="{% url 'heritage-detail' object.pk %}" class="hover:text-brand-gold dark:hover:text-gray-300 transition">
+            <!-- Content Section -->
+            <div class="p-4">
+              <h3 class="font-semibold text-brand-navy mb-2 line-clamp-2 hover:text-brand-gold transition">
+                <a href="{% url 'heritage-detail' object.pk %}" class="block">
                   {{ object.get_title_display }}
                 </a>
-              </h2>
+              </h3>
 
-              <div class="space-y-2 text-sm">
+              <div class="space-y-1 text-sm text-brand-navy/70 mb-3">
                 <div class="flex items-center gap-2">
-                  <span class="text-brand-navy/60 dark:text-gray-400">{% trans "Region:" %}</span>
-                  <span class="font-medium text-brand-navy dark:text-white">{{ object.get_region_display }}</span>
+                  <svg class="w-4 h-4 text-brand-gold flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                  </svg>
+                  <span>{{ object.get_region_display }}</span>
                 </div>
                 <div class="flex items-center gap-2">
-                  <span class="text-brand-navy/60">{% trans "Type:" %}</span>
-                  <span class="font-medium text-brand-navy">{{ object.get_object_type_display }}</span>
-                </div>
-                <div class="flex items-center gap-2">
-                  <span class="text-brand-navy/60">{% trans "ICH Domain:" %}</span>
-                  <span class="font-medium text-brand-navy">{{ object.get_ich_domain_display }}</span>
+                  {% if object.object_type == 'tool' %}
+                    <svg class="w-4 h-4 text-brand-gold flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 011-1h1a2 2 0 100-4H7a1 1 0 01-1-1V7a1 1 0 011-1h3a1 1 0 001-1V4z"/>
+                    </svg>
+                  {% elif object.object_type == 'vessel' %}
+                    <svg class="w-4 h-4 text-brand-gold flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                    </svg>
+                  {% elif object.object_type == 'textile' %}
+                    <svg class="w-4 h-4 text-brand-gold flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zM7 3H5a2 2 0 00-2 2v12a4 4 0 004 4h2a2 2 0 002-2V5a2 2 0 00-2-2z"/>
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 21a4 4 0 004-4V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v12a4 4 0 004 4z"/>
+                    </svg>
+                  {% elif object.object_type == 'jewellery' %}
+                    <svg class="w-4 h-4 text-brand-gold flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4l-2-2h4l-2 2v2M6 6l6 6 6-6M6 6l-2 2c-.553 0-1 .447-1 1v11h14V9c0-.553-.447-1-1-1l-2-2M6 6h12"/>
+                    </svg>
+                  {% elif object.object_type == 'furniture' %}
+                    <svg class="w-4 h-4 text-brand-gold flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/>
+                    </svg>
+                  {% elif object.object_type == 'ceramic' %}
+                    <svg class="w-4 h-4 text-brand-gold flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.618 5.984A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                    </svg>
+                  {% elif object.object_type == 'musical instrument' %}
+                    <svg class="w-4 h-4 text-brand-gold flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"/>
+                    </svg>
+                  {% elif object.object_type == 'architecture' or object.object_type == 'architecture_element' %}
+                    <svg class="w-4 h-4 text-brand-gold flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+                    </svg>
+                  {% elif object.object_type == 'manuscript' %}
+                    <svg class="w-4 h-4 text-brand-gold flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                    </svg>
+                  {% else %}
+                    <svg class="w-4 h-4 text-brand-gold flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+                    </svg>
+                  {% endif %}
+                  <span>{{ object.get_object_type_display }}</span>
                 </div>
               </div>
 
-              <div class="mt-4 flex items-center justify-between">
+              <div class="flex items-center justify-between">
                 <a href="{% url 'heritage-detail' object.pk %}"
-                   class="inline-flex items-center justify-center px-4 py-2 rounded-lg border border-brand-navy/20 
-                          text-sm font-medium text-brand-navy hover:bg-brand-gold/10 hover:border-brand-gold/30 
-                          hover:text-brand-gold transition focus:outline-none focus:ring-2 focus:ring-brand-gold/60">
-                  {% trans "View Details" %}
+                   class="inline-flex items-center text-sm font-medium text-brand-navy dark:text-brand-gold hover:text-brand-gold dark:hover:text-white transition">
+                  <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5"/>
+                  </svg>
+                  {% trans "3D" %}
                 </a>
 
-                {# like badge: uses annotated like_count and liked_ids from the view #}
+                {# Like count with heart icon #}
                 {% if object.id in liked_ids %}
-                  <span class="inline-flex items-center gap-1 px-2 py-1 text-xs font-medium rounded-md border bg-brand-gold/10 text-brand-gold border-brand-gold/30">
-                    ❤️ {{ object.like_count }}
+                  <span class="inline-flex items-center gap-1 px-2 py-1 text-xs font-medium rounded-full bg-red-50 text-red-600 border border-red-200">
+                    <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                    </svg>
+                    {{ object.like_count }}
                   </span>
                 {% else %}
-                  <span class="inline-flex items-center gap-1 px-2 py-1 text-xs font-medium rounded-md border bg-brand-sand/60 text-brand-navy border-brand-navy/10">
-                    ♡ {{ object.like_count }}
+                  <span class="inline-flex items-center gap-1 px-2 py-1 text-xs font-medium rounded-full bg-gray-50 text-gray-600 border border-gray-200">
+                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                    </svg>
+                    {{ object.like_count }}
                   </span>
                 {% endif %}
               </div>
@@ -203,10 +357,23 @@
         {% endfor %}
       </div>
     {% else %}
-      <div class="text-center py-16 bg-white rounded-xl2 shadow-soft border border-brand-navy/10">
-        <h3 class="text-xl font-semibold text-brand-navy">{% trans "No Results Found" %}</h3>
-        <p class="mt-2 text-brand-navy/70">{% trans "Try adjusting your search or filter criteria" %}</p>
+      <!-- Empty State -->
+      <div class="text-center py-20">
+        <div class="mx-auto w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mb-4">
+          <svg class="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+          </svg>
+        </div>
+        <h3 class="text-xl font-semibold text-brand-navy mb-2">{% trans "No Heritage Objects Found" %}</h3>
+        <p class="text-brand-navy/70 mb-6">
+          {% trans "We couldn't find any objects matching your search criteria." %}
+        </p>
+        <a href="{% url 'heritage-list' %}" 
+           class="inline-flex items-center px-6 py-3 bg-brand-navy hover:bg-brand-gold text-white dark:bg-white dark:hover:bg-gray-100 dark:text-gray-900 font-medium rounded-lg transition shadow-sm">
+          {% trans "View All Objects" %}
+        </a>
       </div>
     {% endif %}
   </div>
+
 {% endblock %}

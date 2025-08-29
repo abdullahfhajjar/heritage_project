@@ -58,6 +58,7 @@ class HeritageObject(models.Model):
     )
     origin_date = models.DateField()
     image = models.ImageField(upload_to='images/', null=True, blank=True)
+    thumbnail = models.ImageField(upload_to='thumbnails/', null=True, blank=True, verbose_name=_("Thumbnail Image"))
     model_3d = models.FileField(upload_to='models/', null=True, blank=True, verbose_name=_("Model 3D"))
 
     # ---------- Optional Smithsonian-style metadata ----------
