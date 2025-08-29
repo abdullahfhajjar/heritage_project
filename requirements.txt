@@ -1,33 +1,22 @@
 # Core Django framework
-Django==4.2.23
+Django==5.1.4
 
 # Authentication and social login
-django-allauth==0.57.0
+django-allauth==65.11.1
 
 # Django dependencies
-asgiref==3.7.2
-sqlparse==0.4.4
-pytz==2023.3
+asgiref==3.9.1
+sqlparse==0.5.3
 
 # Image and media handling
-Pillow==10.1.0
+Pillow==11.3.0
 
 # Production server
-gunicorn==21.2.0
-whitenoise==6.6.0
+gunicorn==23.0.0
+whitenoise==6.9.0
 
 # Environment variables (for secure configuration)
 python-decouple==3.8
 
-# Additional dependencies for allauth
-certifi==2023.11.17
-charset-normalizer==3.3.2
-cryptography==41.0.7
-defusedxml==0.7.1
-idna==3.6
-oauthlib==3.2.2
-pyjwt==2.8.0
-python3-openid==3.2.0
-requests==2.31.0
-requests-oauthlib==1.3.1
-urllib3==2.1.0
+# Cryptography for secure operations
+cryptography==45.0.6

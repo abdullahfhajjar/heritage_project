@@ -1,0 +1,50 @@
+{% extends "admin/base.html" %}
+{% load static %}
+
+{% block title %}{% if subtitle %}{{ subtitle }} | {% endif %}{{ title }} | Turath3D Admin{% endblock %}
+
+{% block branding %}
+<h1 id="site-name">
+    <a href="{% url 'admin:index' %}">
+        <img src="{% static 'images/logo.png' %}" alt="Turath3D" style="height: 40px; vertical-align: middle; margin-right: 10px;">
+        <span style="vertical-align: middle;">Turath3D Administration</span>
+    </a>
+</h1>
+{% endblock %}
+
+{% block extrastyle %}
+{{ block.super }}
+<link rel="stylesheet" type="text/css" href="{% static 'admin/custom-admin.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'admin/admin-override.css' %}">
+<style>
+    /* Additional inline styles for quick fixes */
+    #header {
+        background: linear-gradient(135deg, #2C3E50 0%, #27AE60 100%);
+    }
+    
+    .module caption {
+        position: relative;
+    }
+    
+    .module caption::after {
+        content: attr(data-description);
+        display: block;
+        font-size: 12px;
+        font-weight: normal;
+        opacity: 0.9;
+        margin-top: 5px;
+    }
+    
+    /* Heritage priority indicator */
+    .module.heritage-content {
+        border: 2px solid #F39C12;
+        box-shadow: 0 4px 8px rgba(243, 156, 18, 0.1);
+    }
+    
+    .module.heritage-content caption {
+        background: linear-gradient(90deg, #F39C12 0%, #27AE60 100%);
+    }
+</style>
+{% endblock %}
+
+{% block nav-global %}{% endblock %}

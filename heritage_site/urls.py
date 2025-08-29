@@ -4,13 +4,16 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from django.views.generic import RedirectView  # ← add this
+from archive.admin_site import admin_site
 
 urlpatterns = [
     # i18n (language switching)
     path("i18n/", include("django.conf.urls.i18n")),
 
-    # Admin
-    path("admin/", admin.site.urls),
+    # Admin - using custom Turath admin site
+    path("admin/", admin_site.urls),
+    # Keep default admin as fallback
+    path("admin-default/", admin.site.urls),
 
     # ✅ Force /accounts/login/ to use Google OAuth (no local form)
     path("accounts/login/", RedirectView.as_view(url="/accounts/google/login/", permanent=False)),

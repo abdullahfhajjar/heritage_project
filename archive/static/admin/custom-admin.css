@@ -1,0 +1,526 @@
+/* Turath3D Admin Theme - Matching Website Styling */
+
+:root {
+    --brand-navy: #2C3E50;
+    --brand-charcoal: #34495E;
+    --brand-palm: #27AE60;
+    --brand-gold: #F39C12;
+    --brand-sand: #FDFAF2;
+    --brand-dark-bg: #1a1a1a;
+    --brand-dark-surface: #2d2d2d;
+    --brand-dark-elevated: #3a3a3a;
+}
+
+/* Override Django admin colors */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background: #f5f5f5;
+    color: #333;
+}
+
+#header {
+    background: linear-gradient(135deg, var(--brand-navy) 0%, var(--brand-palm) 100%);
+    color: white;
+    height: auto;
+    padding: 0;
+    line-height: normal;
+}
+
+#header #branding {
+    padding: 20px 40px;
+}
+
+#header #branding h1 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+#header #branding h1 img {
+    height: 40px;
+    width: auto;
+}
+
+#header #user-tools {
+    padding: 20px 40px;
+    color: white;
+}
+
+#header a:link, #header a:visited {
+    color: white;
+}
+
+#header a:hover {
+    color: var(--brand-gold);
+}
+
+/* Navigation breadcrumbs */
+div.breadcrumbs {
+    background: var(--brand-charcoal);
+    color: white;
+    padding: 15px 40px;
+    font-size: 14px;
+}
+
+div.breadcrumbs a {
+    color: var(--brand-gold);
+}
+
+/* Main content area */
+#content {
+    padding: 30px 40px;
+}
+
+#content h1 {
+    color: var(--brand-navy);
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+/* Module sections on dashboard */
+.module {
+    background: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    margin-bottom: 30px;
+    overflow: visible;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.module caption {
+    background: linear-gradient(90deg, var(--brand-navy) 0%, var(--brand-charcoal) 100%);
+    color: white;
+    padding: 15px 20px;
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: none;
+    margin: -1px -1px 0 -1px;
+    border-radius: 8px 8px 0 0;
+}
+
+.module caption .section-description {
+    font-size: 12px;
+    font-weight: normal;
+    opacity: 0.9;
+    margin-top: 5px;
+}
+
+/* Table styling */
+.module table {
+    width: 100%;
+    background: white;
+}
+
+.module th {
+    background: #f8f9fa;
+    padding: 12px 15px;
+    text-align: left;
+    font-weight: 600;
+    color: var(--brand-navy);
+    border-bottom: 1px solid #ddd;
+}
+
+.module td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #e0e0e0;
+    color: #333;
+    background: white;
+}
+
+.module tr:hover td {
+    background: #f8f9fa;
+}
+
+/* Change list specific styles */
+#changelist {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+#changelist .results {
+    background: white;
+}
+
+#changelist table {
+    border: 1px solid #ddd;
+}
+
+#changelist thead th {
+    background: linear-gradient(to bottom, #f8f9fa, #e9ecef);
+    color: var(--brand-navy);
+    font-weight: 600;
+    border-bottom: 2px solid var(--brand-gold);
+    padding: 12px 10px;
+}
+
+#changelist tbody tr {
+    background: white;
+}
+
+#changelist tbody tr:nth-child(even) {
+    background: #fafafa;
+}
+
+#changelist tbody tr:hover {
+    background: #f0f8ff;
+}
+
+#changelist tbody td, #changelist tbody th {
+    padding: 10px;
+    color: #333;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+#changelist .action-checkbox {
+    text-align: center;
+}
+
+/* Action buttons */
+.button, input[type=submit], input[type=button], .submit-row input, a.button {
+    background: var(--brand-navy);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.button:hover, input[type=submit]:hover, input[type=button]:hover, .submit-row input:hover, a.button:hover {
+    background: var(--brand-palm);
+}
+
+.button.default, input[type=submit].default, .submit-row input.default {
+    background: var(--brand-palm);
+}
+
+.button.default:hover, input[type=submit].default:hover, .submit-row input.default:hover {
+    background: var(--brand-gold);
+}
+
+/* Links */
+a:link, a:visited {
+    color: var(--brand-navy);
+    text-decoration: none;
+}
+
+a:hover {
+    color: var(--brand-palm);
+    text-decoration: underline;
+}
+
+/* Fix link colors in tables */
+#changelist table a:link, #changelist table a:visited {
+    color: var(--brand-navy);
+    font-weight: 500;
+}
+
+#changelist table a:hover {
+    color: var(--brand-palm);
+}
+
+.addlink, .changelink {
+    padding: 8px 15px;
+    border-radius: 4px;
+    display: inline-block;
+    margin: 2px;
+    transition: all 0.2s ease;
+}
+
+.addlink {
+    background: var(--brand-palm);
+    color: white;
+}
+
+.addlink:hover {
+    background: var(--brand-gold);
+    color: white;
+}
+
+.changelink {
+    background: var(--brand-navy);
+    color: white;
+}
+
+.changelink:hover {
+    background: var(--brand-charcoal);
+    color: white;
+}
+
+/* Forms */
+.form-row {
+    padding: 15px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.form-row:last-child {
+    border-bottom: none;
+}
+
+label {
+    color: var(--brand-navy);
+    font-weight: 500;
+}
+
+input[type=text], input[type=password], input[type=email], input[type=url], 
+input[type=number], textarea, select, .vTextField {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 8px 12px;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+}
+
+input[type=text]:focus, input[type=password]:focus, input[type=email]:focus, 
+input[type=url]:focus, input[type=number]:focus, textarea:focus, select:focus {
+    border-color: var(--brand-gold);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(243, 156, 18, 0.1);
+}
+
+/* Sidebar */
+#changelist-filter {
+    background: var(--brand-sand);
+    border-left: 3px solid var(--brand-gold);
+}
+
+#changelist-filter h2 {
+    background: var(--brand-navy);
+    color: white;
+    padding: 10px 15px;
+    margin: 0;
+    font-size: 14px;
+}
+
+#changelist-filter h3 {
+    color: var(--brand-charcoal);
+    font-weight: 600;
+}
+
+/* Success/Error messages */
+.messagelist li {
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 6px;
+    font-weight: 500;
+}
+
+.messagelist .success {
+    background: var(--brand-palm);
+    color: white;
+}
+
+.messagelist .warning {
+    background: var(--brand-gold);
+    color: white;
+}
+
+.messagelist .error {
+    background: #e74c3c;
+    color: white;
+}
+
+/* Help text */
+.help, p.help, form p.help {
+    color: #6c757d;
+    font-size: 13px;
+    margin-top: 5px;
+    font-style: italic;
+}
+
+/* Dashboard custom layout */
+#content-main .module:first-child caption {
+    background: linear-gradient(90deg, var(--brand-palm) 0%, var(--brand-gold) 100%);
+}
+
+/* Recent actions */
+#recent-actions-module h2 {
+    background: var(--brand-charcoal);
+    color: white;
+    padding: 12px 15px;
+    margin: 0;
+    font-size: 16px;
+    border-radius: 8px 8px 0 0;
+}
+
+/* Custom heritage priority styling */
+.heritage-priority {
+    border: 2px solid var(--brand-gold);
+}
+
+.heritage-priority caption {
+    background: linear-gradient(90deg, var(--brand-gold) 0%, var(--brand-palm) 100%);
+}
+
+/* User type indicators */
+.user-google {
+    display: inline-block;
+    padding: 2px 8px;
+    background: #4285f4;
+    color: white;
+    border-radius: 3px;
+    font-size: 11px;
+    margin-left: 5px;
+}
+
+.user-registered {
+    display: inline-block;
+    padding: 2px 8px;
+    background: var(--brand-navy);
+    color: white;
+    border-radius: 3px;
+    font-size: 11px;
+    margin-left: 5px;
+}
+
+/* Ensure readability for form fields */
+.aligned label {
+    display: block;
+    padding: 8px 10px 0 0;
+    float: left;
+    width: 160px;
+    word-wrap: break-word;
+    line-height: 1.5;
+    color: var(--brand-navy);
+    font-weight: 500;
+}
+
+/* Fix Django admin's default styles that might be causing issues */
+.results table {
+    font-size: 14px;
+}
+
+.paginator {
+    background: white;
+    padding: 10px;
+    border-radius: 0 0 8px 8px;
+    color: #333;
+}
+
+.paginator a {
+    padding: 5px 10px;
+    margin: 0 2px;
+    background: var(--brand-navy);
+    color: white;
+    border-radius: 4px;
+    text-decoration: none;
+}
+
+.paginator a:hover {
+    background: var(--brand-palm);
+}
+
+/* Fix filters sidebar */
+#changelist-filter {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 0;
+}
+
+#changelist-filter h2 {
+    background: var(--brand-navy);
+    color: white;
+    padding: 12px 15px;
+    margin: 0;
+    font-size: 14px;
+    border-radius: 8px 8px 0 0;
+}
+
+#changelist-filter h3 {
+    color: var(--brand-charcoal);
+    font-weight: 600;
+    margin: 15px 15px 5px 15px;
+}
+
+#changelist-filter ul {
+    padding: 0 15px 15px 15px;
+}
+
+#changelist-filter li {
+    list-style: none;
+    margin: 5px 0;
+}
+
+#changelist-filter a {
+    color: var(--brand-navy);
+}
+
+#changelist-filter a:hover {
+    color: var(--brand-palm);
+}
+
+#changelist-filter li.selected a {
+    color: var(--brand-palm);
+    font-weight: 600;
+}
+
+/* Fix search bar */
+#changelist-search {
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+#searchbar {
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+/* Ensure all text is readable */
+.object-tools {
+    margin-bottom: 20px;
+}
+
+.object-tools a {
+    background: var(--brand-palm);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 6px;
+    text-decoration: none;
+    display: inline-block;
+    margin-left: 10px;
+}
+
+.object-tools a:hover {
+    background: var(--brand-gold);
+}
+
+/* Custom section descriptions */
+.module-description {
+    padding: 15px 20px;
+    background: #f8f9fa;
+    border-bottom: 1px solid #e0e0e0;
+    color: #666;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+/* Priority indicator for main content */
+.priority-section::before {
+    content: "⭐ ";
+    color: var(--brand-gold);
+}
+
+/* Responsive improvements */
+@media (max-width: 767px) {
+    #header #branding {
+        padding: 15px 20px;
+    }
+    
+    #content {
+        padding: 20px;
+    }
+    
+    .module {
+        margin-bottom: 20px;
+    }
+}

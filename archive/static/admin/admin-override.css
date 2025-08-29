@@ -1,0 +1,198 @@
+/* Critical overrides for readability in Heritage Objects and all admin pages */
+
+/* Force white background and dark text for maximum contrast */
+body, #container {
+    background: #f5f5f5 !important;
+    color: #212529 !important;
+}
+
+#content {
+    background: transparent !important;
+}
+
+/* Main content area */
+.content {
+    background: white !important;
+    color: #212529 !important;
+}
+
+/* All tables must have readable text */
+table, thead, tbody, tfoot, tr, td, th {
+    color: #212529 !important;
+}
+
+/* Change list specific */
+#changelist {
+    background: white !important;
+}
+
+#changelist table {
+    background: white !important;
+}
+
+#changelist thead th {
+    background: #f8f9fa !important;
+    color: #2C3E50 !important;
+    font-weight: 600 !important;
+    border-bottom: 2px solid #F39C12 !important;
+}
+
+#changelist tbody tr {
+    background: white !important;
+}
+
+#changelist tbody tr:nth-child(even) {
+    background: #fafafa !important;
+}
+
+#changelist tbody tr:hover {
+    background: #e8f4f8 !important;
+}
+
+#changelist tbody td, #changelist tbody th {
+    color: #212529 !important;
+    font-size: 14px !important;
+}
+
+/* All links must be visible */
+a, a:link, a:visited {
+    color: #2C3E50 !important;
+    font-weight: 500;
+}
+
+a:hover {
+    color: #27AE60 !important;
+}
+
+/* Form fields */
+input[type="text"], 
+input[type="password"], 
+input[type="email"], 
+input[type="url"], 
+input[type="number"], 
+textarea, 
+select {
+    background: white !important;
+    color: #212529 !important;
+    border: 1px solid #ced4da !important;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="number"]:focus,
+textarea:focus,
+select:focus {
+    background: white !important;
+    color: #212529 !important;
+    border-color: #F39C12 !important;
+    box-shadow: 0 0 0 3px rgba(243, 156, 18, 0.1) !important;
+}
+
+/* Labels */
+label {
+    color: #2C3E50 !important;
+    font-weight: 500 !important;
+}
+
+/* Help text */
+.help, p.help, form p.help, .helptext {
+    color: #6c757d !important;
+    font-size: 13px !important;
+}
+
+/* Error text */
+.errorlist, .errornote {
+    color: #dc3545 !important;
+}
+
+/* Success messages */
+.success {
+    color: #155724 !important;
+    background-color: #d4edda !important;
+    border-color: #c3e6cb !important;
+}
+
+/* Warning messages */
+.warning {
+    color: #856404 !important;
+    background-color: #fff3cd !important;
+    border-color: #ffeeba !important;
+}
+
+/* Sidebar filters */
+#changelist-filter {
+    background: white !important;
+    border: 1px solid #dee2e6 !important;
+}
+
+#changelist-filter h3 {
+    color: #2C3E50 !important;
+}
+
+#changelist-filter li a {
+    color: #495057 !important;
+}
+
+#changelist-filter li.selected a {
+    color: #27AE60 !important;
+    font-weight: 600 !important;
+}
+
+/* Ensure inline formsets are readable */
+.inline-group {
+    background: white !important;
+}
+
+.inline-group h2 {
+    background: #f8f9fa !important;
+    color: #2C3E50 !important;
+}
+
+/* Date time shortcuts */
+.datetimeshortcuts {
+    color: #2C3E50 !important;
+}
+
+/* Ensure action buttons are visible */
+.submit-row {
+    background: white !important;
+    border-top: 1px solid #dee2e6 !important;
+}
+
+/* Required field asterisks */
+.required {
+    color: #dc3545 !important;
+}
+
+/* Field names in change form */
+.form-row label {
+    color: #2C3E50 !important;
+}
+
+/* Make sure delete/history links are visible */
+.deletelink {
+    color: #dc3545 !important;
+}
+
+.historylink {
+    color: #17a2b8 !important;
+}
+
+/* Fix any potential dark mode issues */
+@media (prefers-color-scheme: dark) {
+    body, #container, .content, #changelist {
+        background: #f5f5f5 !important;
+        color: #212529 !important;
+    }
+    
+    table, thead, tbody, tfoot, tr, td, th {
+        color: #212529 !important;
+    }
+    
+    input, textarea, select {
+        background: white !important;
+        color: #212529 !important;
+    }
+}
