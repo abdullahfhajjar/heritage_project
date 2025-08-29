@@ -710,3 +710,30 @@ def public_profile(request, username: str):
             "recent_comments": recent_comments,
         },
     )
+
+
+# Authentication views
+def signup(request):
+    """GitHub-style signup page"""
+    if request.user.is_authenticated:
+        return redirect('home')
+    
+    if request.method == "POST":
+        # For now, redirect to Google OAuth since we're using social auth only
+        # In a full implementation, you'd handle manual user creation here
+        return redirect('/accounts/google/login/')
+    
+    return render(request, "archive/signup.html")
+
+
+def signin(request):
+    """GitHub-style signin page"""
+    if request.user.is_authenticated:
+        return redirect('home')
+    
+    if request.method == "POST":
+        # For now, redirect to Google OAuth since we're using social auth only
+        # In a full implementation, you'd handle manual authentication here
+        return redirect('/accounts/google/login/')
+    
+    return render(request, "archive/signin.html")

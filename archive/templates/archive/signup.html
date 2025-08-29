@@ -1,0 +1,202 @@
+{% extends "archive/base.html" %}
+{% load static i18n %}
+
+{% block title %}{% trans "Sign up" %} - Turath3D{% endblock %}
+
+{% block content %}
+<div class="min-h-screen flex">
+  <!-- Left side - Visual showcase -->
+  <div class="hidden lg:flex lg:w-1/2 relative overflow-hidden bg-gradient-to-br from-brand-navy via-brand-palm to-brand-charcoal">
+    <!-- Background pattern -->
+    <div class="absolute inset-0 opacity-10">
+      <svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+            <path d="M 40 0 L 0 0 0 40" fill="none" stroke="white" stroke-width="1"/>
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#grid)" />
+      </svg>
+    </div>
+    
+    <!-- Content -->
+    <div class="relative z-10 flex flex-col justify-center px-12">
+      <div class="mb-8">
+        <img src="{% static 'images/logo.png' %}" alt="Turath3D" class="h-16 w-auto mb-6">
+        <h1 class="text-4xl font-bold text-white mb-4">
+          {% trans "Preserve Heritage Together" %}
+        </h1>
+        <p class="text-xl text-white/80 mb-8">
+          {% trans "Join our community in documenting and sharing Saudi Arabia's rich cultural heritage through 3D digitization." %}
+        </p>
+      </div>
+      
+      <!-- Feature highlights -->
+      <div class="space-y-4">
+        <div class="flex items-start space-x-3">
+          <svg class="w-6 h-6 text-brand-gold mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+          <div>
+            <h3 class="font-semibold text-white">{% trans "3D Heritage Models" %}</h3>
+            <p class="text-white/70 text-sm">{% trans "View and interact with cultural artifacts in stunning 3D" %}</p>
+          </div>
+        </div>
+        
+        <div class="flex items-start space-x-3">
+          <svg class="w-6 h-6 text-brand-gold mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
+          </svg>
+          <div>
+            <h3 class="font-semibold text-white">{% trans "Community Driven" %}</h3>
+            <p class="text-white/70 text-sm">{% trans "Contribute your knowledge and help preserve history" %}</p>
+          </div>
+        </div>
+        
+        <div class="flex items-start space-x-3">
+          <svg class="w-6 h-6 text-brand-gold mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm9-13.5V9"></path>
+          </svg>
+          <div>
+            <h3 class="font-semibold text-white">{% trans "Multilingual Support" %}</h3>
+            <p class="text-white/70 text-sm">{% trans "Access content in Arabic, English, and French" %}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Right side - Sign up form -->
+  <div class="w-full lg:w-1/2 flex items-center justify-center px-6 py-12 bg-white dark:bg-brand-dark-bg">
+    <div class="w-full max-w-md">
+      <!-- Already have account link -->
+      <div class="text-right mb-8">
+        <span class="text-sm text-gray-600 dark:text-gray-400">{% trans "Already have an account?" %}</span>
+        <a href="{% url 'signin' %}" class="text-sm text-brand-navy dark:text-brand-gold hover:underline ml-1">
+          {% trans "Sign in" %} →
+        </a>
+      </div>
+      
+      <!-- Sign up header -->
+      <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-8">
+        {% trans "Sign up for Turath3D" %}
+      </h2>
+      
+      <!-- OAuth options -->
+      <div class="mb-6">
+        <a href="/accounts/google/login/" 
+           class="w-full flex items-center justify-center px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm text-sm font-medium text-gray-700 dark:text-gray-200 bg-white dark:bg-brand-dark-surface hover:bg-gray-50 dark:hover:bg-brand-dark-elevated transition-colors">
+          <svg class="w-5 h-5 mr-2" viewBox="0 0 24 24">
+            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+          </svg>
+          {% trans "Continue with Google" %}
+        </a>
+      </div>
+      
+      <!-- Divider -->
+      <div class="relative mb-6">
+        <div class="absolute inset-0 flex items-center">
+          <div class="w-full border-t border-gray-300 dark:border-gray-600"></div>
+        </div>
+        <div class="relative flex justify-center text-sm">
+          <span class="px-2 bg-white dark:bg-brand-dark-bg text-gray-500">{% trans "or" %}</span>
+        </div>
+      </div>
+      
+      <!-- Email signup form -->
+      <form method="post" action="{% url 'signup' %}" class="space-y-4">
+        {% csrf_token %}
+        
+        <!-- Email -->
+        <div>
+          <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            {% trans "Email" %}<span class="text-red-500">*</span>
+          </label>
+          <input type="email" id="email" name="email" required
+                 class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-brand-gold focus:border-brand-gold dark:bg-brand-dark-surface dark:text-white">
+        </div>
+        
+        <!-- Password -->
+        <div>
+          <label for="password" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            {% trans "Password" %}<span class="text-red-500">*</span>
+          </label>
+          <input type="password" id="password" name="password" required
+                 class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-brand-gold focus:border-brand-gold dark:bg-brand-dark-surface dark:text-white">
+          <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">
+            {% trans "Password should be at least 15 characters OR at least 8 characters including a number and a lowercase letter." %}
+          </p>
+        </div>
+        
+        <!-- Username -->
+        <div>
+          <label for="username" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            {% trans "Username" %}<span class="text-red-500">*</span>
+          </label>
+          <input type="text" id="username" name="username" required
+                 pattern="^[a-zA-Z0-9]([a-zA-Z0-9-]*[a-zA-Z0-9])?$"
+                 class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-brand-gold focus:border-brand-gold dark:bg-brand-dark-surface dark:text-white">
+          <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">
+            {% trans "Username may only contain alphanumeric characters or single hyphens, and cannot begin or end with a hyphen." %}
+          </p>
+        </div>
+        
+        <!-- Country/Region -->
+        <div>
+          <label for="country" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            {% trans "Your Country/Region" %}<span class="text-red-500">*</span>
+          </label>
+          <select id="country" name="country" required
+                  class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-brand-gold focus:border-brand-gold dark:bg-brand-dark-surface dark:text-white">
+            <option value="">{% trans "Select your country" %}</option>
+            <option value="SA">{% trans "Saudi Arabia" %}</option>
+            <option value="AE">{% trans "United Arab Emirates" %}</option>
+            <option value="KW">{% trans "Kuwait" %}</option>
+            <option value="QA">{% trans "Qatar" %}</option>
+            <option value="BH">{% trans "Bahrain" %}</option>
+            <option value="OM">{% trans "Oman" %}</option>
+            <option value="EG">{% trans "Egypt" %}</option>
+            <option value="JO">{% trans "Jordan" %}</option>
+            <option value="LB">{% trans "Lebanon" %}</option>
+            <option value="OTHER">{% trans "Other" %}</option>
+          </select>
+          <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">
+            {% trans "For compliance reasons, we're required to collect country information to send you occasional updates and announcements." %}
+          </p>
+        </div>
+        
+        <!-- Email preferences -->
+        <div class="pt-2">
+          <label class="flex items-start">
+            <input type="checkbox" name="email_updates" 
+                   class="mt-1 mr-2 rounded border-gray-300 text-brand-gold focus:ring-brand-gold">
+            <span class="text-sm text-gray-700 dark:text-gray-300">
+              {% trans "Receive occasional product updates and announcements" %}
+            </span>
+          </label>
+        </div>
+        
+        <!-- Terms and conditions -->
+        <div class="pt-4 pb-2">
+          <p class="text-xs text-gray-500 dark:text-gray-400">
+            {% trans "By creating an account, you agree to the" %} 
+            <a href="{% url 'about' %}" class="text-brand-navy dark:text-brand-gold hover:underline">{% trans "Terms of Service" %}</a>.
+            {% trans "For more information about Turath3D's privacy practices, see the" %}
+            <a href="{% url 'about' %}" class="text-brand-navy dark:text-brand-gold hover:underline">{% trans "Privacy Statement" %}</a>.
+            {% trans "We'll occasionally send you account-related emails." %}
+          </p>
+        </div>
+        
+        <!-- Submit button -->
+        <button type="submit"
+                class="w-full py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-brand-navy hover:bg-brand-palm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-gold transition-colors">
+          {% trans "Create account" %}
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

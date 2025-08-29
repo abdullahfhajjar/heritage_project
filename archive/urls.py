@@ -4,6 +4,10 @@ from . import views
 urlpatterns = [
     # 🏠 Homepage
     path("", views.home, name="home"),
+    
+    # 🔐 Authentication
+    path("signup/", views.signup, name="signup"),
+    path("signin/", views.signin, name="signin"),
 
     # 📚 Collections / listing
     path("heritage/", views.heritage_list, name="heritage-list"),
