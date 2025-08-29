@@ -1,53 +1,589 @@
 {% extends 'archive/base.html' %}
 {% load static i18n %}
 
-{% block title %}{% trans "Our Sponsors" %}{% endblock %}
+{% block title %}{% trans "Partners in Preserving Heritage" %} - Turath3D{% endblock %}
 
 {% block content %}
-<div class="max-w-4xl mx-auto px-4 py-8">
-  <h1 class="text-3xl font-bold text-brand-navy mb-6">{% trans "Our Sponsors" %}</h1>
-  
-  <div class="prose prose-lg max-w-none text-brand-navy/80">
-    <p class="text-xl leading-relaxed mb-8">
-      {% trans "We thank our generous partners and sponsors who support cultural preservation and digitization efforts." %}
-    </p>
-    
-    <div class="bg-brand-sand/20 rounded-lg p-6 mb-8">
-      <h2 class="text-xl font-semibold text-brand-navy mb-4">{% trans "Partnership Opportunities" %}</h2>
-      <p>
-        {% trans "We welcome partnerships with cultural institutions, technology companies, educational organizations, and philanthropic foundations who share our mission of preserving Saudi Arabia's cultural heritage." %}
-      </p>
+<div class="min-h-screen" x-data="sponsorsPage()">
+  <!-- Hero Section -->
+  <section class="relative overflow-hidden bg-gradient-to-br from-brand-navy via-brand-navy/90 to-brand-palm py-24 lg:py-32">
+    <!-- Animated Background Pattern -->
+    <div class="absolute inset-0 opacity-10">
+      <div class="absolute top-0 left-0 w-96 h-96 bg-brand-gold rounded-full mix-blend-multiply animate-pulse"></div>
+      <div class="absolute top-0 right-0 w-96 h-96 bg-brand-sand rounded-full mix-blend-multiply animate-pulse" style="animation-delay: 2s;"></div>
+      <div class="absolute bottom-0 left-1/2 w-96 h-96 bg-brand-gold/50 rounded-full mix-blend-multiply animate-pulse" style="animation-delay: 4s;"></div>
     </div>
     
-    <div class="grid md:grid-cols-2 gap-8">
-      <div class="bg-white rounded-lg shadow-sm border border-brand-sand/30 p-6 hover:shadow-lg hover:-translate-y-0.5 transition">
-        <h2 class="text-xl font-semibold text-brand-navy mb-4">{% trans "Institutional Partners" %}</h2>
-        <p>
-          {% trans "Museums, universities, and cultural institutions that collaborate with us in digitization projects and research initiatives." %}
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div class="space-y-8" x-intersect="$el.classList.add('animate-fade-in-up')">
+        <h1 class="text-5xl md:text-7xl font-bold text-white leading-tight">
+          {% trans "Partners in" %}<br>
+          <span class="text-brand-gold">{% trans "Preserving Heritage" %}</span>
+        </h1>
+        
+        <p class="text-xl md:text-2xl text-white/90 max-w-4xl mx-auto leading-relaxed">
+          {% trans "Join global leaders in safeguarding Saudi Arabia's cultural legacy. Together, we're building tomorrow's digital archive today." %}
         </p>
-      </div>
-      
-      <div class="bg-white rounded-lg shadow-sm border border-brand-sand/30 p-6 hover:shadow-lg hover:-translate-y-0.5 transition">
-        <h2 class="text-xl font-semibold text-brand-navy mb-4">{% trans "Technology Sponsors" %}</h2>
-        <p>
-          {% trans "Companies providing 3D scanning equipment, software solutions, and technical expertise to advance our digitization capabilities." %}
-        </p>
-      </div>
-      
-      <div class="bg-white rounded-lg shadow-sm border border-brand-sand/30 p-6 hover:shadow-lg hover:-translate-y-0.5 transition">
-        <h2 class="text-xl font-semibold text-brand-navy mb-4">{% trans "Educational Support" %}</h2>
-        <p>
-          {% trans "Organizations supporting educational programs and public access initiatives to make cultural heritage accessible to all." %}
-        </p>
-      </div>
-      
-      <div class="bg-white rounded-lg shadow-sm border border-brand-sand/30 p-6 hover:shadow-lg hover:-translate-y-0.5 transition">
-        <h2 class="text-xl font-semibold text-brand-navy mb-4">{% trans "Become a Sponsor" %}</h2>
-        <p>
-          {% trans "Interested in supporting our mission? Contact us to learn about sponsorship opportunities and partnership benefits." %}
-        </p>
+        
+        <!-- Impact Stats -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mt-16">
+          <div class="text-center" x-intersect="animateCounter($el, 10000)">
+            <div class="text-3xl md:text-4xl font-bold text-brand-gold mb-2" x-ref="counter1">0</div>
+            <div class="text-white/80 text-sm uppercase tracking-wider">{% trans "Artifacts Digitized" %}</div>
+          </div>
+          <div class="text-center" x-intersect="animateCounter($el, 50)">
+            <div class="text-3xl md:text-4xl font-bold text-brand-gold mb-2" x-ref="counter2">0</div>
+            <div class="text-white/80 text-sm uppercase tracking-wider">{% trans "Partner Institutions" %}</div>
+          </div>
+          <div class="text-center" x-intersect="animateCounter($el, 150)">
+            <div class="text-3xl md:text-4xl font-bold text-brand-gold mb-2" x-ref="counter3">0</div>
+            <div class="text-white/80 text-sm uppercase tracking-wider">{% trans "Countries Reached" %}</div>
+          </div>
+          <div class="text-center" x-intersect="animateCounter($el, 2)">
+            <div class="text-3xl md:text-4xl font-bold text-brand-gold mb-2" x-ref="counter4">0</div>
+            <div class="text-white/80 text-sm uppercase tracking-wider">{% trans "Million+ Views" %}</div>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
+    
+    <!-- Scroll Indicator -->
+    <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+      <div class="w-6 h-10 border-2 border-white/50 rounded-full flex justify-center">
+        <div class="w-1 h-3 bg-white/70 rounded-full mt-2 animate-pulse"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lead Partner Section -->
+  <section class="py-20 bg-gradient-to-r from-brand-sand/20 to-brand-gold/10 dark:from-gray-900 dark:to-black">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16" x-intersect="$el.classList.add('animate-fade-in-up')">
+        <h2 class="text-4xl md:text-5xl font-bold text-brand-navy dark:text-white mb-4">
+          {% trans "Founding Partner" %}
+        </h2>
+        <p class="text-xl text-brand-navy/70 dark:text-white/70">
+          {% trans "Leading the preservation of cultural heritage through visionary partnership" %}
+        </p>
+      </div>
+      
+      <!-- Premium Lead Sponsor Card -->
+      <div class="relative max-w-4xl mx-auto" x-intersect="$el.classList.add('animate-scale-in')">
+        <div class="absolute -inset-4 bg-gradient-to-r from-brand-gold via-brand-gold/80 to-brand-gold rounded-2xl blur-xl opacity-20"></div>
+        <div class="relative bg-white dark:bg-gray-900 rounded-2xl shadow-2xl border-4 border-brand-gold/30 overflow-hidden">
+          <div class="absolute top-0 right-0 bg-brand-gold text-brand-navy px-6 py-2 rounded-bl-2xl font-bold text-sm uppercase tracking-wider">
+            {% trans "Lead Partner" %}
+          </div>
+          
+          <div class="p-12 text-center">
+            <div class="mb-8">
+              <!-- Placeholder for Lead Sponsor Logo -->
+              <div class="h-32 bg-gradient-to-r from-brand-navy/10 to-brand-gold/10 dark:from-gray-800 dark:to-gray-700 rounded-xl flex items-center justify-center border-2 border-dashed border-brand-navy/20 dark:border-white/20">
+                <span class="text-brand-navy/50 dark:text-white/50 font-semibold text-lg">{% trans "Lead Partner Logo" %}</span>
+              </div>
+            </div>
+            
+            <h3 class="text-2xl font-bold text-brand-navy dark:text-white mb-4">{% trans "Your Organization Here" %}</h3>
+            <p class="text-lg text-brand-navy/70 dark:text-white/70 mb-6 max-w-2xl mx-auto leading-relaxed">
+              {% trans "As our founding partner, your organization leads the charge in preserving Saudi Arabia's cultural heritage for future generations. Together, we're making history accessible to the world." %}
+            </p>
+            
+            <div class="flex justify-center space-x-6 text-sm text-brand-navy/60 dark:text-white/60">
+              <span class="flex items-center">
+                <svg class="w-5 h-5 mr-2 text-brand-gold" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                </svg>
+                {% trans "Premium Recognition" %}
+              </span>
+              <span class="flex items-center">
+                <svg class="w-5 h-5 mr-2 text-brand-gold" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                </svg>
+                {% trans "Global Impact" %}
+              </span>
+              <span class="flex items-center">
+                <svg class="w-5 h-5 mr-2 text-brand-gold" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                </svg>
+                {% trans "Legacy Partnership" %}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sponsor Tiers Section -->
+  <section class="py-20 bg-white dark:bg-black">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Platinum Partners -->
+      <div class="mb-20" x-intersect="$el.classList.add('animate-fade-in-up')">
+        <div class="text-center mb-12">
+          <h3 class="text-3xl font-bold text-brand-navy dark:text-white mb-4 flex items-center justify-center">
+            <span class="w-2 h-2 bg-gray-400 rounded-full mr-3"></span>
+            {% trans "Platinum Partners" %}
+            <span class="w-2 h-2 bg-gray-400 rounded-full ml-3"></span>
+          </h3>
+          <p class="text-brand-navy/70 dark:text-white/70">{% trans "Distinguished organizations shaping the future of cultural preservation" %}</p>
+        </div>
+        
+        <div class="grid md:grid-cols-3 gap-8">
+          <div class="group bg-gradient-to-br from-white to-gray-50 dark:from-gray-900 dark:to-black rounded-xl shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 p-8 border border-gray-200 dark:border-gray-800" 
+               x-intersect="$el.classList.add('animate-slide-in-left')">
+            <div class="h-24 bg-gray-100 dark:bg-gray-800 rounded-lg flex items-center justify-center mb-6 group-hover:bg-brand-sand/20 transition-colors">
+              <span class="text-gray-400 font-medium">{% trans "Partner Logo" %}</span>
+            </div>
+            <h4 class="text-lg font-semibold text-brand-navy dark:text-white mb-2">{% trans "Platinum Partner 1" %}</h4>
+            <p class="text-sm text-brand-navy/60 dark:text-white/60">{% trans "Leading technology innovation in cultural digitization" %}</p>
+          </div>
+          
+          <div class="group bg-gradient-to-br from-white to-gray-50 dark:from-gray-900 dark:to-black rounded-xl shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 p-8 border border-gray-200 dark:border-gray-800" 
+               x-intersect="$el.classList.add('animate-slide-in-up')" style="animation-delay: 0.2s;">
+            <div class="h-24 bg-gray-100 dark:bg-gray-800 rounded-lg flex items-center justify-center mb-6 group-hover:bg-brand-sand/20 transition-colors">
+              <span class="text-gray-400 font-medium">{% trans "Partner Logo" %}</span>
+            </div>
+            <h4 class="text-lg font-semibold text-brand-navy dark:text-white mb-2">{% trans "Platinum Partner 2" %}</h4>
+            <p class="text-sm text-brand-navy/60 dark:text-white/60">{% trans "Advancing research and educational access" %}</p>
+          </div>
+          
+          <div class="group bg-gradient-to-br from-white to-gray-50 dark:from-gray-900 dark:to-black rounded-xl shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 p-8 border border-gray-200 dark:border-gray-800" 
+               x-intersect="$el.classList.add('animate-slide-in-right')" style="animation-delay: 0.4s;">
+            <div class="h-24 bg-gray-100 dark:bg-gray-800 rounded-lg flex items-center justify-center mb-6 group-hover:bg-brand-sand/20 transition-colors">
+              <span class="text-gray-400 font-medium">{% trans "Partner Logo" %}</span>
+            </div>
+            <h4 class="text-lg font-semibold text-brand-navy dark:text-white mb-2">{% trans "Platinum Partner 3" %}</h4>
+            <p class="text-sm text-brand-navy/60 dark:text-white/60">{% trans "Supporting global heritage preservation initiatives" %}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Gold Partners -->
+      <div class="mb-20" x-intersect="$el.classList.add('animate-fade-in-up')">
+        <div class="text-center mb-12">
+          <h3 class="text-3xl font-bold text-brand-navy dark:text-white mb-4 flex items-center justify-center">
+            <span class="w-2 h-2 bg-brand-gold rounded-full mr-3"></span>
+            {% trans "Gold Partners" %}
+            <span class="w-2 h-2 bg-brand-gold rounded-full ml-3"></span>
+          </h3>
+          <p class="text-brand-navy/70 dark:text-white/70">{% trans "Valued collaborators in our mission to preserve cultural heritage" %}</p>
+        </div>
+        
+        <div class="grid md:grid-cols-4 gap-6">
+          <div class="group bg-white dark:bg-gray-900 rounded-lg shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 p-6 border border-brand-gold/20" 
+               x-intersect="$el.classList.add('animate-fade-in')" style="animation-delay: 0.1s;">
+            <div class="h-20 bg-brand-gold/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-brand-gold/20 transition-colors">
+              <span class="text-brand-gold font-medium text-sm">{% trans "Gold Logo" %}</span>
+            </div>
+            <h4 class="text-md font-semibold text-brand-navy dark:text-white">{% trans "Gold Partner 1" %}</h4>
+          </div>
+          
+          <div class="group bg-white dark:bg-gray-900 rounded-lg shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 p-6 border border-brand-gold/20" 
+               x-intersect="$el.classList.add('animate-fade-in')" style="animation-delay: 0.2s;">
+            <div class="h-20 bg-brand-gold/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-brand-gold/20 transition-colors">
+              <span class="text-brand-gold font-medium text-sm">{% trans "Gold Logo" %}</span>
+            </div>
+            <h4 class="text-md font-semibold text-brand-navy dark:text-white">{% trans "Gold Partner 2" %}</h4>
+          </div>
+          
+          <div class="group bg-white dark:bg-gray-900 rounded-lg shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 p-6 border border-brand-gold/20" 
+               x-intersect="$el.classList.add('animate-fade-in')" style="animation-delay: 0.3s;">
+            <div class="h-20 bg-brand-gold/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-brand-gold/20 transition-colors">
+              <span class="text-brand-gold font-medium text-sm">{% trans "Gold Logo" %}</span>
+            </div>
+            <h4 class="text-md font-semibold text-brand-navy dark:text-white">{% trans "Gold Partner 3" %}</h4>
+          </div>
+          
+          <div class="group bg-white dark:bg-gray-900 rounded-lg shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 p-6 border border-brand-gold/20" 
+               x-intersect="$el.classList.add('animate-fade-in')" style="animation-delay: 0.4s;">
+            <div class="h-20 bg-brand-gold/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-brand-gold/20 transition-colors">
+              <span class="text-brand-gold font-medium text-sm">{% trans "Gold Logo" %}</span>
+            </div>
+            <h4 class="text-md font-semibold text-brand-navy dark:text-white">{% trans "Gold Partner 4" %}</h4>
+          </div>
+        </div>
+      </div>
+
+      <!-- Silver Partners -->
+      <div class="mb-20" x-intersect="$el.classList.add('animate-fade-in-up')">
+        <div class="text-center mb-12">
+          <h3 class="text-2xl font-bold text-brand-navy dark:text-white mb-4 flex items-center justify-center">
+            <span class="w-2 h-2 bg-gray-300 rounded-full mr-3"></span>
+            {% trans "Silver Partners" %}
+            <span class="w-2 h-2 bg-gray-300 rounded-full ml-3"></span>
+          </h3>
+        </div>
+        
+        <div class="grid grid-cols-2 md:grid-cols-6 gap-4">
+          <div class="group bg-white dark:bg-gray-900 rounded-lg shadow-sm hover:shadow-md transition-all duration-300 p-4 border border-gray-200 dark:border-gray-700" 
+               x-intersect="$el.classList.add('animate-fade-in')" x-show="true" style="animation-delay: 0.1s;">
+            <div class="h-16 bg-gray-100 dark:bg-gray-800 rounded flex items-center justify-center group-hover:bg-gray-200 dark:group-hover:bg-gray-700 transition-colors">
+              <span class="text-gray-400 text-xs">{% trans "Logo" %}</span>
+            </div>
+          </div>
+          <div class="group bg-white dark:bg-gray-900 rounded-lg shadow-sm hover:shadow-md transition-all duration-300 p-4 border border-gray-200 dark:border-gray-700" 
+               x-intersect="$el.classList.add('animate-fade-in')" style="animation-delay: 0.2s;">
+            <div class="h-16 bg-gray-100 dark:bg-gray-800 rounded flex items-center justify-center group-hover:bg-gray-200 dark:group-hover:bg-gray-700 transition-colors">
+              <span class="text-gray-400 text-xs">{% trans "Logo" %}</span>
+            </div>
+          </div>
+          <div class="group bg-white dark:bg-gray-900 rounded-lg shadow-sm hover:shadow-md transition-all duration-300 p-4 border border-gray-200 dark:border-gray-700" 
+               x-intersect="$el.classList.add('animate-fade-in')" style="animation-delay: 0.3s;">
+            <div class="h-16 bg-gray-100 dark:bg-gray-800 rounded flex items-center justify-center group-hover:bg-gray-200 dark:group-hover:bg-gray-700 transition-colors">
+              <span class="text-gray-400 text-xs">{% trans "Logo" %}</span>
+            </div>
+          </div>
+          <div class="group bg-white dark:bg-gray-900 rounded-lg shadow-sm hover:shadow-md transition-all duration-300 p-4 border border-gray-200 dark:border-gray-700" 
+               x-intersect="$el.classList.add('animate-fade-in')" style="animation-delay: 0.4s;">
+            <div class="h-16 bg-gray-100 dark:bg-gray-800 rounded flex items-center justify-center group-hover:bg-gray-200 dark:group-hover:bg-gray-700 transition-colors">
+              <span class="text-gray-400 text-xs">{% trans "Logo" %}</span>
+            </div>
+          </div>
+          <div class="group bg-white dark:bg-gray-900 rounded-lg shadow-sm hover:shadow-md transition-all duration-300 p-4 border border-gray-200 dark:border-gray-700" 
+               x-intersect="$el.classList.add('animate-fade-in')" style="animation-delay: 0.5s;">
+            <div class="h-16 bg-gray-100 dark:bg-gray-800 rounded flex items-center justify-center group-hover:bg-gray-200 dark:group-hover:bg-gray-700 transition-colors">
+              <span class="text-gray-400 text-xs">{% trans "Logo" %}</span>
+            </div>
+          </div>
+          <div class="group bg-white dark:bg-gray-900 rounded-lg shadow-sm hover:shadow-md transition-all duration-300 p-4 border border-gray-200 dark:border-gray-700" 
+               x-intersect="$el.classList.add('animate-fade-in')" style="animation-delay: 0.6s;">
+            <div class="h-16 bg-gray-100 dark:bg-gray-800 rounded flex items-center justify-center group-hover:bg-gray-200 dark:group-hover:bg-gray-700 transition-colors">
+              <span class="text-gray-400 text-xs">{% trans "Logo" %}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Partnership Benefits Section -->
+  <section class="py-20 bg-gradient-to-br from-brand-navy to-brand-palm relative overflow-hidden">
+    <div class="absolute inset-0 bg-black/20"></div>
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16" x-intersect="$el.classList.add('animate-fade-in-up')">
+        <h2 class="text-4xl md:text-5xl font-bold text-white mb-6">
+          {% trans "Why Partner With Us" %}
+        </h2>
+        <p class="text-xl text-white/90 max-w-3xl mx-auto">
+          {% trans "Join a prestigious network of organizations committed to preserving cultural heritage and shaping the future of digital preservation." %}
+        </p>
+      </div>
+      
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="bg-white/10 backdrop-blur-sm rounded-xl p-8 border border-white/20" x-intersect="$el.classList.add('animate-slide-in-up')" style="animation-delay: 0.1s;">
+          <div class="w-12 h-12 bg-brand-gold rounded-lg flex items-center justify-center mb-6">
+            <svg class="w-6 h-6 text-brand-navy" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold text-white mb-4">{% trans "Global Recognition" %}</h3>
+          <p class="text-white/80">{% trans "Gain international visibility as a leader in cultural preservation alongside prestigious institutions." %}</p>
+        </div>
+        
+        <div class="bg-white/10 backdrop-blur-sm rounded-xl p-8 border border-white/20" x-intersect="$el.classList.add('animate-slide-in-up')" style="animation-delay: 0.2s;">
+          <div class="w-12 h-12 bg-brand-gold rounded-lg flex items-center justify-center mb-6">
+            <svg class="w-6 h-6 text-brand-navy" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3z"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold text-white mb-4">{% trans "Exclusive Access" %}</h3>
+          <p class="text-white/80">{% trans "Early access to digitized collections, research data, and collaborative opportunities with leading scholars." %}</p>
+        </div>
+        
+        <div class="bg-white/10 backdrop-blur-sm rounded-xl p-8 border border-white/20" x-intersect="$el.classList.add('animate-slide-in-up')" style="animation-delay: 0.3s;">
+          <div class="w-12 h-12 bg-brand-gold rounded-lg flex items-center justify-center mb-6">
+            <svg class="w-6 h-6 text-brand-navy" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold text-white mb-4">{% trans "Cultural Impact" %}</h3>
+          <p class="text-white/80">{% trans "Contribute to preserving irreplaceable cultural artifacts and making them accessible to future generations." %}</p>
+        </div>
+        
+        <div class="bg-white/10 backdrop-blur-sm rounded-xl p-8 border border-white/20" x-intersect="$el.classList.add('animate-slide-in-up')" style="animation-delay: 0.4s;">
+          <div class="w-12 h-12 bg-brand-gold rounded-lg flex items-center justify-center mb-6">
+            <svg class="w-6 h-6 text-brand-navy" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clip-rule="evenodd"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold text-white mb-4">{% trans "Research Collaboration" %}</h3>
+          <p class="text-white/80">{% trans "Partner in groundbreaking research projects and technological innovations in digital heritage preservation." %}</p>
+        </div>
+        
+        <div class="bg-white/10 backdrop-blur-sm rounded-xl p-8 border border-white/20" x-intersect="$el.classList.add('animate-slide-in-up')" style="animation-delay: 0.5s;">
+          <div class="w-12 h-12 bg-brand-gold rounded-lg flex items-center justify-center mb-6">
+            <svg class="w-6 h-6 text-brand-navy" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"></path>
+              <path fill-rule="evenodd" d="M4 5a2 2 0 012-2v1a2 2 0 002 2h8a2 2 0 002-2V3a2 2 0 012 2v6a2 2 0 01-2 2H6a2 2 0 01-2-2V5zM8 8a1 1 0 000 2h4a1 1 0 100-2H8z" clip-rule="evenodd"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold text-white mb-4">{% trans "Educational Outreach" %}</h3>
+          <p class="text-white/80">{% trans "Support educational initiatives that bring cultural heritage to students and communities worldwide." %}</p>
+        </div>
+        
+        <div class="bg-white/10 backdrop-blur-sm rounded-xl p-8 border border-white/20" x-intersect="$el.classList.add('animate-slide-in-up')" style="animation-delay: 0.6s;">
+          <div class="w-12 h-12 bg-brand-gold rounded-lg flex items-center justify-center mb-6">
+            <svg class="w-6 h-6 text-brand-navy" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold text-white mb-4">{% trans "Innovation Leadership" %}</h3>
+          <p class="text-white/80">{% trans "Be at the forefront of cutting-edge 3D digitization technology and heritage preservation methodologies." %}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact & Partnership Section -->
+  <section class="py-20 bg-brand-sand/30 dark:bg-gray-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+        <!-- Contact Information -->
+        <div x-intersect="$el.classList.add('animate-slide-in-left')">
+          <h2 class="text-4xl font-bold text-brand-navy dark:text-white mb-8">
+            {% trans "Become a Partner" %}
+          </h2>
+          <p class="text-xl text-brand-navy/80 dark:text-white/80 mb-12 leading-relaxed">
+            {% trans "Join our prestigious network of partners and help shape the future of cultural heritage preservation. Together, we can ensure that Saudi Arabia's rich cultural legacy remains accessible for generations to come." %}
+          </p>
+          
+          <!-- Contact Details -->
+          <div class="space-y-6">
+            <div class="flex items-center space-x-4">
+              <div class="w-12 h-12 bg-brand-gold/20 rounded-full flex items-center justify-center">
+                <svg class="w-6 h-6 text-brand-gold" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
+                  <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
+                </svg>
+              </div>
+              <div>
+                <p class="text-sm text-brand-navy/60 dark:text-white/60 uppercase tracking-wider font-semibold">{% trans "Partnership Inquiries" %}</p>
+                <a href="mailto:sponsor@turath3d.com" class="text-xl font-semibold text-brand-navy dark:text-white hover:text-brand-gold transition-colors">
+                  sponsor@turath3d.com
+                </a>
+              </div>
+            </div>
+            
+            <div class="flex items-center space-x-4">
+              <div class="w-12 h-12 bg-brand-gold/20 rounded-full flex items-center justify-center">
+                <svg class="w-6 h-6 text-brand-gold" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
+                </svg>
+              </div>
+              <div>
+                <p class="text-sm text-brand-navy/60 dark:text-white/60 uppercase tracking-wider font-semibold">{% trans "Global Reach" %}</p>
+                <p class="text-xl font-semibold text-brand-navy dark:text-white">{% trans "Riyadh, Kingdom of Saudi Arabia" %}</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Partnership Tiers CTA -->
+          <div class="mt-12 p-6 bg-gradient-to-r from-brand-gold/10 to-brand-sand/20 dark:from-brand-gold/5 dark:to-gray-800 rounded-xl border border-brand-gold/20">
+            <h4 class="text-lg font-semibold text-brand-navy dark:text-white mb-3">{% trans "Partnership Tiers Available" %}</h4>
+            <div class="flex flex-wrap gap-2">
+              <span class="px-3 py-1 bg-white dark:bg-gray-800 text-brand-navy dark:text-white text-sm rounded-full border border-brand-gold/20">{% trans "Founding Partner" %}</span>
+              <span class="px-3 py-1 bg-white dark:bg-gray-800 text-brand-navy dark:text-white text-sm rounded-full border border-gray-300 dark:border-gray-600">{% trans "Platinum" %}</span>
+              <span class="px-3 py-1 bg-white dark:bg-gray-800 text-brand-navy dark:text-white text-sm rounded-full border border-brand-gold/20">{% trans "Gold" %}</span>
+              <span class="px-3 py-1 bg-white dark:bg-gray-800 text-brand-navy dark:text-white text-sm rounded-full border border-gray-300 dark:border-gray-600">{% trans "Silver" %}</span>
+              <span class="px-3 py-1 bg-white dark:bg-gray-800 text-brand-navy dark:text-white text-sm rounded-full border border-gray-300 dark:border-gray-600">{% trans "Supporting" %}</span>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Contact Form -->
+        <div class="bg-white dark:bg-black rounded-2xl shadow-2xl p-8 border border-gray-200 dark:border-gray-800" x-intersect="$el.classList.add('animate-slide-in-right')">
+          <h3 class="text-2xl font-bold text-brand-navy dark:text-white mb-6">{% trans "Partnership Inquiry" %}</h3>
+          
+          <form class="space-y-6" @submit.prevent="submitPartnershipForm">
+            <div class="grid md:grid-cols-2 gap-6">
+              <div>
+                <label class="block text-sm font-semibold text-brand-navy dark:text-white mb-2">{% trans "Organization Name" %}</label>
+                <input type="text" class="w-full px-4 py-3 border border-brand-navy/20 dark:border-gray-600 rounded-lg focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/20 bg-white dark:bg-gray-800 text-brand-navy dark:text-white transition-colors" x-model="form.organization">
+              </div>
+              <div>
+                <label class="block text-sm font-semibold text-brand-navy dark:text-white mb-2">{% trans "Contact Person" %}</label>
+                <input type="text" class="w-full px-4 py-3 border border-brand-navy/20 dark:border-gray-600 rounded-lg focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/20 bg-white dark:bg-gray-800 text-brand-navy dark:text-white transition-colors" x-model="form.contact">
+              </div>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+              <div>
+                <label class="block text-sm font-semibold text-brand-navy dark:text-white mb-2">{% trans "Email Address" %}</label>
+                <input type="email" class="w-full px-4 py-3 border border-brand-navy/20 dark:border-gray-600 rounded-lg focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/20 bg-white dark:bg-gray-800 text-brand-navy dark:text-white transition-colors" x-model="form.email">
+              </div>
+              <div>
+                <label class="block text-sm font-semibold text-brand-navy dark:text-white mb-2">{% trans "Partnership Interest" %}</label>
+                <select class="w-full px-4 py-3 border border-brand-navy/20 dark:border-gray-600 rounded-lg focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/20 bg-white dark:bg-gray-800 text-brand-navy dark:text-white transition-colors" x-model="form.tier">
+                  <option value="">{% trans "Select Tier" %}</option>
+                  <option value="founding">{% trans "Founding Partner" %}</option>
+                  <option value="platinum">{% trans "Platinum Partner" %}</option>
+                  <option value="gold">{% trans "Gold Partner" %}</option>
+                  <option value="silver">{% trans "Silver Partner" %}</option>
+                  <option value="supporting">{% trans "Supporting Organization" %}</option>
+                </select>
+              </div>
+            </div>
+            
+            <div>
+              <label class="block text-sm font-semibold text-brand-navy dark:text-white mb-2">{% trans "Message" %}</label>
+              <textarea rows="4" class="w-full px-4 py-3 border border-brand-navy/20 dark:border-gray-600 rounded-lg focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/20 bg-white dark:bg-gray-800 text-brand-navy dark:text-white transition-colors resize-none" x-model="form.message" placeholder="{% trans 'Tell us about your organization and partnership interests...' %}"></textarea>
+            </div>
+            
+            <button type="submit" 
+                    class="w-full bg-brand-navy dark:bg-brand-gold text-white dark:text-brand-navy font-semibold py-4 px-8 rounded-lg hover:bg-brand-navy/90 dark:hover:bg-brand-gold/90 focus:ring-2 focus:ring-brand-navy/20 dark:focus:ring-brand-gold/20 transition-all duration-300 transform hover:scale-[1.02]">
+              {% trans "Submit Partnership Inquiry" %}
+            </button>
+          </form>
+          
+          <div class="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700 text-center">
+            <p class="text-sm text-brand-navy/60 dark:text-white/60">
+              {% trans "We'll respond to partnership inquiries within 24-48 hours" %}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 </div>
+
+<style>
+  @keyframes fade-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes scale-in {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  @keyframes slide-in-left {
+    from {
+      opacity: 0;
+      transform: translateX(-30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  @keyframes slide-in-right {
+    from {
+      opacity: 0;
+      transform: translateX(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  @keyframes slide-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  .animate-fade-in-up {
+    animation: fade-in-up 0.6s ease-out forwards;
+  }
+  
+  .animate-scale-in {
+    animation: scale-in 0.8s ease-out forwards;
+  }
+  
+  .animate-slide-in-left {
+    animation: slide-in-left 0.6s ease-out forwards;
+  }
+  
+  .animate-slide-in-right {
+    animation: slide-in-right 0.6s ease-out forwards;
+  }
+  
+  .animate-slide-in-up {
+    animation: slide-in-up 0.6s ease-out forwards;
+  }
+  
+  .animate-fade-in {
+    animation: fade-in 0.6s ease-out forwards;
+  }
+</style>
+
+<script>
+  function sponsorsPage() {
+    return {
+      form: {
+        organization: '',
+        contact: '',
+        email: '',
+        tier: '',
+        message: ''
+      },
+      
+      animateCounter(element, target) {
+        const counter = element.querySelector('div');
+        const increment = target / 100;
+        let current = 0;
+        
+        const timer = setInterval(() => {
+          current += increment;
+          if (current >= target) {
+            current = target;
+            clearInterval(timer);
+          }
+          
+          // Format numbers nicely
+          if (target >= 1000000) {
+            counter.textContent = (current / 1000000).toFixed(1) + 'M+';
+          } else if (target >= 1000) {
+            counter.textContent = (current / 1000).toFixed(0) + 'K+';
+          } else {
+            counter.textContent = Math.floor(current) + (target < 100 ? '+' : '');
+          }
+        }, 20);
+      },
+      
+      submitPartnershipForm() {
+        // Here you would typically submit the form to your backend
+        alert('Thank you for your partnership inquiry! We will contact you within 24-48 hours.');
+        
+        // Reset form
+        this.form = {
+          organization: '',
+          contact: '',
+          email: '',
+          tier: '',
+          message: ''
+        };
+      }
+    }
+  }
+</script>
 {% endblock %}

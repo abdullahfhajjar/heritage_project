@@ -1,39 +1,440 @@
 {% extends 'archive/base.html' %}
 {% load static i18n %}
 
-{% block title %}{% trans "About Us" %}{% endblock %}
+{% block title %}{% trans "About Turath3D" %} - {% trans "Where Technology Meets Tradition" %}{% endblock %}
+
+{% block extra_head %}
+<style>
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+  }
+  @keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 20px rgba(201, 166, 107, 0.3); }
+    50% { box-shadow: 0 0 40px rgba(201, 166, 107, 0.6); }
+  }
+  @keyframes slide-in-left {
+    0% { transform: translateX(-100px); opacity: 0; }
+    100% { transform: translateX(0); opacity: 1; }
+  }
+  @keyframes slide-in-right {
+    0% { transform: translateX(100px); opacity: 0; }
+    100% { transform: translateX(0); opacity: 1; }
+  }
+  .float-animation { animation: float 6s ease-in-out infinite; }
+  .pulse-glow { animation: pulse-glow 3s ease-in-out infinite; }
+  .slide-in-left { animation: slide-in-left 1s ease-out; }
+  .slide-in-right { animation: slide-in-right 1s ease-out; }
+  
+  .geometric-pattern {
+    background-image: 
+      linear-gradient(45deg, rgba(201, 166, 107, 0.05) 25%, transparent 25%),
+      linear-gradient(-45deg, rgba(201, 166, 107, 0.05) 25%, transparent 25%),
+      linear-gradient(45deg, transparent 75%, rgba(201, 166, 107, 0.05) 75%),
+      linear-gradient(-45deg, transparent 75%, rgba(201, 166, 107, 0.05) 75%);
+    background-size: 40px 40px;
+    background-position: 0 0, 0 20px, 20px -20px, -20px 0px;
+  }
+  
+  .parallax-element {
+    transform: translateZ(0);
+    will-change: transform;
+  }
+  
+  .tech-showcase {
+    background: linear-gradient(135deg, rgba(139, 58, 43, 0.05) 0%, rgba(201, 166, 107, 0.05) 100%);
+  }
+  
+  .impact-counter {
+    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+</style>
+{% endblock %}
 
 {% block content %}
-<div class="max-w-4xl mx-auto px-4 py-8">
-  <h1 class="text-3xl font-bold text-brand-navy mb-6">{% trans "About This Platform" %}</h1>
-  
-  <div class="prose prose-lg max-w-none text-brand-navy/80">
-    <p class="text-xl leading-relaxed mb-6">
-      {% trans "This website aims to preserve and present Saudi Arabia's cultural heritage through digitized 3D models and accessible research tools." %}
-    </p>
+<div class="min-h-screen">
+  <!-- Hero Section with Mission Statement -->
+  <section class="relative overflow-hidden bg-gradient-to-br from-brand-navy via-brand-navy/90 to-brand-navy/80 text-white">
+    <div class="geometric-pattern absolute inset-0 opacity-30"></div>
+    <div class="relative max-w-7xl mx-auto px-4 py-20 lg:py-32">
+      <div class="text-center" x-data="{ visible: false }" x-init="setTimeout(() => visible = true, 300)">
+        <h1 class="text-5xl lg:text-7xl font-bold mb-6 leading-tight" 
+            x-show="visible" 
+            x-transition:enter="transition ease-out duration-1000"
+            x-transition:enter-start="opacity-0 transform scale-90"
+            x-transition:enter-end="opacity-100 transform scale-100">
+          {% trans "Turath3D" %}
+        </h1>
+        <p class="text-xl lg:text-3xl mb-8 text-brand-gold font-light" 
+           x-show="visible" 
+           x-transition:enter="transition ease-out duration-1000 delay-300"
+           x-transition:enter-start="opacity-0 transform translate-y-8"
+           x-transition:enter-end="opacity-100 transform translate-y-0">
+          {% trans "Where Technology Meets Tradition" %}
+        </p>
+        <p class="text-lg lg:text-xl mb-12 max-w-4xl mx-auto leading-relaxed opacity-90" 
+           x-show="visible" 
+           x-transition:enter="transition ease-out duration-1000 delay-600"
+           x-transition:enter-start="opacity-0 transform translate-y-8"
+           x-transition:enter-end="opacity-100 transform translate-y-0">
+          {% trans "Revolutionizing heritage preservation through cutting-edge photogrammetry and 3D digitization, building Saudi Arabia's eternal digital legacy for future generations." %}
+        </p>
+        <div class="inline-block pulse-glow rounded-full p-1 bg-gradient-to-r from-brand-gold to-brand-gold/80">
+          <div class="bg-brand-navy px-8 py-4 rounded-full">
+            <span class="text-lg font-semibold">{% trans "Preserving Yesterday for Tomorrow" %}</span>
+          </div>
+        </div>
+      </div>
+    </div>
     
-    <div class="grid md:grid-cols-2 gap-8 mt-8">
-      <div class="bg-white rounded-lg shadow-sm border border-brand-sand/30 p-6 hover:shadow-lg hover:-translate-y-0.5 transition">
-        <h2 class="text-xl font-semibold text-brand-navy mb-4">{% trans "Our Mission" %}</h2>
-        <p>
-          {% trans "To digitally preserve and share Saudi Arabia's rich cultural heritage through innovative 3D modeling technology, making these treasures accessible to researchers, educators, and the global community." %}
+    <!-- Floating geometric elements -->
+    <div class="absolute top-20 left-10 w-20 h-20 border-2 border-brand-gold/30 rotate-45 float-animation"></div>
+    <div class="absolute bottom-20 right-10 w-16 h-16 border-2 border-brand-gold/20 rotate-12 float-animation" style="animation-delay: -2s;"></div>
+    <div class="absolute top-1/2 left-1/4 w-12 h-12 bg-brand-gold/10 rotate-45 float-animation" style="animation-delay: -4s;"></div>
+  </section>
+
+  <!-- ★ FOUNDER SECTION - ABDULLAH HAJJAR ★ -->
+  <section class="py-20 bg-gray-50 dark:bg-gray-900">
+    <div class="max-w-4xl mx-auto px-4">
+      <!-- Simple card layout -->
+      <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden">
+        <div class="p-8">
+          <!-- Main title -->
+          <h1 class="text-4xl lg:text-5xl font-bold text-brand-navy dark:text-white mb-2">
+            {% trans "Abdullah Hajjar" %}
+          </h1>
+          <p class="text-xl text-brand-gold font-semibold mb-8">
+            {% trans "Founder & Cultural Heritage Technologist" %}
+          </p>
+          
+          <div class="flex flex-col lg:flex-row gap-8">
+            <!-- Avatar section -->
+            <div class="flex-shrink-0">
+              <div class="w-32 h-32 bg-gray-200 dark:bg-gray-700 rounded-full flex items-center justify-center mb-4">
+                <svg class="w-16 h-16 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"/>
+                </svg>
+              </div>
+              <div class="text-center">
+                <p class="text-sm text-gray-600 dark:text-gray-400">{% trans "Professional Portrait" %}</p>
+                <p class="text-sm font-medium text-gray-800 dark:text-gray-200">{% trans "Abdullah Hajjar" %}</p>
+              </div>
+            </div>
+            
+            <!-- Content section -->
+            <div class="flex-1 space-y-6">
+              <div class="space-y-4 text-gray-700 dark:text-gray-300 leading-relaxed">
+                <p>
+                  {% trans "A visionary technologist and cultural preservationist, Abdullah Hajjar founded Turath3D with a singular mission: to bridge the gap between Saudi Arabia's rich cultural heritage and cutting-edge digital technology." %}
+                </p>
+                <p>
+                  {% trans "With a background in advanced photogrammetry and 3D modeling, Abdullah recognized the urgent need to preserve our cultural artifacts for future generations. His innovative approach combines museum-quality digitization standards with accessible, interactive experiences." %}
+                </p>
+                <p>
+                  {% trans "Through Turath3D, Abdullah is building the world's most comprehensive digital archive of Saudi cultural heritage, ensuring that every object, every story, and every tradition is preserved with unprecedented detail and accuracy." %}
+                </p>
+              </div>
+              
+              <!-- Quote -->
+              <blockquote class="border-l-4 border-brand-gold pl-6 py-4 bg-gray-50 dark:bg-gray-700/50 rounded-r-lg">
+                <p class="text-lg italic text-gray-700 dark:text-gray-300">
+                  "{% trans "Every artifact tells a story. Every scan captures a moment in time. Every model we create is a gift to the future - ensuring that our cultural heritage remains alive, accessible, and eternal." %}"
+                </p>
+                <cite class="block mt-2 text-brand-gold font-semibold">— {% trans "Abdullah Hajjar" %}</cite>
+              </blockquote>
+              
+              <!-- Badge pills -->
+              <div class="flex flex-wrap gap-2 pt-4">
+                <span class="px-3 py-1 bg-brand-navy/10 text-brand-navy dark:bg-brand-navy/20 dark:text-brand-gold rounded-full text-sm font-medium">
+                  {% trans "Cultural Heritage Expert" %}
+                </span>
+                <span class="px-3 py-1 bg-brand-navy/10 text-brand-navy dark:bg-brand-navy/20 dark:text-brand-gold rounded-full text-sm font-medium">
+                  {% trans "3D Technology Specialist" %}
+                </span>
+                <span class="px-3 py-1 bg-brand-navy/10 text-brand-navy dark:bg-brand-navy/20 dark:text-brand-gold rounded-full text-sm font-medium">
+                  {% trans "Digital Preservation Pioneer" %}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Technology Showcase -->
+  <section class="tech-showcase py-20" x-data="{ inView: false }" x-intersect="inView = true">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="text-center mb-16" 
+           x-show="inView" 
+           x-transition:enter="transition ease-out duration-1000"
+           x-transition:enter-start="opacity-0 transform translate-y-8"
+           x-transition:enter-end="opacity-100 transform translate-y-0">
+        <h2 class="text-4xl lg:text-5xl font-bold text-brand-navy dark:text-white mb-6">
+          {% trans "Cutting-Edge Technology" %}
+        </h2>
+        <p class="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+          {% trans "Photogrammetry Excellence: Capturing Reality in Perfect Detail" %}
         </p>
       </div>
+
+      <div class="grid lg:grid-cols-3 gap-8">
+        <!-- Photogrammetry -->
+        <div class="group bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-105"
+             x-show="inView" 
+             x-transition:enter="transition ease-out duration-1000 delay-200"
+             x-transition:enter-start="opacity-0 transform translate-y-8"
+             x-transition:enter-end="opacity-100 transform translate-y-0">
+          <div class="w-16 h-16 bg-gradient-to-br from-brand-navy to-brand-navy/80 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/>
+            </svg>
+          </div>
+          <h3 class="text-2xl font-bold text-brand-navy dark:text-white mb-4">
+            {% trans "Advanced Photogrammetry" %}
+          </h3>
+          <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+            {% trans "State-of-the-art photogrammetric techniques capture thousands of high-resolution images, creating millimeter-accurate 3D reconstructions with photorealistic textures." %}
+          </p>
+        </div>
+
+        <!-- 3D Processing -->
+        <div class="group bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-105"
+             x-show="inView" 
+             x-transition:enter="transition ease-out duration-1000 delay-400"
+             x-transition:enter-start="opacity-0 transform translate-y-8"
+             x-transition:enter-end="opacity-100 transform translate-y-0">
+          <div class="w-16 h-16 bg-gradient-to-br from-brand-gold to-brand-gold/80 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/>
+            </svg>
+          </div>
+          <h3 class="text-2xl font-bold text-brand-navy dark:text-white mb-4">
+            {% trans "Museum-Quality Processing" %}
+          </h3>
+          <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+            {% trans "Our advanced processing pipeline ensures every 3D model meets museum archival standards, with complete geometric accuracy and color-calibrated textures." %}
+          </p>
+        </div>
+
+        <!-- Digital Preservation -->
+        <div class="group bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-105"
+             x-show="inView" 
+             x-transition:enter="transition ease-out duration-1000 delay-600"
+             x-transition:enter-start="opacity-0 transform translate-y-8"
+             x-transition:enter-end="opacity-100 transform translate-y-0">
+          <div class="w-16 h-16 bg-gradient-to-br from-brand-palm to-brand-palm/80 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+            </svg>
+          </div>
+          <h3 class="text-2xl font-bold text-brand-navy dark:text-white mb-4">
+            {% trans "Eternal Digital Legacy" %}
+          </h3>
+          <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+            {% trans "Each digitized artifact is preserved in multiple formats with comprehensive metadata, ensuring accessibility and longevity for centuries to come." %}
+          </p>
+        </div>
+      </div>
+
+      <!-- Process Workflow -->
+      <div class="mt-20 bg-gradient-to-r from-brand-navy/5 to-brand-gold/5 rounded-3xl p-8 lg:p-12">
+        <h3 class="text-3xl font-bold text-center text-brand-navy dark:text-white mb-12">
+          {% trans "Our Digital Preservation Process" %}
+        </h3>
+        
+        <div class="grid lg:grid-cols-4 gap-8">
+          <div class="text-center group">
+            <div class="w-20 h-20 bg-brand-navy rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+              <span class="text-2xl font-bold text-white">1</span>
+            </div>
+            <h4 class="font-bold text-brand-navy dark:text-white mb-2">{% trans "Documentation" %}</h4>
+            <p class="text-sm text-gray-600 dark:text-gray-300">{% trans "Detailed catalog and historical research" %}</p>
+          </div>
+          
+          <div class="text-center group">
+            <div class="w-20 h-20 bg-brand-gold rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+              <span class="text-2xl font-bold text-white">2</span>
+            </div>
+            <h4 class="font-bold text-brand-navy dark:text-white mb-2">{% trans "Capture" %}</h4>
+            <p class="text-sm text-gray-600 dark:text-gray-300">{% trans "High-resolution photogrammetry scanning" %}</p>
+          </div>
+          
+          <div class="text-center group">
+            <div class="w-20 h-20 bg-brand-palm rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+              <span class="text-2xl font-bold text-white">3</span>
+            </div>
+            <h4 class="font-bold text-brand-navy dark:text-white mb-2">{% trans "Processing" %}</h4>
+            <p class="text-sm text-gray-600 dark:text-gray-300">{% trans "3D reconstruction and optimization" %}</p>
+          </div>
+          
+          <div class="text-center group">
+            <div class="w-20 h-20 bg-brand-charcoal rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+              <span class="text-2xl font-bold text-white">4</span>
+            </div>
+            <h4 class="font-bold text-brand-navy dark:text-white mb-2">{% trans "Preservation" %}</h4>
+            <p class="text-sm text-gray-600 dark:text-gray-300">{% trans "Digital archiving and public access" %}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Impact & Achievements -->
+  <section class="py-20 bg-brand-navy text-white relative overflow-hidden">
+    <div class="geometric-pattern absolute inset-0 opacity-10"></div>
+    <div class="relative max-w-7xl mx-auto px-4" x-data="{ inView: false, counters: { objects: 0, regions: 0, researchers: 0, downloads: 0 } }" x-intersect="inView = true">
       
-      <div class="bg-white rounded-lg shadow-sm border border-brand-sand/30 p-6 hover:shadow-lg hover:-translate-y-0.5 transition">
-        <h2 class="text-xl font-semibold text-brand-navy mb-4">{% trans "Our Vision" %}</h2>
-        <p>
-          {% trans "To become the leading digital repository of Saudi cultural artifacts, fostering education, research, and cultural appreciation for future generations." %}
+      <div class="text-center mb-16"
+           x-show="inView" 
+           x-transition:enter="transition ease-out duration-1000"
+           x-transition:enter-start="opacity-0 transform translate-y-8"
+           x-transition:enter-end="opacity-100 transform translate-y-0">
+        <h2 class="text-4xl lg:text-5xl font-bold mb-6">{% trans "Global Impact" %}</h2>
+        <p class="text-xl text-brand-gold max-w-3xl mx-auto">
+          {% trans "Building the world's most comprehensive digital heritage repository" %}
         </p>
       </div>
+
+      <!-- Impact Statistics -->
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+        <div class="text-center impact-counter"
+             x-show="inView"
+             x-init="$watch('inView', value => { if (value) { let start = 0; const end = 500; const duration = 2000; const increment = end / (duration / 16); const timer = setInterval(() => { start += increment; counters.objects = Math.floor(start); if (start >= end) { counters.objects = end; clearInterval(timer); } }, 16); } })">
+          <div class="text-4xl lg:text-5xl font-bold text-brand-gold mb-2" x-text="counters.objects + '+'">500+</div>
+          <p class="text-lg">{% trans "Artifacts Digitized" %}</p>
+        </div>
+        
+        <div class="text-center impact-counter"
+             x-show="inView"
+             x-init="$watch('inView', value => { if (value) { setTimeout(() => { let start = 0; const end = 15; const duration = 2000; const increment = end / (duration / 16); const timer = setInterval(() => { start += increment; counters.regions = Math.floor(start); if (start >= end) { counters.regions = end; clearInterval(timer); } }, 16); }, 200); } })">
+          <div class="text-4xl lg:text-5xl font-bold text-brand-gold mb-2" x-text="counters.regions">15</div>
+          <p class="text-lg">{% trans "Saudi Regions" %}</p>
+        </div>
+        
+        <div class="text-center impact-counter"
+             x-show="inView"
+             x-init="$watch('inView', value => { if (value) { setTimeout(() => { let start = 0; const end = 1000; const duration = 2000; const increment = end / (duration / 16); const timer = setInterval(() => { start += increment; counters.researchers = Math.floor(start); if (start >= end) { counters.researchers = end; clearInterval(timer); } }, 16); }, 400); } })">
+          <div class="text-4xl lg:text-5xl font-bold text-brand-gold mb-2" x-text="counters.researchers + '+'">1000+</div>
+          <p class="text-lg">{% trans "Global Researchers" %}</p>
+        </div>
+        
+        <div class="text-center impact-counter"
+             x-show="inView"
+             x-init="$watch('inView', value => { if (value) { setTimeout(() => { let start = 0; const end = 50000; const duration = 2000; const increment = end / (duration / 16); const timer = setInterval(() => { start += increment; counters.downloads = Math.floor(start); if (start >= end) { counters.downloads = end; clearInterval(timer); } }, 16); }, 600); } })">
+          <div class="text-4xl lg:text-5xl font-bold text-brand-gold mb-2" x-text="counters.downloads + '+'">50000+</div>
+          <p class="text-lg">{% trans "Model Downloads" %}</p>
+        </div>
+      </div>
+
+      <!-- Achievement Timeline -->
+      <div class="bg-white/5 rounded-3xl p-8 lg:p-12">
+        <h3 class="text-3xl font-bold text-center mb-12">{% trans "Innovation Timeline" %}</h3>
+        
+        <div class="space-y-8">
+          <div class="flex items-center gap-6 group">
+            <div class="w-4 h-4 bg-brand-gold rounded-full group-hover:scale-150 transition-transform flex-shrink-0"></div>
+            <div class="bg-white/10 rounded-lg p-4 flex-grow group-hover:bg-white/20 transition-colors">
+              <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between">
+                <div>
+                  <h4 class="font-bold text-lg">{% trans "Platform Foundation" %}</h4>
+                  <p class="text-brand-gold/80">{% trans "Established cutting-edge photogrammetry standards" %}</p>
+                </div>
+                <span class="text-brand-gold font-semibold mt-2 lg:mt-0">{% trans "2023" %}</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="flex items-center gap-6 group">
+            <div class="w-4 h-4 bg-brand-gold rounded-full group-hover:scale-150 transition-transform flex-shrink-0"></div>
+            <div class="bg-white/10 rounded-lg p-4 flex-grow group-hover:bg-white/20 transition-colors">
+              <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between">
+                <div>
+                  <h4 class="font-bold text-lg">{% trans "National Heritage Partnership" %}</h4>
+                  <p class="text-brand-gold/80">{% trans "Collaborating with museums and cultural institutions" %}</p>
+                </div>
+                <span class="text-brand-gold font-semibold mt-2 lg:mt-0">{% trans "2024" %}</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="flex items-center gap-6 group">
+            <div class="w-4 h-4 bg-brand-gold rounded-full group-hover:scale-150 transition-transform flex-shrink-0"></div>
+            <div class="bg-white/10 rounded-lg p-4 flex-grow group-hover:bg-white/20 transition-colors">
+              <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between">
+                <div>
+                  <h4 class="font-bold text-lg">{% trans "Global Expansion" %}</h4>
+                  <p class="text-brand-gold/80">{% trans "International recognition and research partnerships" %}</p>
+                </div>
+                <span class="text-brand-gold font-semibold mt-2 lg:mt-0">{% trans "2025" %}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    
-    <div class="mt-8 bg-brand-sand/20 rounded-lg p-6">
-      <h2 class="text-xl font-semibold text-brand-navy mb-4">{% trans "Technology & Innovation" %}</h2>
-      <p>
-        {% trans "Our platform utilizes cutting-edge 3D scanning and modeling technology to create high-fidelity digital representations of cultural artifacts. Each object is carefully documented with detailed metadata, providing context and historical significance." %}
-      </p>
+  </section>
+
+  <!-- Call to Action -->
+  <section class="py-20 bg-gradient-to-r from-brand-sand to-brand-gold/20">
+    <div class="max-w-4xl mx-auto text-center px-4" x-data="{ inView: false }" x-intersect="inView = true">
+      <div x-show="inView" 
+           x-transition:enter="transition ease-out duration-1000"
+           x-transition:enter-start="opacity-0 transform translate-y-8"
+           x-transition:enter-end="opacity-100 transform translate-y-0">
+        <h2 class="text-4xl lg:text-5xl font-bold text-brand-navy mb-6">
+          {% trans "Join the Heritage Revolution" %}
+        </h2>
+        <p class="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
+          {% trans "Every Object Tells a Story. Help us preserve Saudi Arabia's cultural heritage for future generations through the power of advanced 3D technology." %}
+        </p>
+        
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="{% url 'heritage-list' %}" class="inline-flex items-center px-8 py-4 bg-brand-navy text-white rounded-full font-semibold hover:bg-brand-navy/90 hover:scale-105 transition-all shadow-lg">
+            {% trans "Explore Collection" %}
+            <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+            </svg>
+          </a>
+          <a href="#contact" class="inline-flex items-center px-8 py-4 border-2 border-brand-navy text-brand-navy rounded-full font-semibold hover:bg-brand-navy hover:text-white hover:scale-105 transition-all">
+            {% trans "Collaborate With Us" %}
+          </a>
+        </div>
+      </div>
     </div>
-  </div>
+  </section>
 </div>
+
+<script>
+// Enhanced scroll animations
+window.addEventListener('scroll', () => {
+  const parallaxElements = document.querySelectorAll('.parallax-element');
+  const scrolled = window.pageYOffset;
+  
+  parallaxElements.forEach(element => {
+    const rate = scrolled * -0.5;
+    element.style.transform = `translateY(${rate}px)`;
+  });
+});
+
+// Intersection Observer for enhanced animations
+const observerOptions = {
+  threshold: 0.1,
+  rootMargin: '0px 0px -50px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.animationPlayState = 'running';
+    }
+  });
+}, observerOptions);
+
+document.querySelectorAll('[class*="slide-in"]').forEach(el => {
+  el.style.animationPlayState = 'paused';
+  observer.observe(el);
+});
+</script>
 {% endblock %}
