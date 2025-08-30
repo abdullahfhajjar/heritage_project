@@ -1,0 +1,483 @@
+/* ========================================
+   TURATH3D 8-BIT TRANSFORMATION
+   Main Override Stylesheet
+   ======================================== */
+
+/* Import design tokens and components */
+@import url('design-tokens.css');
+@import url('8bit-components.css');
+
+/* ================================
+   GLOBAL OVERRIDES
+   ================================ */
+
+/* Reset smooth transitions globally */
+* {
+  transition: none !important;
+  animation-timing-function: steps(4) !important;
+  text-shadow: none !important;
+}
+
+/* Remove all rounded corners */
+* {
+  border-radius: 0 !important;
+}
+
+/* Remove all gradients */
+[class*="gradient"],
+[class*="bg-gradient"] {
+  background-image: none !important;
+  background: var(--color-bg-primary) !important;
+}
+
+/* ================================
+   BODY & LAYOUT
+   ================================ */
+
+body {
+  font-family: var(--font-mono) !important;
+  background-color: var(--color-archive-paper) !important;
+  color: var(--color-archive-ink) !important;
+  font-size: var(--text-base);
+  line-height: var(--leading-base);
+  background-image: 
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 1px,
+      rgba(44, 62, 80, 0.03) 1px,
+      rgba(44, 62, 80, 0.03) 2px
+    ) !important;
+}
+
+/* Dark mode body */
+.dark body {
+  background-color: var(--color-bg-primary) !important;
+  color: var(--color-text-primary) !important;
+  background-image: 
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 1px,
+      rgba(232, 226, 213, 0.02) 1px,
+      rgba(232, 226, 213, 0.02) 2px
+    ) !important;
+}
+
+/* ================================
+   NAVIGATION OVERRIDE
+   ================================ */
+
+header {
+  background: var(--color-archive-ink) !important;
+  border-bottom: var(--border-width-4) solid var(--color-archive-border) !important;
+  box-shadow: var(--shadow-pixel-lg) !important;
+}
+
+.dark header {
+  background: var(--color-bg-elevated) !important;
+  border-color: var(--color-archive-border) !important;
+}
+
+/* Navigation links - ensure high visibility */
+header a {
+  font-family: var(--font-mono) !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  font-size: var(--text-sm) !important;
+  position: relative;
+  color: white !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Ensure logo and text are visible in light mode */
+header .flex.items-center span {
+  color: white !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Language selector visibility - ensure always visible */
+header button[type="button"] {
+  color: white !important;
+  background-color: rgba(255, 255, 255, 0.15) !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Sign in/Sign up buttons visibility - ensure always visible */
+header .flex.items-center.space-x-3 a {
+  color: white !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+header .flex.items-center.space-x-3 a:last-child {
+  border-color: rgba(255, 255, 255, 0.4) !important;
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+header a:hover {
+  background-color: rgba(255, 255, 255, 0.2) !important;
+  color: white !important;
+  padding: 4px 8px !important;
+  margin: -4px -8px !important;
+  opacity: 1 !important;
+}
+
+/* Remove logo animations */
+header img {
+  transition: none !important;
+  transform: none !important;
+  filter: contrast(1.2) !important;
+  image-rendering: pixelated !important;
+}
+
+/* ================================
+   TYPOGRAPHY OVERRIDES
+   ================================ */
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-mono) !important;
+  text-transform: uppercase !important;
+  letter-spacing: -0.02em !important;
+  color: var(--color-text-primary) !important;
+  text-shadow: none !important;
+  text-decoration: none !important;
+}
+
+/* Special handling for hero titles to ensure visibility */
+.hero-title {
+  color: #1A1A1A !important;
+  text-shadow: none !important;
+  text-decoration: none !important;
+}
+
+.dark .hero-title {
+  color: var(--color-text-primary) !important;
+  text-shadow: none !important;
+  text-decoration: none !important;
+}
+
+h1 { font-size: var(--text-3xl) !important; }
+h2 { font-size: var(--text-2xl) !important; }
+h3 { font-size: var(--text-xl) !important; }
+h4 { font-size: var(--text-lg) !important; }
+h5 { font-size: var(--text-base) !important; }
+h6 { font-size: var(--text-sm) !important; }
+
+/* Paragraph styles */
+p {
+  max-width: 65ch;
+  line-height: var(--leading-relaxed);
+}
+
+/* ================================
+   BUTTON OVERRIDES
+   ================================ */
+
+button,
+.btn,
+[class*="btn-"],
+a[class*="bg-"] {
+  font-family: var(--font-mono) !important;
+  text-transform: uppercase !important;
+  border: var(--border-width-2) solid var(--color-archive-border) !important;
+  box-shadow: var(--shadow-pixel) !important;
+  background-image: none !important;
+  transition: none !important;
+  letter-spacing: 0.05em !important;
+}
+
+button:hover,
+.btn:hover,
+[class*="btn-"]:hover,
+a[class*="bg-"]:hover {
+  transform: translate(-2px, -2px) !important;
+  box-shadow: var(--shadow-pixel-lg) !important;
+}
+
+button:active,
+.btn:active,
+[class*="btn-"]:active {
+  transform: translate(0, 0) !important;
+  box-shadow: 1px 1px 0 var(--color-archive-border) !important;
+}
+
+/* ================================
+   CARD OVERRIDES
+   ================================ */
+
+[class*="rounded"],
+[class*="shadow"] {
+  border-radius: 0 !important;
+  box-shadow: var(--shadow-pixel) !important;
+}
+
+.bg-white,
+[class*="bg-white"] {
+  background-color: var(--color-bg-elevated) !important;
+  border: var(--border-width-2) solid var(--color-archive-border) !important;
+}
+
+.dark .bg-white,
+.dark [class*="bg-white"] {
+  background-color: var(--color-bg-elevated) !important;
+  border-color: var(--color-archive-border) !important;
+}
+
+/* ================================
+   FORM OVERRIDES
+   ================================ */
+
+input,
+textarea,
+select {
+  font-family: var(--font-mono) !important;
+  background-color: var(--color-bg-primary) !important;
+  border: var(--border-width-2) solid var(--color-archive-border) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  transition: none !important;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: var(--border-width-2) solid var(--color-archive-highlight) !important;
+  outline-offset: 0 !important;
+  border-color: var(--color-archive-highlight) !important;
+}
+
+/* ================================
+   HERO SECTION TRANSFORMATION
+   ================================ */
+
+/* Hero background */
+.min-h-screen {
+  background: var(--color-archive-paper) !important;
+  position: relative;
+}
+
+.min-h-screen::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 40px,
+      rgba(44, 62, 80, 0.05) 40px,
+      rgba(44, 62, 80, 0.05) 41px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 40px,
+      rgba(44, 62, 80, 0.05) 40px,
+      rgba(44, 62, 80, 0.05) 41px
+    );
+  pointer-events: none;
+}
+
+/* Remove floating elements */
+.animate-pulse {
+  animation: none !important;
+  display: none !important;
+}
+
+/* ================================
+   SEARCH BAR TRANSFORMATION
+   ================================ */
+
+input[type="text"],
+input[type="search"] {
+  background: var(--color-bg-primary) !important;
+  border: var(--border-width-2) solid var(--color-archive-border) !important;
+  font-family: var(--font-mono) !important;
+  padding: var(--space-1) var(--space-2) !important;
+  font-size: var(--text-base) !important;
+}
+
+/* Search button */
+button[type="submit"] {
+  background: var(--color-archive-highlight) !important;
+  color: var(--color-archive-ink) !important;
+  border: var(--border-width-2) solid var(--color-archive-border) !important;
+  font-family: var(--font-mono) !important;
+  text-transform: uppercase !important;
+  font-weight: var(--font-bold) !important;
+  padding: var(--space-1) var(--space-2) !important;
+}
+
+/* ================================
+   COLLECTION CARDS
+   ================================ */
+
+.group {
+  border: var(--border-width-2) solid var(--color-archive-border) !important;
+  background: var(--color-bg-elevated) !important;
+  transition: none !important;
+  position: relative;
+}
+
+.group::before {
+  content: "╔═══════════╗";
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  background: var(--color-bg-elevated);
+  padding: 0 4px;
+}
+
+.group:hover {
+  transform: translate(-2px, -2px) !important;
+  box-shadow: var(--shadow-pixel-lg) !important;
+}
+
+/* ================================
+   LANGUAGE SWITCHER
+   ================================ */
+
+.flag {
+  image-rendering: pixelated !important;
+  border: var(--border-width-1) solid var(--color-archive-border) !important;
+}
+
+/* Dropdown menus */
+[x-show] {
+  border: var(--border-width-2) solid var(--color-archive-border) !important;
+  box-shadow: var(--shadow-pixel-lg) !important;
+  background: var(--color-bg-elevated) !important;
+}
+
+/* ================================
+   DARK MODE TOGGLE
+   ================================ */
+
+button[x-data*="darkMode"] {
+  border: var(--border-width-2) solid var(--color-archive-border) !important;
+  background: var(--color-archive-accent) !important;
+  padding: var(--space-1) !important;
+}
+
+/* ================================
+   FOOTER TRANSFORMATION
+   ================================ */
+
+footer {
+  background: var(--color-archive-ink) !important;
+  border-top: var(--border-width-4) solid var(--color-archive-border) !important;
+  color: var(--color-text-inverse) !important;
+  font-family: var(--font-mono) !important;
+  font-size: var(--text-sm) !important;
+}
+
+footer::before {
+  content: "═══════════════════════════════════════════════════════════════";
+  display: block;
+  text-align: center;
+  color: var(--color-archive-accent);
+  margin-bottom: var(--space-2);
+  overflow: hidden;
+}
+
+/* ================================
+   LOADING STATES
+   ================================ */
+
+.loading,
+[class*="animate-"] {
+  animation: pixel-pulse 500ms steps(2) infinite !important;
+}
+
+/* ================================
+   SCROLL INDICATOR
+   ================================ */
+
+.animate-bounce {
+  animation: none !important;
+  position: relative;
+}
+
+.animate-bounce::after {
+  content: "▼ SCROLL ▼";
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-archive-accent);
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: pixel-pulse 1s steps(2) infinite;
+}
+
+/* ================================
+   ASCII ART DECORATIONS
+   ================================ */
+
+section::before {
+  content: "┌─────────────────────────────────────────────────────────────┐";
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  text-align: center;
+  margin-bottom: var(--space-2);
+  overflow: hidden;
+  opacity: 0.3;
+}
+
+section::after {
+  content: "└─────────────────────────────────────────────────────────────┘";
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  text-align: center;
+  margin-top: var(--space-2);
+  overflow: hidden;
+  opacity: 0.3;
+}
+
+/* ================================
+   RESPONSIVE ADJUSTMENTS
+   ================================ */
+
+@media (max-width: 768px) {
+  :root {
+    --text-3xl: 1.25rem;
+    --text-2xl: 1.125rem;
+    --text-xl: 1rem;
+  }
+  
+  body {
+    font-size: var(--text-sm);
+  }
+}
+
+/* ================================
+   PRINT STYLES
+   ================================ */
+
+@media print {
+  body {
+    background: white !important;
+    color: black !important;
+    font-family: 'Times New Roman', serif !important;
+  }
+  
+  header, footer, .animate-bounce, [x-data] {
+    display: none !important;
+  }
+}

@@ -1,0 +1,255 @@
+/* ========================================
+   TURATH3D 8-BIT DESIGN TOKENS
+   Digital Archive Sanctuary Design System
+   ======================================== */
+
+:root {
+  /* ================================
+     COLORS - Archive Paper & Ink
+     ================================ */
+  
+  /* Primary Colors - Timeless Archive Palette */
+  --color-archive-paper: #F4F1E8;      /* Main background - aged paper */
+  --color-archive-ink: #1A1A1A;        /* Primary text - very dark for contrast */
+  --color-archive-accent: #6B5B47;     /* Accent - darker aged gold/bronze */
+  --color-archive-highlight: #B8860B;  /* Highlights - darker manuscript gold */
+  --color-archive-border: #3A3A3A;     /* Borders - ink lines */
+  
+  /* Semantic Colors */
+  --color-text-primary: var(--color-archive-ink);
+  --color-text-secondary: #1A1A1A;
+  --color-text-muted: #4A4A4A;
+  --color-text-inverse: #FFFFFF;
+  
+  --color-bg-primary: var(--color-archive-paper);
+  --color-bg-secondary: #FAFAF8;
+  --color-bg-tertiary: #E8E5DC;
+  --color-bg-elevated: #FFFFFF;
+  
+  /* 8-Bit Specific Colors */
+  --color-pixel-green: #4CAF50;
+  --color-pixel-red: #F44336;
+  --color-pixel-blue: #2196F3;
+  --color-pixel-yellow: #FFC107;
+  
+  /* ================================
+     TYPOGRAPHY - Monospace Academic
+     ================================ */
+  
+  /* Font Families */
+  --font-mono: 'IBM Plex Mono', 'Courier New', monospace;
+  --font-arabic: 'IBM Plex Sans Arabic', 'Noto Kufi Arabic', sans-serif;
+  --font-system: system-ui, -apple-system, sans-serif;
+  
+  /* Font Sizes - 8-bit Constrained */
+  --text-xs: 0.625rem;    /* 10px */
+  --text-sm: 0.75rem;     /* 12px */
+  --text-base: 0.875rem;  /* 14px */
+  --text-lg: 1rem;        /* 16px */
+  --text-xl: 1.125rem;    /* 18px */
+  --text-2xl: 1.25rem;    /* 20px */
+  --text-3xl: 1.5rem;     /* 24px MAX */
+  
+  /* Font Weights */
+  --font-normal: 400;
+  --font-medium: 500;
+  --font-bold: 700;
+  
+  /* Line Heights */
+  --leading-tight: 1.2;
+  --leading-base: 1.5;
+  --leading-relaxed: 1.75;
+  
+  /* ================================
+     SPACING - 8px Grid System
+     ================================ */
+  
+  --space-0: 0;
+  --space-1: 0.5rem;   /* 8px */
+  --space-2: 1rem;     /* 16px */
+  --space-3: 1.5rem;   /* 24px */
+  --space-4: 2rem;     /* 32px */
+  --space-5: 2.5rem;   /* 40px */
+  --space-6: 3rem;     /* 48px */
+  --space-8: 4rem;     /* 64px */
+  --space-10: 5rem;    /* 80px */
+  --space-12: 6rem;    /* 96px */
+  --space-16: 8rem;    /* 128px */
+  
+  /* ================================
+     BORDERS - Pixel Perfect
+     ================================ */
+  
+  --border-width-1: 1px;
+  --border-width-2: 2px;
+  --border-width-4: 4px;
+  
+  --border-radius-none: 0;
+  --border-radius-sm: 2px;
+  --border-radius-base: 4px;
+  --border-radius-lg: 4px;  /* MAX 4px for 8-bit aesthetic */
+  
+  /* ================================
+     SHADOWS - Retro Game Style
+     ================================ */
+  
+  --shadow-pixel: 2px 2px 0 var(--color-archive-border);
+  --shadow-pixel-lg: 4px 4px 0 var(--color-archive-border);
+  --shadow-pixel-hover: 3px 3px 0 var(--color-archive-accent);
+  --shadow-none: none;
+  
+  /* ================================
+     ANIMATIONS - Quick & Snappy
+     ================================ */
+  
+  --duration-instant: 0ms;
+  --duration-fast: 100ms;
+  --duration-base: 150ms;  /* MAX duration */
+  
+  --ease-linear: linear;
+  --ease-step: steps(4);
+  
+  /* ================================
+     Z-INDEX - Layer Management
+     ================================ */
+  
+  --z-base: 0;
+  --z-dropdown: 10;
+  --z-sticky: 20;
+  --z-modal: 30;
+  --z-popover: 40;
+  --z-tooltip: 50;
+  
+  /* ================================
+     BREAKPOINTS
+     ================================ */
+  
+  --screen-sm: 640px;
+  --screen-md: 768px;
+  --screen-lg: 1024px;
+  --screen-xl: 1280px;
+  --screen-2xl: 1536px;
+}
+
+/* ================================
+   DARK MODE TOKENS
+   ================================ */
+
+:root.dark {
+  /* Dark Archive Theme - Like viewing manuscripts by candlelight */
+  --color-archive-paper: #0F0F0F;
+  --color-archive-ink: #FFFFFF;
+  --color-archive-accent: #C9A66B;
+  --color-archive-highlight: #FFD700;
+  --color-archive-border: #4A4A4A;
+  
+  --color-text-primary: #FFFFFF;
+  --color-text-secondary: #CCCCCC;
+  --color-text-muted: #999999;
+  --color-text-inverse: #0F0F0F;
+  
+  --color-bg-primary: #0F0F0F;
+  --color-bg-secondary: #1A1A1A;
+  --color-bg-tertiary: #2A2A2A;
+  --color-bg-elevated: #333333;
+  
+  /* Shadows in dark mode */
+  --shadow-pixel: 2px 2px 0 rgba(0, 0, 0, 0.5);
+  --shadow-pixel-lg: 4px 4px 0 rgba(0, 0, 0, 0.5);
+  --shadow-pixel-hover: 3px 3px 0 var(--color-archive-highlight);
+}
+
+/* ================================
+   UTILITY CLASSES
+   ================================ */
+
+/* Remove all smooth transitions */
+* {
+  transition-duration: var(--duration-instant) !important;
+  transition-timing-function: var(--ease-step) !important;
+}
+
+/* Enforce pixel-perfect borders */
+*,
+*::before,
+*::after {
+  border-radius: 0 !important;
+}
+
+/* ASCII Art Placeholder */
+.ascii-decoration::before {
+  content: "╔════════════════════════════════════╗";
+  display: block;
+  font-family: var(--font-mono);
+  color: var(--color-text-muted);
+  font-size: var(--text-xs);
+  line-height: 1;
+}
+
+.ascii-decoration::after {
+  content: "╚════════════════════════════════════╝";
+  display: block;
+  font-family: var(--font-mono);
+  color: var(--color-text-muted);
+  font-size: var(--text-xs);
+  line-height: 1;
+}
+
+/* 8-bit Loading Animation */
+@keyframes pixel-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.pixel-loading {
+  animation: pixel-pulse 500ms steps(2) infinite;
+}
+
+/* Cursor styles for 8-bit feel */
+button,
+a,
+[role="button"] {
+  cursor: pointer;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+/* Disable all gradients */
+* {
+  background-image: none !important;
+}
+
+/* Force monospace for headers */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-mono) !important;
+  font-weight: var(--font-bold);
+  letter-spacing: -0.02em;
+}
+
+/* Pixelated images */
+img {
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+/* 8-bit style scrollbar */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-archive-border);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-archive-accent);
+  border: 1px solid var(--color-archive-border);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-archive-highlight);
+}

@@ -1,0 +1,456 @@
+/* ========================================
+   HOMEPAGE 8-BIT TRANSFORMATION
+   Digital Archive Sanctuary Homepage
+   ======================================== */
+
+/* ================================
+   HERO SECTION TRANSFORMATION
+   ================================ */
+
+.hero-archive {
+  background: var(--color-archive-paper) !important;
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-8) var(--space-2);
+}
+
+.hero-archive::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 63px,
+      rgba(44, 62, 80, 0.08) 63px,
+      rgba(44, 62, 80, 0.08) 64px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 47px,
+      rgba(44, 62, 80, 0.08) 47px,
+      rgba(44, 62, 80, 0.08) 48px
+    );
+  pointer-events: none;
+}
+
+/* Dark mode hero */
+.dark .hero-archive {
+  background: var(--color-bg-primary) !important;
+}
+
+.dark .hero-archive::before {
+  background-image: 
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 63px,
+      rgba(232, 226, 213, 0.05) 63px,
+      rgba(232, 226, 213, 0.05) 64px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 47px,
+      rgba(232, 226, 213, 0.05) 47px,
+      rgba(232, 226, 213, 0.05) 48px
+    );
+}
+
+/* ASCII Art Frame around Hero */
+.hero-frame {
+  position: relative;
+  max-width: 1024px;
+  margin: 0 auto;
+  padding: var(--space-6);
+  border: var(--border-width-4) solid var(--color-archive-border);
+  background: var(--color-bg-elevated);
+  box-shadow: var(--shadow-pixel-lg);
+}
+
+.hero-frame::before {
+  content: "╔═══════════════════════════════════════════════════════════════╗\A│                TURATH3D DIGITAL ARCHIVE                      │\A╠═══════════════════════════════════════════════════════════════╣";
+  position: absolute;
+  top: -24px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-archive-accent);
+  background: var(--color-bg-elevated);
+  padding: 0 var(--space-1);
+  white-space: pre;
+  line-height: 1.2;
+  text-align: center;
+  z-index: 1;
+}
+
+.hero-frame::after {
+  content: "╚═══════════════════════════════════════════════════════════════╝";
+  position: absolute;
+  bottom: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-archive-accent);
+  background: var(--color-bg-elevated);
+  padding: 0 var(--space-1);
+  z-index: 1;
+}
+
+/* ================================
+   HERO CONTENT STYLING
+   ================================ */
+
+.hero-title {
+  font-family: var(--font-mono) !important;
+  font-size: var(--text-3xl) !important;
+  font-weight: var(--font-bold) !important;
+  text-align: center;
+  color: #1A1A1A !important;
+  margin-bottom: var(--space-3);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  position: relative;
+  text-shadow: none !important;
+}
+
+.hero-title::before {
+  content: "▣ ";
+  color: var(--color-archive-highlight);
+  font-size: 1.2em;
+}
+
+.hero-subtitle {
+  font-family: var(--font-mono) !important;
+  font-size: var(--text-lg) !important;
+  color: #4A4A4A !important;
+  text-align: center;
+  margin-bottom: var(--space-6);
+  line-height: var(--leading-relaxed);
+  max-width: 60ch;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ================================
+   HERO BUTTONS - ARCHIVE STYLE
+   ================================ */
+
+.hero-buttons {
+  display: flex;
+  gap: var(--space-3);
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: var(--space-6);
+}
+
+.btn-archive {
+  font-family: var(--font-mono) !important;
+  font-size: var(--text-base) !important;
+  font-weight: var(--font-bold) !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  padding: var(--space-2) var(--space-4) !important;
+  border: var(--border-width-2) solid var(--color-archive-border) !important;
+  background: var(--color-bg-elevated) !important;
+  color: var(--color-text-primary) !important;
+  text-decoration: none !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: var(--space-1) !important;
+  transition: none !important;
+  position: relative;
+  box-shadow: var(--shadow-pixel);
+}
+
+.btn-archive-primary {
+  background: var(--color-archive-highlight) !important;
+  color: var(--color-archive-ink) !important;
+}
+
+.btn-archive-secondary {
+  background: var(--color-archive-accent) !important;
+  color: white !important;
+}
+
+.btn-archive:hover {
+  transform: translate(-2px, -2px) !important;
+  box-shadow: var(--shadow-pixel-lg) !important;
+}
+
+.btn-archive:active {
+  transform: translate(0, 0) !important;
+  box-shadow: 1px 1px 0 var(--color-archive-border) !important;
+}
+
+/* ================================
+   ARCHIVE STATISTICS
+   ================================ */
+
+.archive-stats {
+  text-align: center;
+  position: relative;
+  margin-top: var(--space-4);
+  padding: var(--space-3);
+  border-top: var(--border-width-2) solid var(--color-archive-border);
+  border-bottom: var(--border-width-2) solid var(--color-archive-border);
+}
+
+.archive-stats::before {
+  content: "═══════════════════════════════════";
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-archive-accent);
+  margin-bottom: var(--space-2);
+  overflow: hidden;
+}
+
+.archive-stats::after {
+  content: "═══════════════════════════════════";
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-archive-accent);
+  margin-top: var(--space-2);
+  overflow: hidden;
+}
+
+.stats-text {
+  font-family: var(--font-mono) !important;
+  font-size: var(--text-base) !important;
+  color: #1A1A1A !important;
+  line-height: var(--leading-base);
+}
+
+.stats-number {
+  color: #B8860B !important;
+  font-weight: var(--font-bold) !important;
+}
+
+/* ================================
+   REMOVE ANIMATIONS & GRADIENTS
+   ================================ */
+
+/* Remove all Alpine.js animations from hero */
+.hero-archive * {
+  opacity: 1 !important;
+  transform: none !important;
+  animation: none !important;
+  transition: none !important;
+}
+
+/* Remove gradient backgrounds */
+.hero-archive [class*="gradient"],
+.hero-archive [class*="bg-gradient"] {
+  background: var(--color-bg-primary) !important;
+  background-image: none !important;
+}
+
+/* Remove floating animation elements */
+.hero-archive .animate-pulse,
+.hero-archive [style*="animation-delay"] {
+  display: none !important;
+}
+
+/* Remove blur effects */
+.hero-archive [class*="blur"] {
+  filter: none !important;
+}
+
+/* Remove logo animations and effects */
+.hero-archive img {
+  transition: none !important;
+  transform: none !important;
+  filter: contrast(1.2) brightness(0.95) !important;
+  image-rendering: pixelated !important;
+}
+
+.hero-archive .group:hover img {
+  transform: none !important;
+  scale: 1 !important;
+}
+
+/* Remove scroll indicator animations */
+.hero-archive .animate-bounce {
+  animation: none !important;
+  position: static !important;
+}
+
+.hero-archive .animate-bounce::after {
+  content: "▼ ▼ ▼ SCROLL TO EXPLORE ARCHIVE ▼ ▼ ▼" !important;
+  display: block !important;
+  text-align: center !important;
+  font-family: var(--font-mono) !important;
+  font-size: var(--text-xs) !important;
+  color: var(--color-archive-accent) !important;
+  margin-top: var(--space-2) !important;
+  animation: pixel-pulse 1500ms steps(2) infinite !important;
+}
+
+/* ================================
+   SECTION TRANSFORMATIONS
+   ================================ */
+
+/* Remove section gradients */
+section[class*="gradient"] {
+  background: var(--color-bg-primary) !important;
+}
+
+.dark section[class*="gradient"] {
+  background: var(--color-bg-secondary) !important;
+}
+
+/* Transform feature cards to archive entries */
+section .group {
+  border: var(--border-width-2) solid var(--color-archive-border) !important;
+  background: var(--color-bg-elevated) !important;
+  position: relative;
+}
+
+section .group::before {
+  content: "╔═══════════╗";
+  position: absolute;
+  top: -6px;
+  left: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: 8px;
+  color: var(--color-text-muted);
+  background: var(--color-bg-elevated);
+  padding: 0 2px;
+}
+
+/* Remove rounded corners from feature icons */
+section [class*="rounded"] {
+  border-radius: 0 !important;
+  border: var(--border-width-2) solid var(--color-archive-border) !important;
+}
+
+/* Transform gradient icons to solid colors */
+section [class*="gradient-to"] {
+  background: var(--color-archive-accent) !important;
+  background-image: none !important;
+}
+
+/* Fix dark mode archive ink background */
+.bg-archive-ink {
+  background-color: var(--color-archive-ink) !important;
+}
+
+.dark .bg-archive-ink {
+  background-color: var(--color-bg-elevated) !important;
+}
+
+/* Fix archive accent color usage */
+.text-archive-accent {
+  color: var(--color-archive-accent) !important;
+}
+
+/* Fix archive border color */
+.border-archive-border {
+  border-color: var(--color-archive-border) !important;
+}
+
+/* Fix archive paper background */
+.bg-archive-paper {
+  background-color: var(--color-archive-paper) !important;
+}
+
+/* Update archive class names to match CSS custom properties */
+.hero-archive .text-archive-accent {
+  color: var(--color-archive-accent) !important;
+}
+
+.hero-archive .text-archive-ink {
+  color: var(--color-archive-ink) !important;
+}
+
+.hero-archive .bg-archive-accent {
+  background-color: var(--color-archive-accent) !important;
+}
+
+.hero-archive .bg-archive-highlight {
+  background-color: var(--color-archive-highlight) !important;
+}
+
+/* ================================
+   RESPONSIVE ADJUSTMENTS
+   ================================ */
+
+@media (max-width: 768px) {
+  .hero-frame {
+    padding: var(--space-3);
+    margin: var(--space-2);
+  }
+  
+  .hero-frame::before {
+    font-size: 8px;
+    top: -16px;
+  }
+  
+  .hero-frame::after {
+    font-size: 8px;
+    bottom: -8px;
+  }
+  
+  .hero-title {
+    font-size: var(--text-xl) !important;
+  }
+  
+  .hero-subtitle {
+    font-size: var(--text-base) !important;
+  }
+  
+  .hero-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .btn-archive {
+    padding: var(--space-1) var(--space-3) !important;
+    font-size: var(--text-sm) !important;
+  }
+}
+
+/* ================================
+   LOADING PROGRESS BAR
+   ================================ */
+
+.progress-8bit {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--color-archive-accent);
+}
+
+.progress-8bit::before {
+  content: "LOADING ARCHIVE: ";
+}
+
+.progress-8bit::after {
+  content: "█░░░░░░░░░ 10%";
+  animation: progress-load 3s steps(10) infinite;
+}
+
+@keyframes progress-load {
+  0% { content: "█░░░░░░░░░ 10%"; }
+  10% { content: "██░░░░░░░░ 20%"; }
+  20% { content: "███░░░░░░░ 30%"; }
+  30% { content: "████░░░░░░ 40%"; }
+  40% { content: "█████░░░░░ 50%"; }
+  50% { content: "██████░░░░ 60%"; }
+  60% { content: "███████░░░ 70%"; }
+  70% { content: "████████░░ 80%"; }
+  80% { content: "█████████░ 90%"; }
+  90% { content: "██████████ 100%"; }
+  100% { content: "██████████ READY"; }
+}

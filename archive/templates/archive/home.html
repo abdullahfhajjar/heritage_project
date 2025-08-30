@@ -1,374 +1,286 @@
 {% extends 'archive/base.html' %}
 {% load i18n static %}
 
-{% block title %}{% trans "Turath3D - Digitizing Cultural Memory in 3D" %}{% endblock %}
+{% block title %}{% trans "TURATH3D DIGITAL ARCHIVE - Preserving Saudi Cultural Heritage" %}{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/homepage-8bit.css' %}">
+{% endblock %}
 
 {% block content %}
-<div x-data="homePageAnimation()" x-init="initAnimations()">
-
-  <!-- Hero Section -->
-  <section class="relative min-h-screen bg-gradient-to-br from-brand-sand via-white to-brand-mist dark:from-black dark:via-gray-900 dark:to-brand-charcoal overflow-hidden">
-    <!-- Geometric Pattern Background -->
-    <div class="absolute inset-0 opacity-5 dark:opacity-3">
-      <svg class="w-full h-full" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <pattern id="islamic-pattern" patternUnits="userSpaceOnUse" width="20" height="20">
-            <path d="M10 2 L18 10 L10 18 L2 10 Z" fill="none" stroke="currentColor" stroke-width="0.5" class="text-brand-navy dark:text-white"/>
-            <circle cx="10" cy="10" r="3" fill="none" stroke="currentColor" stroke-width="0.3" class="text-brand-gold"/>
-          </pattern>
-        </defs>
-        <rect width="100%" height="100%" fill="url(#islamic-pattern)"/>
-      </svg>
+<!-- Hero Section - Digital Archive Sanctuary -->
+<section class="hero-archive">
+  <div class="hero-frame">
+    <!-- Archive Logo -->
+    <div class="flex justify-center mb-8">
+      <img src="{% static 'images/logo.png' %}" alt="TURATH3D DIGITAL ARCHIVE" class="h-24 w-auto" />
     </div>
 
-    <!-- Floating Elements for Visual Interest -->
-    <div class="absolute inset-0 overflow-hidden">
-      <div class="absolute top-20 left-10 w-32 h-32 bg-brand-gold/10 rounded-full blur-xl animate-pulse"></div>
-      <div class="absolute bottom-40 right-20 w-48 h-48 bg-brand-navy/5 rounded-full blur-2xl animate-pulse" style="animation-delay: 2s;"></div>
-      <div class="absolute top-1/2 left-1/4 w-24 h-24 bg-brand-palm/10 rounded-full blur-lg animate-pulse" style="animation-delay: 4s;"></div>
+    <!-- Main Archive Title -->
+    <h1 class="hero-title">
+      {% trans "TURATH3D DIGITAL ARCHIVE" %}
+    </h1>
+    
+    <!-- Archive Mission -->
+    <p class="hero-subtitle">
+      {% trans "Preserving Saudi Cultural Heritage" %}<br>
+      {% trans "in the Digital Memory of Tomorrow" %}
+    </p>
+
+    <!-- Archive Navigation Buttons -->
+    <div class="hero-buttons">
+      <a href="{% url 'heritage-list' %}" class="btn-archive btn-archive-primary">
+        <span>{% trans "BROWSE" %}</span><br>
+        <span>{% trans "COLLECTION" %}</span>
+      </a>
+      
+      <a href="/about/" class="btn-archive btn-archive-secondary">
+        <span>{% trans "LEARN ABOUT" %}</span><br>
+        <span>{% trans "OUR MISSION" %}</span>
+      </a>
     </div>
 
-    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-h-screen flex items-center">
-      <div class="w-full">
+    <!-- Archive Statistics -->
+    <div class="archive-stats">
+      <div class="stats-text">
+        {% trans "Currently archiving" %} <span class="stats-number">1,247</span><br>
+        {% trans "cultural artifacts online" %}
+      </div>
+    </div>
+
+    <!-- Scroll Indicator -->
+    <div class="animate-bounce"></div>
+  </div>
+</section>
+
+<!-- Archive Mission Statement -->
+<section class="py-20 bg-white dark:bg-brand-dark-surface">
+  <div class="max-w-4xl mx-auto px-4 text-center">
+    <h2 class="hero-title mb-8">
+      {% trans "DIGITAL PRESERVATION FOR FUTURE GENERATIONS" %}
+    </h2>
+    <div class="space-y-6">
+      <p class="hero-subtitle leading-relaxed max-w-none{% if LANGUAGE_CODE == 'ar' %} font-arabic{% endif %}">
+        {% trans "Every artifact tells a story. Every tradition carries wisdom. Through systematic digital archiving, we ensure that Saudi Arabia's rich cultural heritage transcends time, making ancient craftsmanship accessible to scholars and communities worldwide." %}
+      </p>
+      
+      <!-- Archive Methodology -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
+        <div class="card-8bit text-center">
+          <div class="card-8bit-header">
+            <span class="badge-8bit badge-8bit-rare">01</span> {% trans "DOCUMENTATION" %}
+          </div>
+          <p class="text-sm leading-relaxed">
+            {% trans "Systematic cataloging of traditional artifacts and cultural practices using academic standards" %}
+          </p>
+        </div>
         
-        <!-- Main Hero Content -->
-        <div class="text-center space-y-8">
-          
-          <!-- Animated Logo -->
-          <div class="flex justify-center mb-12" x-show="logoVisible" x-transition:enter="transition ease-out duration-1000" x-transition:enter-start="opacity-0 transform scale-75" x-transition:enter-end="opacity-100 transform scale-100">
-            <div class="relative group">
-              <div class="absolute -inset-4 bg-gradient-to-r from-brand-gold/20 to-brand-navy/20 rounded-full blur-xl group-hover:blur-2xl transition-all duration-500"></div>
-              <img src="{% static 'images/logo.png' %}" alt="Turath3D" class="relative h-32 w-auto drop-shadow-2xl transform group-hover:scale-105 transition-transform duration-500" />
-            </div>
+        <div class="card-8bit text-center">
+          <div class="card-8bit-header">
+            <span class="badge-8bit badge-8bit-rare">02</span> {% trans "DIGITIZATION" %}
           </div>
-
-          <!-- Main Heading -->
-          <div class="space-y-6" x-show="headingVisible" x-transition:enter="transition ease-out duration-1000 delay-300" x-transition:enter-start="opacity-0 transform translate-y-8" x-transition:enter-end="opacity-100 transform translate-y-0">
-            <h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight">
-              <span class="block text-brand-navy dark:text-white mb-2">
-                {% trans "Turath3D" %}
-              </span>
-              <span class="block text-2xl sm:text-3xl lg:text-4xl font-light text-brand-gold bg-gradient-to-r from-brand-gold to-amber-600 bg-clip-text text-transparent">
-                {% trans "Digital Heritage Preservation" %}
-              </span>
-            </h1>
-            
-            <div class="max-w-4xl mx-auto">
-              <p class="text-xl sm:text-2xl text-brand-navy/80 dark:text-gray-300 font-light leading-relaxed {% if LANGUAGE_CODE == 'ar' %}font-arabic{% endif %}">
-                {% trans "Immortalizing Saudi Arabia's cultural memory through cutting-edge 3D digitization" %}
-              </p>
-              <div class="mt-4 h-1 w-24 mx-auto bg-gradient-to-r from-brand-gold to-brand-navy rounded-full"></div>
-            </div>
-          </div>
-
-          <!-- Call to Action Buttons -->
-          <div class="flex flex-col sm:flex-row gap-6 justify-center items-center mt-12" x-show="ctaVisible" x-transition:enter="transition ease-out duration-1000 delay-500" x-transition:enter-start="opacity-0 transform translate-y-8" x-transition:enter-end="opacity-100 transform translate-y-0">
-            <a href="{% url 'heritage-list' %}" class="group relative inline-flex items-center gap-3 px-8 py-4 bg-brand-navy dark:bg-white text-white dark:text-black font-semibold text-lg rounded-xl shadow-xl hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 overflow-hidden">
-              <div class="absolute inset-0 bg-gradient-to-r from-brand-navy to-brand-palm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              <span class="relative">{% trans "Explore Collections" %}</span>
-              <svg class="relative w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
-              </svg>
-            </a>
-            
-            <a href="/about/" class="group inline-flex items-center gap-3 px-8 py-4 border-2 border-brand-gold text-brand-gold hover:bg-brand-gold hover:text-white dark:hover:text-black font-semibold text-lg rounded-xl transform hover:-translate-y-1 transition-all duration-300">
-              <svg class="w-5 h-5 transform group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-              </svg>
-              <span>{% trans "Our Mission" %}</span>
-            </a>
-          </div>
-
-          <!-- Scroll Indicator -->
-          <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce" x-show="scrollIndicatorVisible" x-transition:enter="transition ease-out duration-1000 delay-1000" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100">
-            <div class="w-6 h-10 border-2 border-brand-gold rounded-full flex justify-center">
-              <div class="w-1 h-3 bg-brand-gold rounded-full mt-2 animate-pulse"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Mission Statement -->
-  <section class="py-20 bg-white dark:bg-brand-dark-surface transition-colors duration-500" x-intersect="missionVisible = true">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <div x-show="missionVisible" x-transition:enter="transition ease-out duration-1000" x-transition:enter-start="opacity-0 transform translate-y-12" x-transition:enter-end="opacity-100 transform translate-y-0">
-        <h2 class="text-4xl sm:text-5xl font-bold text-brand-navy dark:text-white mb-8">
-          {% trans "Preserving Legacy for Eternity" %}
-        </h2>
-        <div class="max-w-4xl mx-auto space-y-6">
-          <p class="text-xl text-brand-navy/70 dark:text-gray-300 leading-relaxed {% if LANGUAGE_CODE == 'ar' %}font-arabic{% endif %}">
-            {% trans "Every artifact tells a story. Every tradition carries wisdom. Through advanced 3D technology, we ensure that Saudi Arabia's rich cultural heritage transcends time, making ancient craftsmanship accessible to future generations worldwide." %}
+          <p class="text-sm leading-relaxed">
+            {% trans "High-precision 3D scanning and modeling for permanent digital preservation" %}
           </p>
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
-            <div class="text-center group">
-              <div class="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-brand-gold to-amber-600 rounded-full flex items-center justify-center transform group-hover:scale-110 transition-transform duration-300">
-                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
-                </svg>
-              </div>
-              <h3 class="text-xl font-semibold text-brand-navy dark:text-white mb-2">{% trans "Cultural Documentation" %}</h3>
-              <p class="text-brand-navy/60 dark:text-gray-400">{% trans "Meticulously documenting traditional artifacts and practices" %}</p>
-            </div>
-            <div class="text-center group">
-              <div class="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-brand-navy to-brand-palm rounded-full flex items-center justify-center transform group-hover:scale-110 transition-transform duration-300">
-                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9v-9m0-9v9"/>
-                </svg>
-              </div>
-              <h3 class="text-xl font-semibold text-brand-navy dark:text-white mb-2">{% trans "3D Technology" %}</h3>
-              <p class="text-brand-navy/60 dark:text-gray-400">{% trans "State-of-the-art scanning and modeling techniques" %}</p>
-            </div>
-            <div class="text-center group">
-              <div class="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-brand-palm to-green-700 rounded-full flex items-center justify-center transform group-hover:scale-110 transition-transform duration-300">
-                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064"/>
-                </svg>
-              </div>
-              <h3 class="text-xl font-semibold text-brand-navy dark:text-white mb-2">{% trans "Global Access" %}</h3>
-              <p class="text-brand-navy/60 dark:text-gray-400">{% trans "Making heritage accessible to communities worldwide" %}</p>
-            </div>
+        </div>
+        
+        <div class="card-8bit text-center">
+          <div class="card-8bit-header">
+            <span class="badge-8bit badge-8bit-rare">03</span> {% trans "ACCESS" %}
           </div>
+          <p class="text-sm leading-relaxed">
+            {% trans "Open scholarly access to heritage materials for research and education" %}
+          </p>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- Featured Collections -->
-  <section class="py-20 bg-gradient-to-br from-brand-sand/30 to-brand-mist dark:from-gray-900 dark:to-black transition-colors duration-500" x-intersect="featuresVisible = true">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-16" x-show="featuresVisible" x-transition:enter="transition ease-out duration-1000" x-transition:enter-start="opacity-0 transform translate-y-8" x-transition:enter-end="opacity-100 transform translate-y-0">
-        <h2 class="text-4xl sm:text-5xl font-bold text-brand-navy dark:text-white mb-6">
-          {% trans "Discover Our Collections" %}
-        </h2>
-        <p class="text-xl text-brand-navy/70 dark:text-gray-300 max-w-3xl mx-auto {% if LANGUAGE_CODE == 'ar' %}font-arabic{% endif %}">
-          {% trans "Immerse yourself in the rich tapestry of Saudi heritage through interactive 3D experiences" %}
+<!-- Archive Collections Overview -->
+<section class="py-20 bg-white dark:bg-brand-dark-surface">
+  <div class="max-w-6xl mx-auto px-4">
+    <div class="text-center mb-16">
+      <h2 class="hero-title mb-6">
+        {% trans "EXPLORE OUR DIGITAL COLLECTIONS" %}
+      </h2>
+      <p class="hero-subtitle max-w-none{% if LANGUAGE_CODE == 'ar' %} font-arabic{% endif %}">
+        {% trans "Systematically organized archives of Saudi cultural heritage" %}
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <!-- 3D Models Archive -->
+      <div class="card-8bit group">
+        <div class="card-8bit-header">
+          <span class="badge-8bit badge-8bit-count">▣</span> {% trans "3D MODELS" %}
+        </div>
+        <p class="text-sm leading-relaxed mb-4">
+          {% trans "High-resolution 3D scans of traditional artifacts. Rotate, zoom, and examine craftsmanship techniques in scholarly detail." %}
         </p>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8" x-show="featuresVisible" x-transition:enter="transition ease-out duration-1000 delay-200" x-transition:enter-start="opacity-0 transform translate-y-8" x-transition:enter-end="opacity-100 transform translate-y-0">
-        <!-- Interactive 3D Feature -->
-        <div class="group bg-white dark:bg-brand-dark-elevated rounded-2xl p-8 shadow-xl hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-500 border border-brand-navy/10 dark:border-brand-dark-border">
-          <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center mb-6 transform group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
-            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 104.5 4.5a7.5 7.5 0 0012.15 12.15z"/>
-            </svg>
-          </div>
-          <h3 class="text-2xl font-bold text-brand-navy dark:text-white mb-4">{% trans "Interactive 3D Models" %}</h3>
-          <p class="text-brand-navy/70 dark:text-gray-300 mb-6 leading-relaxed">
-            {% trans "Rotate, zoom, and explore artifacts in stunning detail. Discover craftsmanship techniques passed down through generations." %}
-          </p>
-          <div class="flex items-center text-brand-gold group-hover:text-brand-navy dark:group-hover:text-white font-semibold transition-colors duration-300">
-            <span>{% trans "Explore Models" %}</span>
-            <svg class="w-5 h-5 ml-2 transform group-hover:translate-x-2 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
-            </svg>
-          </div>
-        </div>
-
-        <!-- Regional Collections Feature -->
-        <div class="group bg-white dark:bg-brand-dark-elevated rounded-2xl p-8 shadow-xl hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-500 border border-brand-navy/10 dark:border-brand-dark-border">
-          <div class="w-16 h-16 bg-gradient-to-br from-green-500 to-teal-600 rounded-2xl flex items-center justify-center mb-6 transform group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
-            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-              <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-            </svg>
-          </div>
-          <h3 class="text-2xl font-bold text-brand-navy dark:text-white mb-4">{% trans "Regional Heritage" %}</h3>
-          <p class="text-brand-navy/70 dark:text-gray-300 mb-6 leading-relaxed">
-            {% trans "Filter collections by region, time period, and cultural significance. Journey through the diverse landscapes of Saudi heritage." %}
-          </p>
-          <div class="flex items-center text-brand-gold group-hover:text-brand-navy dark:group-hover:text-white font-semibold transition-colors duration-300">
-            <span>{% trans "Browse Regions" %}</span>
-            <svg class="w-5 h-5 ml-2 transform group-hover:translate-x-2 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
-            </svg>
-          </div>
-        </div>
-
-        <!-- Multilingual Feature -->
-        <div class="group bg-white dark:bg-brand-dark-elevated rounded-2xl p-8 shadow-xl hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-500 border border-brand-navy/10 dark:border-brand-dark-border">
-          <div class="w-16 h-16 bg-gradient-to-br from-amber-500 to-orange-600 rounded-2xl flex items-center justify-center mb-6 transform group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
-            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"/>
-            </svg>
-          </div>
-          <h3 class="text-2xl font-bold text-brand-navy dark:text-white mb-4">{% trans "Trilingual Experience" %}</h3>
-          <p class="text-brand-navy/70 dark:text-gray-300 mb-6 leading-relaxed">
-            {% trans "Experience heritage in Arabic, English, and French. Cultural context and stories available in your preferred language." %}
-          </p>
-          <div class="flex items-center text-brand-gold group-hover:text-brand-navy dark:group-hover:text-white font-semibold transition-colors duration-300">
-            <span>{% trans "Switch Language" %}</span>
-            <svg class="w-5 h-5 ml-2 transform group-hover:translate-x-2 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
-            </svg>
-          </div>
+        <div class="text-center">
+          <a href="{% url 'heritage-list' %}" class="btn-8bit btn-8bit-primary text-xs">
+            {% trans "BROWSE MODELS" %} ►
+          </a>
         </div>
       </div>
-    </div>
-  </section>
 
-  <!-- Sponsors Section -->
-  <section class="py-20 bg-white dark:bg-brand-dark-surface transition-colors duration-500" x-intersect="sponsorsVisible = true">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-16" x-show="sponsorsVisible" x-transition:enter="transition ease-out duration-1000" x-transition:enter-start="opacity-0 transform translate-y-8" x-transition:enter-end="opacity-100 transform translate-y-0">
-        <h2 class="text-4xl sm:text-5xl font-bold text-brand-navy dark:text-white mb-6">
-          {% trans "Our Partners in Preservation" %}
-        </h2>
-        <p class="text-xl text-brand-navy/70 dark:text-gray-300 max-w-3xl mx-auto {% if LANGUAGE_CODE == 'ar' %}font-arabic{% endif %}">
-          {% trans "Collaborating with leading institutions to safeguard Saudi Arabia's cultural legacy" %}
+      <!-- Regional Archives -->
+      <div class="card-8bit group">
+        <div class="card-8bit-header">
+          <span class="badge-8bit badge-8bit-count">◉</span> {% trans "REGIONS" %}
+        </div>
+        <p class="text-sm leading-relaxed mb-4">
+          {% trans "Collections organized by geographic region and historical period. Filter by cultural significance and research parameters." %}
         </p>
-      </div>
-
-      <!-- Sponsor Tiers -->
-      <div class="space-y-12" x-show="sponsorsVisible" x-transition:enter="transition ease-out duration-1000 delay-200" x-transition:enter-start="opacity-0 transform translate-y-8" x-transition:enter-end="opacity-100 transform translate-y-0">
-        <!-- Founding Partners -->
         <div class="text-center">
-          <h3 class="text-2xl font-bold text-brand-gold mb-8">{% trans "Founding Partners" %}</h3>
-          <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 items-center">
-            <div class="group bg-gradient-to-br from-gray-50 to-white dark:from-brand-dark-elevated dark:to-gray-800 rounded-xl p-8 shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 border border-brand-navy/10 dark:border-brand-dark-border min-h-[120px] flex items-center justify-center">
-              <div class="text-center">
-                <div class="w-16 h-16 mx-auto bg-gradient-to-br from-brand-gold to-amber-600 rounded-lg flex items-center justify-center mb-3">
-                  <span class="text-white font-bold text-xl">P1</span>
-                </div>
-                <p class="text-brand-navy/70 dark:text-gray-300 text-sm">{% trans "Partner Logo" %}</p>
-              </div>
-            </div>
-            <div class="group bg-gradient-to-br from-gray-50 to-white dark:from-brand-dark-elevated dark:to-gray-800 rounded-xl p-8 shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 border border-brand-navy/10 dark:border-brand-dark-border min-h-[120px] flex items-center justify-center">
-              <div class="text-center">
-                <div class="w-16 h-16 mx-auto bg-gradient-to-br from-brand-navy to-brand-palm rounded-lg flex items-center justify-center mb-3">
-                  <span class="text-white font-bold text-xl">P2</span>
-                </div>
-                <p class="text-brand-navy/70 dark:text-gray-300 text-sm">{% trans "Partner Logo" %}</p>
-              </div>
-            </div>
-            <div class="group bg-gradient-to-br from-gray-50 to-white dark:from-brand-dark-elevated dark:to-gray-800 rounded-xl p-8 shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 border border-brand-navy/10 dark:border-brand-dark-border min-h-[120px] flex items-center justify-center">
-              <div class="text-center">
-                <div class="w-16 h-16 mx-auto bg-gradient-to-br from-brand-palm to-green-700 rounded-lg flex items-center justify-center mb-3">
-                  <span class="text-white font-bold text-xl">P3</span>
-                </div>
-                <p class="text-brand-navy/70 dark:text-gray-300 text-sm">{% trans "Partner Logo" %}</p>
-              </div>
-            </div>
-            <div class="group bg-gradient-to-br from-gray-50 to-white dark:from-brand-dark-elevated dark:to-gray-800 rounded-xl p-8 shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 border border-brand-navy/10 dark:border-brand-dark-border min-h-[120px] flex items-center justify-center">
-              <div class="text-center">
-                <div class="w-16 h-16 mx-auto bg-gradient-to-br from-purple-600 to-pink-600 rounded-lg flex items-center justify-center mb-3">
-                  <span class="text-white font-bold text-xl">P4</span>
-                </div>
-                <p class="text-brand-navy/70 dark:text-gray-300 text-sm">{% trans "Partner Logo" %}</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Supporting Organizations -->
-        <div class="text-center">
-          <h3 class="text-xl font-semibold text-brand-navy dark:text-white mb-6">{% trans "Supporting Organizations" %}</h3>
-          <div class="grid grid-cols-3 lg:grid-cols-6 gap-6 items-center opacity-75 hover:opacity-100 transition-opacity duration-300">
-            <div class="group bg-gray-50 dark:bg-brand-dark-elevated rounded-lg p-4 hover:bg-brand-sand dark:hover:bg-gray-700 transition-colors duration-300 min-h-[80px] flex items-center justify-center">
-              <div class="w-12 h-12 bg-gray-300 dark:bg-gray-600 rounded flex items-center justify-center">
-                <span class="text-xs font-bold text-gray-600 dark:text-gray-300">S1</span>
-              </div>
-            </div>
-            <div class="group bg-gray-50 dark:bg-brand-dark-elevated rounded-lg p-4 hover:bg-brand-sand dark:hover:bg-gray-700 transition-colors duration-300 min-h-[80px] flex items-center justify-center">
-              <div class="w-12 h-12 bg-gray-300 dark:bg-gray-600 rounded flex items-center justify-center">
-                <span class="text-xs font-bold text-gray-600 dark:text-gray-300">S2</span>
-              </div>
-            </div>
-            <div class="group bg-gray-50 dark:bg-brand-dark-elevated rounded-lg p-4 hover:bg-brand-sand dark:hover:bg-gray-700 transition-colors duration-300 min-h-[80px] flex items-center justify-center">
-              <div class="w-12 h-12 bg-gray-300 dark:bg-gray-600 rounded flex items-center justify-center">
-                <span class="text-xs font-bold text-gray-600 dark:text-gray-300">S3</span>
-              </div>
-            </div>
-            <div class="group bg-gray-50 dark:bg-brand-dark-elevated rounded-lg p-4 hover:bg-brand-sand dark:hover:bg-gray-700 transition-colors duration-300 min-h-[80px] flex items-center justify-center">
-              <div class="w-12 h-12 bg-gray-300 dark:bg-gray-600 rounded flex items-center justify-center">
-                <span class="text-xs font-bold text-gray-600 dark:text-gray-300">S4</span>
-              </div>
-            </div>
-            <div class="group bg-gray-50 dark:bg-brand-dark-elevated rounded-lg p-4 hover:bg-brand-sand dark:hover:bg-gray-700 transition-colors duration-300 min-h-[80px] flex items-center justify-center">
-              <div class="w-12 h-12 bg-gray-300 dark:bg-gray-600 rounded flex items-center justify-center">
-                <span class="text-xs font-bold text-gray-600 dark:text-gray-300">S5</span>
-              </div>
-            </div>
-            <div class="group bg-gray-50 dark:bg-brand-dark-elevated rounded-lg p-4 hover:bg-brand-sand dark:hover:bg-gray-700 transition-colors duration-300 min-h-[80px] flex items-center justify-center">
-              <div class="w-12 h-12 bg-gray-300 dark:bg-gray-600 rounded flex items-center justify-center">
-                <span class="text-xs font-bold text-gray-600 dark:text-gray-300">S6</span>
-              </div>
-            </div>
-          </div>
+          <a href="{% url 'heritage-list' %}" class="btn-8bit btn-8bit-secondary text-xs">
+            {% trans "BROWSE REGIONS" %} ►
+          </a>
         </div>
       </div>
 
-      <!-- Partnership CTA -->
-      <div class="text-center mt-16">
-        <a href="/sponsors/" class="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-brand-gold to-amber-600 text-white font-semibold text-lg rounded-xl shadow-xl hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
-          </svg>
-          {% trans "Become a Partner" %}
-        </a>
+      <!-- Research Database -->
+      <div class="card-8bit group">
+        <div class="card-8bit-header">
+          <span class="badge-8bit badge-8bit-count">※</span> {% trans "RESEARCH" %}
+        </div>
+        <p class="text-sm leading-relaxed mb-4">
+          {% trans "Multilingual documentation in Arabic, English, and French. Comprehensive metadata for academic research." %}
+        </p>
+        <div class="text-center">
+          <a href="/about/" class="btn-8bit btn-8bit-gold text-xs">
+            {% trans "LEARN MORE" %} ►
+          </a>
+        </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- Call to Action -->
-  <section class="py-20 bg-gradient-to-r from-brand-navy via-brand-palm to-brand-charcoal text-white relative overflow-hidden">
-    <!-- Animated background pattern -->
-    <div class="absolute inset-0 opacity-10">
-      <div class="absolute inset-0" style="background-image: radial-gradient(circle at 25% 25%, rgba(201, 166, 107, 0.3) 0%, transparent 50%), radial-gradient(circle at 75% 75%, rgba(45, 90, 39, 0.3) 0%, transparent 50%);"></div>
+<!-- Institutional Partners -->
+<section class="py-20 bg-gray-50 dark:bg-brand-dark-elevated">
+  <div class="max-w-6xl mx-auto px-4">
+    <div class="text-center mb-16">
+      <h2 class="hero-title mb-6">
+        {% trans "INSTITUTIONAL PARTNERS" %}
+      </h2>
+      <p class="hero-subtitle max-w-none{% if LANGUAGE_CODE == 'ar' %} font-arabic{% endif %}">
+        {% trans "Collaborating with leading academic and cultural institutions" %}
+      </p>
+    </div>
+
+    <!-- Primary Academic Partners -->
+    <div class="mb-12">
+      <div class="text-center mb-8">
+        <h3 class="font-mono text-lg font-bold text-archive-accent uppercase tracking-wider">
+          {% trans "PRIMARY RESEARCH INSTITUTIONS" %}
+        </h3>
+        <div class="divider-8bit-ornate"></div>
+      </div>
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="card-8bit text-center min-h-[100px] flex flex-col justify-center">
+          <div class="badge-8bit badge-8bit-count mb-2">P1</div>
+          <p class="text-xs font-mono">{% trans "UNIVERSITY PARTNER" %}</p>
+        </div>
+        <div class="card-8bit text-center min-h-[100px] flex flex-col justify-center">
+          <div class="badge-8bit badge-8bit-count mb-2">P2</div>
+          <p class="text-xs font-mono">{% trans "CULTURAL MINISTRY" %}</p>
+        </div>
+        <div class="card-8bit text-center min-h-[100px] flex flex-col justify-center">
+          <div class="badge-8bit badge-8bit-count mb-2">P3</div>
+          <p class="text-xs font-mono">{% trans "HERITAGE FOUNDATION" %}</p>
+        </div>
+        <div class="card-8bit text-center min-h-[100px] flex flex-col justify-center">
+          <div class="badge-8bit badge-8bit-count mb-2">P4</div>
+          <p class="text-xs font-mono">{% trans "RESEARCH CENTER" %}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Supporting Academic Network -->
+    <div class="mb-12">
+      <div class="text-center mb-6">
+        <h3 class="font-mono text-base font-medium text-text-secondary uppercase tracking-wider">
+          {% trans "SUPPORTING ACADEMIC NETWORK" %}
+        </h3>
+      </div>
+      <div class="grid grid-cols-3 lg:grid-cols-6 gap-4 opacity-80">
+        <div class="card-8bit text-center p-3">
+          <div class="badge-8bit text-xs">S1</div>
+        </div>
+        <div class="card-8bit text-center p-3">
+          <div class="badge-8bit text-xs">S2</div>
+        </div>
+        <div class="card-8bit text-center p-3">
+          <div class="badge-8bit text-xs">S3</div>
+        </div>
+        <div class="card-8bit text-center p-3">
+          <div class="badge-8bit text-xs">S4</div>
+        </div>
+        <div class="card-8bit text-center p-3">
+          <div class="badge-8bit text-xs">S5</div>
+        </div>
+        <div class="card-8bit text-center p-3">
+          <div class="badge-8bit text-xs">S6</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Partnership Information -->
+    <div class="text-center">
+      <a href="/sponsors/" class="btn-8bit btn-8bit-secondary">
+        &#8250; {% trans "PARTNERSHIP INFORMATION" %} &#8249;
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Archive Access Portal -->
+<section class="py-20 bg-archive-ink text-white relative">
+  <!-- ASCII Border Decoration -->
+  <div class="absolute inset-0 opacity-20 pointer-events-none">
+    <div class="absolute top-0 left-0 right-0 text-center font-mono text-xs text-archive-accent">
+      ═══════════════════════════════════════════════════════════════
+    </div>
+    <div class="absolute bottom-0 left-0 right-0 text-center font-mono text-xs text-archive-accent">
+      ═══════════════════════════════════════════════════════════════
+    </div>
+  </div>
+  
+  <div class="relative max-w-4xl mx-auto px-4 text-center">
+    <h2 class="hero-title mb-8 text-white">
+      {% trans "ACCESS THE DIGITAL ARCHIVE" %}
+    </h2>
+    <div class="hero-subtitle text-white/90 mb-12 max-w-none{% if LANGUAGE_CODE == 'ar' %} font-arabic{% endif %}">
+      {% trans "Join scholars and researchers worldwide in preserving and studying Saudi Arabia's cultural heritage. Every artifact contributes to our understanding of human civilization." %}
     </div>
     
-    <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center" x-intersect="ctaFinalVisible = true">
-      <div x-show="ctaFinalVisible" x-transition:enter="transition ease-out duration-1000" x-transition:enter-start="opacity-0 transform translate-y-8" x-transition:enter-end="opacity-100 transform translate-y-0">
-        <h2 class="text-4xl sm:text-5xl font-bold mb-8">
-          {% trans "Join the Heritage Revolution" %}
-        </h2>
-        <p class="text-xl text-white/90 mb-12 leading-relaxed max-w-3xl mx-auto {% if LANGUAGE_CODE == 'ar' %}font-arabic{% endif %}">
-          {% trans "Be part of a global community dedicated to preserving cultural heritage. Contribute your knowledge, discover new artifacts, or support our mission." %}
-        </p>
-        
-        <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
-          <a href="{% url 'heritage-list' %}" class="group inline-flex items-center gap-3 px-8 py-4 bg-white text-brand-navy font-semibold text-lg rounded-xl shadow-xl hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300">
-            <svg class="w-5 h-5 transform group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-              <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
-            </svg>
-            {% trans "Start Exploring" %}
-          </a>
-          
-          <a href="/donate/" class="group inline-flex items-center gap-3 px-8 py-4 border-2 border-white text-white hover:bg-white hover:text-brand-navy font-semibold text-lg rounded-xl transform hover:-translate-y-1 transition-all duration-300">
-            <svg class="w-5 h-5 transform group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
-            </svg>
-            {% trans "Support Our Mission" %}
-          </a>
-        </div>
-      </div>
+    <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
+      <a href="{% url 'heritage-list' %}" class="btn-8bit btn-8bit-gold">
+        <span class="font-mono">‹ {% trans "BEGIN RESEARCH" %} ›</span>
+      </a>
+      
+      <a href="/about/" class="btn-8bit btn-8bit-secondary">
+        <span class="font-mono">‹ {% trans "ABOUT THE PROJECT" %} ›</span>
+      </a>
     </div>
-  </section>
+    
+    <!-- Archive Footer Note -->
+    <div class="mt-12 pt-8 border-t border-white/20">
+      <p class="font-mono text-xs text-white/60 uppercase tracking-wider">
+        {% trans "Digital Archive System" %} | {% trans "Academic Research Portal" %} | {% trans "Cultural Heritage Database" %}
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ASCII Art Credit -->
+<div class="text-center py-4 bg-archive-paper dark:bg-archive-ink border-t-4 border-archive-border">
+  <div class="font-mono text-xs text-archive-accent opacity-50">
+    ┌──────────────────────────────────────────────────────────────┐<br>
+    │ TURATH3D DIGITAL ARCHIVE - PRESERVING HERITAGE FOR TOMORROW   │<br>
+    └──────────────────────────────────────────────────────────────┘
+  </div>
 </div>
-
-<script>
-function homePageAnimation() {
-  return {
-    logoVisible: false,
-    headingVisible: false,
-    ctaVisible: false,
-    scrollIndicatorVisible: false,
-    missionVisible: false,
-    featuresVisible: false,
-    sponsorsVisible: false,
-    ctaFinalVisible: false,
-    
-    initAnimations() {
-      // Stagger the initial animations
-      setTimeout(() => this.logoVisible = true, 300);
-      setTimeout(() => this.headingVisible = true, 600);
-      setTimeout(() => this.ctaVisible = true, 900);
-      setTimeout(() => this.scrollIndicatorVisible = true, 1200);
-    }
-  }
-}
-</script>
 {% endblock %}

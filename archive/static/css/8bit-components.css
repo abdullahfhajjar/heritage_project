@@ -1,0 +1,415 @@
+/* ========================================
+   8-BIT COMPONENT LIBRARY
+   Pixel-Perfect UI Components
+   ======================================== */
+
+/* ================================
+   BUTTONS - Retro Game Style
+   ================================ */
+
+.btn-8bit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-1) var(--space-2);
+  font-family: var(--font-mono);
+  font-size: var(--text-base);
+  font-weight: var(--font-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background-color: var(--color-bg-elevated);
+  color: var(--color-text-primary);
+  border: var(--border-width-2) solid var(--color-archive-border);
+  box-shadow: var(--shadow-pixel);
+  cursor: pointer;
+  position: relative;
+  transition: none !important;
+}
+
+.btn-8bit:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: var(--shadow-pixel-lg);
+}
+
+.btn-8bit:active {
+  transform: translate(1px, 1px);
+  box-shadow: 1px 1px 0 var(--color-archive-border);
+}
+
+.btn-8bit-primary {
+  background-color: var(--color-archive-accent);
+  color: var(--color-text-inverse);
+  border-color: var(--color-archive-border);
+}
+
+.btn-8bit-secondary {
+  background-color: var(--color-bg-secondary);
+  color: var(--color-text-primary);
+  border-color: var(--color-archive-border);
+}
+
+.btn-8bit-gold {
+  background-color: var(--color-archive-highlight);
+  color: var(--color-archive-ink);
+  border-color: var(--color-archive-border);
+}
+
+/* ================================
+   CARDS - Archive Entry Style
+   ================================ */
+
+.card-8bit {
+  background-color: var(--color-bg-elevated);
+  border: var(--border-width-2) solid var(--color-archive-border);
+  padding: var(--space-2);
+  position: relative;
+  box-shadow: var(--shadow-pixel);
+}
+
+.card-8bit::before {
+  content: "";
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  right: -4px;
+  bottom: -4px;
+  border: var(--border-width-1) dashed var(--color-archive-border);
+  opacity: 0.3;
+  z-index: -1;
+}
+
+.card-8bit-header {
+  font-family: var(--font-mono);
+  font-size: var(--text-lg);
+  font-weight: var(--font-bold);
+  color: var(--color-text-primary);
+  border-bottom: var(--border-width-2) solid var(--color-archive-border);
+  padding-bottom: var(--space-1);
+  margin-bottom: var(--space-2);
+  text-transform: uppercase;
+}
+
+.card-8bit:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: var(--shadow-pixel-lg);
+}
+
+/* ================================
+   FORMS - Terminal Style
+   ================================ */
+
+.input-8bit {
+  width: 100%;
+  padding: var(--space-1);
+  font-family: var(--font-mono);
+  font-size: var(--text-base);
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  border: var(--border-width-2) solid var(--color-archive-border);
+  outline: none;
+}
+
+.input-8bit:focus {
+  border-color: var(--color-archive-highlight);
+  box-shadow: 0 0 0 var(--border-width-2) var(--color-archive-highlight);
+}
+
+.input-8bit::placeholder {
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+.select-8bit {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M6 8L0 0H12L6 8Z' fill='%232C3E50'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right var(--space-1) center;
+  padding-right: var(--space-4);
+}
+
+/* ================================
+   NAVIGATION - Archive Index
+   ================================ */
+
+.nav-8bit {
+  background-color: var(--color-archive-ink);
+  border-bottom: var(--border-width-4) solid var(--color-archive-border);
+  padding: var(--space-2) 0;
+}
+
+.nav-8bit-item {
+  display: inline-block;
+  padding: var(--space-1) var(--space-2);
+  font-family: var(--font-mono);
+  font-size: var(--text-base);
+  font-weight: var(--font-medium);
+  color: var(--color-text-inverse);
+  text-decoration: none;
+  border: var(--border-width-1) solid transparent;
+  position: relative;
+}
+
+.nav-8bit-item:hover {
+  background-color: var(--color-archive-accent);
+  border-color: var(--color-archive-highlight);
+}
+
+.nav-8bit-item.active {
+  background-color: var(--color-archive-highlight);
+  color: var(--color-archive-ink);
+  border-color: var(--color-archive-border);
+}
+
+.nav-8bit-item.active::after {
+  content: "◄";
+  position: absolute;
+  right: -12px;
+  color: var(--color-archive-highlight);
+}
+
+/* ================================
+   BADGES - Status Indicators
+   ================================ */
+
+.badge-8bit {
+  display: inline-block;
+  padding: 0 var(--space-1);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: var(--font-bold);
+  text-transform: uppercase;
+  background-color: var(--color-bg-tertiary);
+  color: var(--color-text-primary);
+  border: var(--border-width-1) solid var(--color-archive-border);
+}
+
+.badge-8bit-new {
+  background-color: var(--color-pixel-green);
+  color: white;
+  animation: pixel-pulse 1s steps(2) infinite;
+}
+
+.badge-8bit-rare {
+  background-color: var(--color-archive-highlight);
+  color: var(--color-archive-ink);
+}
+
+.badge-8bit-count {
+  background-color: var(--color-archive-accent);
+  color: white;
+  min-width: 24px;
+  text-align: center;
+}
+
+/* ================================
+   LOADING STATES - Retro Style
+   ================================ */
+
+.loader-8bit {
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  position: relative;
+}
+
+.loader-8bit::before {
+  content: "▉";
+  position: absolute;
+  font-family: var(--font-mono);
+  font-size: 32px;
+  color: var(--color-archive-accent);
+  animation: pixel-rotate 0.6s steps(4) infinite;
+}
+
+@keyframes pixel-rotate {
+  0% { content: "▉"; }
+  25% { content: "▊"; }
+  50% { content: "▋"; }
+  75% { content: "▌"; }
+  100% { content: "▉"; }
+}
+
+/* ================================
+   TOOLTIPS - Info Boxes
+   ================================ */
+
+.tooltip-8bit {
+  position: relative;
+}
+
+.tooltip-8bit::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: var(--space-1);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  background-color: var(--color-archive-ink);
+  color: var(--color-text-inverse);
+  border: var(--border-width-1) solid var(--color-archive-border);
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  margin-bottom: 4px;
+}
+
+.tooltip-8bit:hover::after {
+  opacity: 1;
+}
+
+/* ================================
+   PAGINATION - Page Navigation
+   ================================ */
+
+.pagination-8bit {
+  display: flex;
+  gap: var(--space-1);
+  font-family: var(--font-mono);
+}
+
+.pagination-8bit-item {
+  padding: var(--space-1);
+  min-width: 32px;
+  text-align: center;
+  border: var(--border-width-2) solid var(--color-archive-border);
+  background-color: var(--color-bg-elevated);
+  color: var(--color-text-primary);
+  text-decoration: none;
+}
+
+.pagination-8bit-item:hover {
+  background-color: var(--color-archive-accent);
+  color: white;
+}
+
+.pagination-8bit-item.active {
+  background-color: var(--color-archive-highlight);
+  color: var(--color-archive-ink);
+  font-weight: var(--font-bold);
+}
+
+/* ================================
+   DIVIDERS - ASCII Style
+   ================================ */
+
+.divider-8bit {
+  border: none;
+  height: var(--space-2);
+  position: relative;
+  margin: var(--space-4) 0;
+}
+
+.divider-8bit::before {
+  content: "════════════════════════════════════════════════════════════════";
+  position: absolute;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.divider-8bit-ornate::before {
+  content: "◆ ◇ ◆ ◇ ◆ ◇ ◆ ◇ ◆ ◇ ◆ ◇ ◆ ◇ ◆ ◇ ◆ ◇ ◆ ◇ ◆";
+}
+
+/* ================================
+   ALERTS - System Messages
+   ================================ */
+
+.alert-8bit {
+  padding: var(--space-2);
+  border: var(--border-width-2) solid var(--color-archive-border);
+  background-color: var(--color-bg-secondary);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  position: relative;
+}
+
+.alert-8bit::before {
+  content: "[!]";
+  font-weight: var(--font-bold);
+  margin-right: var(--space-1);
+}
+
+.alert-8bit-success {
+  border-color: var(--color-pixel-green);
+  background-color: rgba(76, 175, 80, 0.1);
+}
+
+.alert-8bit-success::before {
+  content: "[✓]";
+  color: var(--color-pixel-green);
+}
+
+.alert-8bit-error {
+  border-color: var(--color-pixel-red);
+  background-color: rgba(244, 67, 54, 0.1);
+}
+
+.alert-8bit-error::before {
+  content: "[✗]";
+  color: var(--color-pixel-red);
+}
+
+.alert-8bit-info {
+  border-color: var(--color-pixel-blue);
+  background-color: rgba(33, 150, 243, 0.1);
+}
+
+.alert-8bit-info::before {
+  content: "[i]";
+  color: var(--color-pixel-blue);
+}
+
+/* ================================
+   MODAL - Overlay Dialog
+   ================================ */
+
+.modal-8bit {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--color-bg-elevated);
+  border: var(--border-width-4) solid var(--color-archive-border);
+  padding: var(--space-3);
+  z-index: var(--z-modal);
+  min-width: 400px;
+  box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.5);
+}
+
+.modal-8bit-header {
+  font-family: var(--font-mono);
+  font-size: var(--text-xl);
+  font-weight: var(--font-bold);
+  border-bottom: var(--border-width-2) solid var(--color-archive-border);
+  padding-bottom: var(--space-1);
+  margin-bottom: var(--space-2);
+}
+
+.modal-8bit-close {
+  position: absolute;
+  top: var(--space-1);
+  right: var(--space-1);
+  width: 24px;
+  height: 24px;
+  border: var(--border-width-2) solid var(--color-archive-border);
+  background-color: var(--color-pixel-red);
+  color: white;
+  font-family: var(--font-mono);
+  font-weight: var(--font-bold);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-8bit-close:hover {
+  background-color: darkred;
+}

@@ -21,12 +21,18 @@
     })();
   </script>
 
-  <!-- Fonts (Arabic + Latin) -->
+  <!-- Fonts (Arabic + Latin) - 8-bit Monospace -->
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Kufi+Arabic:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&family=IBM+Plex+Sans+Arabic:wght@400;500;700&display=swap" rel="stylesheet">
 
   <!-- model-viewer -->
   <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+
+  <!-- 8-bit Design System CSS -->
+  <link rel="stylesheet" href="{% static 'css/turath-8bit.css' %}">
+  
+  <!-- Extra CSS block for page-specific styles -->
+  {% block extra_css %}{% endblock %}
 
   <!-- Tailwind (CDN) + brand theme -->
   <script src="https://cdn.tailwindcss.com"></script>
